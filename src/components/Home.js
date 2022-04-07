@@ -4,13 +4,12 @@ export const Home = () => {
                           </figure>
                           <figure class="containerLogoLetters">
                           <img src="Imagenes/Logotipo/Logo-letters-only.png" alt="Binge Worthy logo" class="appName">
-                          <figcaption>Binge Worthy</figcaption>
-                          <p id="slogan" class="pink">MATCH WITH YOUR STORIES</p>
+                          <p class="pink w7">MATCH WITH YOUR STORIES</p>
                           </figure>
-                          <button id="createAccBtn">Create an account</button>`;
+                          <button id="signUpBtn" class="button">Create an account</button>`;
   const containerLogin = `<div id="goToLogin">
                           <p>Already have an account?</p>
-                          <a id="goToLoginBtn" class="pink">Log in</a>
+                          <a id="goToLoginBtn" class="pink w5">Log in</a>
                           </div>`;
 
   const LogInDivs = containerLogo + containerLogin;

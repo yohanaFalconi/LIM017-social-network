@@ -15,27 +15,61 @@
     </div>
     <div>
       <img src="Imagenes/Logotipo/Logo-letters-only.png" alt="Binge Worthy logo" class="appName" />
-      <p id="slogan" class="pink">MATCH WITH YOUR STORIES</p>
-      <button id="createAccBtn" class="pink-bg">Create an account</button>
+      <p class="pink w7">MATCH WITH YOUR STORIES</p>
+      <button id="signUpBtn" class="button">Sign up</button>
     </div>
     <div id="goToLogin">
       <p>Already have an account?</p>
-      <a href="#" id="goToLoginBtn" class="pink">Log in</a>
+      <a href="#" id="goToLoginBtn" class="pink w5">Log in</a>
     </div>
   </section>
-  <section id="login">
-    <div>
-      <img src="#" alt="back" />
+
+  <section id="register">
+    <div class="top">
+      <p class="backIcon">Back</p>
       <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo" />
     </div>
     <div>
-      <p>To get started, enter your email</p>
-      <input type="email" name="password" id="userEmail" placeholder="example@gmail.com">
-      <input type="password" name="password" id="password">
+      <p class="darkPurple w6">Register with email</p>
+      <div class="container">
+        <form action="" method="POST" class="form">
+          <div class="formGroup">
+            <input type="email" name="email" id="userEmail" class="inputBox">
+            <label for="email">email</label>
+          </div>
+          <div class="formGroup">
+            <input type="password" name="password" id="password" class="inputBox">
+            <label for="password">password</label>
+          </div>
+          <div class="formGroup">
+            <input type="text" name="username" id="username" class="inputBox">
+            <label for="username">username</label>
+          </div>
+        </form>
+      </div>
+      <button class="button" id="createAccBtn">Create account</button>
     </div>
     <div>
-      <button>I forgot my password</button>
-      <input type="button" value="Log in">
+      <p>or register with</p>
+      <div id="googleRegBtn">
+        <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
+        <p class="buttonText w7">Google</p>
+      </div>
+      <div id="fbRegBtn">
+        <img class="fbIcon" src="https://i0.wp.com/uncomocorreo.com/wp-content/uploads/2017/03/facebook-logo.png?resize=300%2C300&ssl=1" alt="">
+        <p class="buttonText w7">Facebook</p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="login">
+    <div class="top">
+      <p class="backIcon">Back</p>
+      <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo" />
+    </div>
+    <div id="aDiv">
+      <button class="pink" id="forgotPass">I forgot my password</button>
+      <input type="button" value="Log in" class="button">
     </div>
   </section>
   <script type="module" src="main.js"></script>

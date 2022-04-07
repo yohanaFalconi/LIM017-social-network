@@ -28,7 +28,7 @@ export const onNavigate = (pathname) => {
 };
 /* console.log(onNavigate); */
 
-const registerPage = document.getElementById('createAccBtn');
+const registerPage = document.getElementById('signUpBtn');
 registerPage.addEventListener('click', () => onNavigate('/register'));
 
 const goToLogin = document.getElementById('goToLoginBtn');

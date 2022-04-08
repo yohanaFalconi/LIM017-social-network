@@ -18,19 +18,36 @@ div {
     justify-items: center;
 }
 
-button {
+.button {
     border: none;
     border-radius: 20px;
     padding: 5px 25px;
     color: white;
+    background-color: #fa4564;
+}
+
+.button:hover {
+    cursor: pointer;
 }
 
 .pink {
     color: #fa4564;
 }
 
-.pink-bg {
-    background-color: #fa4564;
+.darkPurple {
+    color: #5F256E;
+}
+
+.w5 {
+    font-weight: 500;
+}
+
+.w6 {
+    font-weight: 600;
+}
+
+.w7 {
+    font-weight: 700;
 }
 
 .topLogo {
@@ -42,29 +59,143 @@ button {
     height: 100px;
 }
 
+.inputBoxes {
+    margin: 20px;
+}
+
+#createAccBtn {
+    margin-bottom: 2vh;
+}
+
 .appName {
     width: 250px;
-    margin: 300px 30px 10px 30px;
+    margin: 50vh 0 1vh 0;
+}
+
+.navIcon {
+    width: 10vw;
 }
 
 #slogan {
     font-weight: 700;
 }
 
-#createAccBtn {
-    margin-top: 30px;
+#signUpBtn {
+    margin: 5vh 0;
 }
 
 #goToLogin {
-    margin-top: 70px;
     display: flex;
     justify-content: center;
 }
 
 #goToLoginBtn {
-    padding-left: 10px;
+    padding-left: 2vw;
+    cursor: pointer;
 }
 
-/* #welcome {
-    grid-template-rows: 1fr 1fr 1fr;
-} */
+.top {
+    grid-template-columns: 10% 80% 10%;
+    margin-top: 2vh;
+}
+
+.backIcon {
+    margin: auto;
+    padding: 0px 5vw;
+}
+
+#aDiv {
+    display: flex;
+    justify-content: center;
+}
+
+#forgotPass {
+    border: none;
+    background: none;
+}
+
+#goToLogin {
+    margin-left: 2vw;
+}
+
+#googleRegBtn {
+    display: inline-flex;
+    justify-content: space-evenly;
+    margin: 2vh 0;
+    background: white;
+    color: #444;
+    width: 130px;
+    border-radius: 5px;
+    border: thin solid #888;
+    box-shadow: 1px 1px 1px grey;
+    white-space: nowrap;
+}
+
+.googleIcon {
+    width: 28px;
+}
+
+.fbIcon {
+    height: 32px;
+}
+
+.buttonText {
+    align-content: center;
+}
+
+#fbRegBtn {
+    display: inline-flex;
+    justify-content: space-evenly;
+    background: #3A5B9B;
+    color: white;
+    width: 130px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 1px 1px 1px grey;
+    white-space: nowrap;
+}
+
+/* floating label */
+
+.container {
+    margin: 16px;
+}
+
+.formGroup {
+    justify-items: left;
+    /* margin here */
+    /* no transition cos i don't want it to grow */
+}
+
+.formLabel {
+    /* font-size */
+    /* color */
+    /* display: block; */
+    margin-left: 20px;
+    transform: translateY(-2.36em);
+    transform-origin: 0 0;
+    transition: all .3s;
+}
+
+.formItem {
+    margin: 15px;
+    outline: none;
+    border-width: 0 0 2px;
+    border-color: #ccc;
+    transition: all .5s;
+    background-color: transparent;
+}
+
+.formItem::placeholder {
+    color: transparent;
+}
+
+.formItem:focus {
+    border-color: #fa4564;
+}
+
+.formItem:focus + .formLabel,
+.formItem:not(:placeholder-shown) + .formLabel
+{
+    transform: translateY(-3.5em) scale(.8);
+}

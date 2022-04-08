@@ -24,6 +24,9 @@ export const onNavigate = (pathname) => {
     pathname,
     window.location.origin + pathname,
   );
+  while (root.firstChild) {
+    root.removeChild(root.firstChild);
+  }
   root.innerHTML = routes[pathname]();
 };
 /* console.log(onNavigate); */
@@ -42,6 +45,9 @@ goToLogin.addEventListener('click', () => onNavigate('/logIn'));
       break;
     case '/':
       root.innerHTML = routes['/register']();
+      break;
+    case '/home':
+      root.innerHTML = routes['/logIn']();
       break;
     default:
       break;

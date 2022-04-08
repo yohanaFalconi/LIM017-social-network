@@ -91,6 +91,7 @@ div {
 
 #goToLoginBtn {
     padding-left: 2vw;
+    cursor: pointer;
 }
 
 .top {

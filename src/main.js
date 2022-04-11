@@ -4,19 +4,16 @@
 import { Home } from './components/Home.js';
 import { Register } from './components/Register.js';
 import { LogIn } from './components/LogIn.js';
-// Router
-// const pageOne = document.getElementById('welcome');
+import { signUpEmail } from './lib/firebase-auth.js'
 
+// Router
 export const routes = {
   '/': Home,
   '/register': Register,
   '/logIn': LogIn,
 };
-
-// console.log(routes);
-
 const root = document.getElementById('root');
-root.innerHTML = routes[window.location.pathname]();
+root.appendChild(routes[window.location.pathname]());
 
 export const onNavigate = (pathname) => {
   window.history.pushState(
@@ -24,33 +21,24 @@ export const onNavigate = (pathname) => {
     pathname,
     window.location.origin + pathname,
   );
-  root.innerHTML = routes[pathname]();
-};
-/* console.log(onNavigate); */
-
-const registerPage = document.getElementById('signUpBtn');
-registerPage.addEventListener('click', () => onNavigate('/register'));
-
-const goToLogin = document.getElementById('goToLoginBtn');
-goToLogin.addEventListener('click', () => onNavigate('/logIn'));
-
-/* export const changeView = (route) => {
-  root.innerHTML = '/';
-  switch (route) {
-    case '':
-      root.innerHTML = routes['/']();
-      break;
-    case '/':
-      root.innerHTML = routes['/register']();
-      break;
-    default:
-      break;
+  while (root.firstChild) {
+    root.removeChild(root.firstChild);
   }
-  // console.log(route)
-}; */
+  return root.appendChild(routes[pathname]());
+};
 
-/* export function showHome() {
-  root.classList.add('hidde');
-  onNavigate('#/home');
-} */
-// mostrar el logIn cuando carga la pagina
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

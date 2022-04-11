@@ -4,22 +4,23 @@ export const Register = () => {
                             <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
                             </figure>
                             <figure class="containerLogoLetters">`;
-  const containerRegister = `<div id="containerRegister">
-                            <p class="darkPurple w6">Register with email</p>
-                            <div class="container">
-                            <form action="" method="POST" class="form">
-                            <div class="formGroup">
-                              <input type="email" name="email" id="userEmail" class="inputBox">
-                              <label for="email">email</label>
-                            </div>
-                            <div class="formGroup">
-                              <input type="password" name="password" id="password" class="inputBox">
-                              <label for="password">password</label>
-                            </div>
-                          </form>
-                            <i class="icon-eye" id="eyeLogo1" ></i>
-                            <i class="icon-eye-blocked" id="eyeSlashLogo1" style="display: none;"></i>
-                            </div>`;
+  const containerRegister = `
+  <div id="containerRegister">
+    <p class="darkPurple w6">Register with email</p>
+    <div class="container">
+    <form action="" method="POST" class="form">
+      <div class="formGroup">
+        <input type="email" name="email" id="userEmail" placeholder="email" class="formItem">
+        <label for="email" class="formLabel">Email</label>
+      </div>
+      <div class="formGroup">
+        <input type="password" name="password" id="password" placeholder="password" class="formItem">
+        <label for="password" class="formLabel">Password</label>
+      </div>
+    </form>
+    <i class="icon-eye" id="eyeLogo1" ></i>
+    <i class="icon-eye-blocked" id="eyeSlashLogo1" style="display: none;"></i>
+    </div>`;
   const registerBtnsWith = `<button class="button" id="createAccBtn">Create account</button>
                             <p>or register with</p>
                                 <div id="googleRegBtn">

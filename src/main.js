@@ -14,49 +14,57 @@ export const routes = {
 };
 
 // console.log(routes);
-
+// const pageOne = document.getElementById('page-header');
 const root = document.getElementById('root');
 root.innerHTML = routes[window.location.pathname]();
 
 export const onNavigate = (pathname) => {
+  const pageView = document.getElementById('page-header');
   window.history.pushState(
     {},
     pathname,
     window.location.origin + pathname,
   );
-  while (root.firstChild) {
-    root.removeChild(root.firstChild);
-  }
-  root.innerHTML = routes[pathname]();
+  pageView.innerHTML = routes[pathname]();
 };
 /* console.log(onNavigate); */
 
 const registerPage = document.getElementById('signUpBtn');
-registerPage.addEventListener('click', () => onNavigate('/register'));
+registerPage.addEventListener('click', () => {
+  onNavigate('/register');
+  Register();
+});
 
-const goToLogin = document.getElementById('goToLoginBtn');
-goToLogin.addEventListener('click', () => onNavigate('/logIn'));
+const pruebaBtnRegistro = document.getElementById('prueba');
+console.log(pruebaBtnRegistro);
+pruebaBtnRegistro.addEventListener('click', () => {
+  console.log('holaaaa');
+});
 
-/* export const changeView = (route) => {
-  root.innerHTML = '/';
-  switch (route) {
-    case '':
-      root.innerHTML = routes['/']();
-      break;
-    case '/':
-      root.innerHTML = routes['/register']();
-      break;
-    case '/home':
-      root.innerHTML = routes['/logIn']();
-      break;
-    default:
-      break;
-  }
-  // console.log(route)
-}; */
-
-/* export function showHome() {
-  root.classList.add('hidde');
-  onNavigate('#/home');
+/* export function showRegister() {
+  const registerButton = document.getElementById('registerButton');
+  registerButton.addEventListener('click', () => {
+    const email = document.getElementById('newUser').value;
+    const password = document.getElementById('newUserPassword').value;
+    const confirmPassword = document.getElementById('newUserPassword2').value;
+    const displayName = document.getElementById('newUserDisplayName').value;
+    if (password === confirmPassword) {
+      Register(email, password, displayName);
+    } else {
+      alert('Las contraseñas deben ser iguales');
+    }
+  });
+}
+export function goToLogIn() {
+  onNavigate('/register');
+//  showLogIn();
 } */
-// mostrar el logIn cuando carga la pagina
+
+/* const newRegistry = document.getElementById('register');
+newRegistry.addEventListener('click', () => {
+  onNavigate('#/register');
+  showRegister();
+}); */
+
+/*  const goToLogin = document.getElementById('goToLoginBtn');
+goToLogin.addEventListener('click', () => onNavigate('/logIn')); */

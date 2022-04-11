@@ -1,4 +1,5 @@
 export const Register = () => {
+  const LogInDivs = document.createElement('div');
   const containerFullLogo = `<figure class="top">
                             <i class="icon-arrow-left2">Back</i>
                             <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
@@ -31,6 +32,14 @@ export const Register = () => {
                                   <img class="fbIcon" src="https://i0.wp.com/uncomocorreo.com/wp-content/uploads/2017/03/facebook-logo.png?resize=300%2C300&ssl=1" alt="">
                                   <p class="buttonText w7">Facebook</p>
                                 </div>`;
-  const LogInDivs = containerFullLogo + containerRegister + registerBtnsWith;
+
+  LogInDivs.innerHTML = containerFullLogo;
+
+  const createAccBtn = LogInDivs.querySelector('#createAccBtn');
+  createAccBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('este boton debe funcionar', createAccBtn);
+  });
+
   return LogInDivs;
 };

@@ -63,12 +63,6 @@ div {
     margin: 20px;
 }
 
-.inputBox {
-    outline: 0;
-    border-width: 0 0 2px;
-    border-color: #fa4564;
-}
-
 #createAccBtn {
     margin-bottom: 2vh;
 }
@@ -159,4 +153,49 @@ div {
     border: none;
     box-shadow: 1px 1px 1px grey;
     white-space: nowrap;
+}
+
+/* floating label */
+
+.container {
+    margin: 16px;
+}
+
+.formGroup {
+    justify-items: left;
+    /* margin here */
+    /* no transition cos i don't want it to grow */
+}
+
+.formLabel {
+    /* font-size */
+    /* color */
+    /* display: block; */
+    margin-left: 20px;
+    transform: translateY(-2.36em);
+    transform-origin: 0 0;
+    transition: all .3s;
+}
+
+.formItem {
+    margin: 15px;
+    outline: none;
+    border-width: 0 0 2px;
+    border-color: #ccc;
+    transition: all .5s;
+    background-color: transparent;
+}
+
+.formItem::placeholder {
+    color: transparent;
+}
+
+.formItem:focus {
+    border-color: #fa4564;
+}
+
+.formItem:focus + .formLabel,
+.formItem:not(:placeholder-shown) + .formLabel
+{
+    transform: translateY(-3.5em) scale(.8);
 }

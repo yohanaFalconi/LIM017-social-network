@@ -23,7 +23,6 @@ export const Register = () => {
                             </form>
                             <i class="icon-eye" id="eyeLogo1" ></i>
                             <i class="icon-eye-blocked" id="eyeSlashLogo1" style="display: none;"></i>
-                            </div>
                             <p>or register with</p>
                                 <div id="googleRegBtn">
                                   <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
@@ -33,14 +32,14 @@ export const Register = () => {
                                   <img class="fbIcon" src="https://i0.wp.com/uncomocorreo.com/wp-content/uploads/2017/03/facebook-logo.png?resize=300%2C300&ssl=1" alt="">
                                   <p class="buttonText w7">Facebook</p>
                                 </div>`;
+
   LogInDivs.innerHTML = containerFullLogo;
-  const createAccBtn = LogInDivs.querySelector("#createAccBtn")
   
+  const createAccBtn = LogInDivs.querySelector("#createAccBtn")
   createAccBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     console.log("este boton debe funcionar", createAccBtn);
-  })
-
+  });
 
   return LogInDivs;
 };

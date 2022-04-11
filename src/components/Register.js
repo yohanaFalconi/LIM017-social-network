@@ -35,9 +35,13 @@ export const Register = () => {
 
   LogInDivs.innerHTML = containerFullLogo;
   
-  const createAccBtn = LogInDivs.querySelector("#createAccBtn")
+  const createAccBtn = LogInDivs.querySelector('#createAccBtn')
   createAccBtn.addEventListener('click', (e)=>{
     e.preventDefault();
+    
+
+
+
     console.log("este boton debe funcionar", createAccBtn);
   });
 

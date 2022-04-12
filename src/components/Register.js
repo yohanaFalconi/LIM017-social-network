@@ -2,7 +2,7 @@ export const Register = () => {
   const LogInDivs = document.createElement('div');
   const containerFullLogo = `
   <div class="top">
-    <i class="icon-arrow-left2">Back</i>
+    <i class="backIcon">Back</i>
     <figure class="containerLogoLetters">
       <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
     </figure>
@@ -25,11 +25,11 @@ export const Register = () => {
     </div>
     <button class="button" id="createAccBtn">Create account</button>
     <p>or register with</p>
-    <div id="googleRegBtn">
+    <div id="googleRegBtn" class="googleBtn">
       <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
       <p class="buttonText w7">Google</p>
     </div>
-    <div id="fbRegBtn">
+    <div id="fbRegBtn" class="fbBtn">
       <img class="fbIcon" src="https://i0.wp.com/uncomocorreo.com/wp-content/uploads/2017/03/facebook-logo.png?resize=300%2C300&ssl=1" alt="">
       <p class="buttonText w7">Facebook</p>
     </div>

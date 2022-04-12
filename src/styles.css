@@ -69,7 +69,7 @@ div {
 
 .appName {
     width: 250px;
-    margin: 50vh 0 1vh 0;
+    margin: 45vh 0 1vh 0;
 }
 
 .navIcon {
@@ -95,18 +95,17 @@ div {
 }
 
 .top {
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 20vw 60vw 20vw;
     margin-top: 2vh;
 }
 
 .backIcon {
-    margin: auto;
-    padding: 0px 5vw;
+    align-content: center;
 }
 
 #aDiv {
     display: flex;
-    justify-content: center;
+    align-items: center;
 }
 
 #forgotPass {
@@ -118,7 +117,7 @@ div {
     margin-left: 2vw;
 }
 
-#googleRegBtn {
+.googleBtn {
     display: inline-flex;
     justify-content: space-evenly;
     margin: 2vh 0;
@@ -143,7 +142,7 @@ div {
     align-content: center;
 }
 
-#fbRegBtn {
+.fbBtn {
     display: inline-flex;
     justify-content: space-evenly;
     background: #3A5B9B;

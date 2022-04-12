@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 // Este es el punto de entrada de tu aplicacion
 
 // eslint-disable-next-line import/no-cycle

@@ -1,8 +1,5 @@
-
-import { 
-  signUpEmail,
-  verificationEmail 
-} from '../lib/firebase-auth.js';
+/* eslint-disable import/no-cycle */
+import { signUpEmail, verificationEmail } from '../lib/firebase-auth.js';
 import { onNavigate } from '../main.js';
 
 export const Register = () => {
@@ -51,21 +48,19 @@ export const Register = () => {
     const email = LogInDivs.querySelector('#userEmail');
     const password = LogInDivs.querySelector('#password');
     signUpEmail(email.value, password.value)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log(user)
-      verificationEmail()
-      .then(() => {
-        onNavigate('/verifyEmail')
-      })    
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(error)
-    });
-    
-
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        verificationEmail()
+          .then(() => {
+            onNavigate('/verifyEmail');
+          });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error, errorCode, errorMessage);
+      });
   });
 
   return LogInDivs;

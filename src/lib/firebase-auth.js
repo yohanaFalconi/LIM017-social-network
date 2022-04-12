@@ -27,7 +27,8 @@ const fProvider = new FacebookAuthProvider();
 
 export const signUpEmail = (email, password) => createUserWithEmailAndPassword(auth, email, password);
 export const verificationEmail = () => sendEmailVerification(auth.currentUser);
-export const verifyUser = () => onAuthStateChanged(auth, user);
+export const verifyUser = () => onAuthStateChanged(auth, (user));
+
 export const logInEmail = (email, password) => signInWithEmailAndPassword(auth, email, password)
 export const logOut = () => signOut(auth);
 export const logInGoogle = () => signInWithPopup(auth, gProvider);

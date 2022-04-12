@@ -1,3 +1,10 @@
+
+import { 
+  signUpEmail,
+  verificationEmail 
+} from '../lib/firebase-auth.js';
+import { onNavigate } from '../main.js';
+
 export const Register = () => {
   const LogInDivs = document.createElement('div');
   const containerFullLogo = `
@@ -38,9 +45,27 @@ export const Register = () => {
   LogInDivs.innerHTML = containerFullLogo;
 
   const createAccBtn = LogInDivs.querySelector('#createAccBtn');
+
   createAccBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    console.log('este boton debe funcionar', createAccBtn);
+    const email = LogInDivs.querySelector('#userEmail');
+    const password = LogInDivs.querySelector('#password');
+    signUpEmail(email.value, password.value)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user)
+      verificationEmail()
+      .then(() => {
+        onNavigate('/verifyEmail')
+      })    
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(error)
+    });
+    
+
   });
 
   return LogInDivs;

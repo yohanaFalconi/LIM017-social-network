@@ -1,10 +1,12 @@
 /* eslint-disable import/no-cycle */
-import { signUpEmail, verificationEmail } from '../lib/firebase-auth.js';
+
+import { signUpEmail, verificationEmail, logInGoogle } from '../lib/firebase-auth.js';
 import { onNavigate } from '../main.js';
 
 export const Register = () => {
-  const LogInDivs = document.createElement('div');
-  const containerFullLogo = `
+
+  const registerDiv = document.createElement('div');
+  const containerRegister = `
   <div class="top">
     <i class="backIcon">Back</i>
     <figure class="containerLogoLetters">
@@ -39,14 +41,18 @@ export const Register = () => {
     </div>
   </div>`;
 
-  LogInDivs.innerHTML = containerFullLogo;
+  registerDiv.innerHTML = containerRegister;
 
-  const createAccBtn = LogInDivs.querySelector('#createAccBtn');
+  const createAccBtn = registerDiv.querySelector('#createAccBtn');
+  const googleRegBtn = registerDiv.querySelector('#googleRegBtn');
+  const email = registerDiv.querySelector('#userEmail');
+  const password = registerDiv.querySelector('#password');
+  const progressMsg = registerDiv.querySelector('#progressMsg');
+  // const reenterPassword = registerDiv.querySelector('#reenterPassword');
+
   const emailPattern = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
-  const email = LogInDivs.querySelector('#userEmail');
-  const password = LogInDivs.querySelector('#password');
   createAccBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+     e.preventDefault();
     if (!emailPattern.test(email.value)) {
       email.classList.add('invalid');
       email.classList.remove('valid');
@@ -57,6 +63,7 @@ export const Register = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
+        progressMsg.innerText = 'Your account is being created, please wait';
           verificationEmail()
             .then(() => {
               onNavigate('/verifyEmail');
@@ -69,6 +76,7 @@ export const Register = () => {
         });
     }
   });
+
 
   const backIcon = LogInDivs.querySelector('.backIcon');
   backIcon.addEventListener('click', () => {
@@ -85,5 +93,22 @@ export const Register = () => {
       password.classList.remove('invalid');
     }
   });
-  return LogInDivs;
+  
+   googleRegBtn.addEventListener('click', () => {
+    logInGoogle()
+      .then((result) => {
+      // const credential = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken;
+        console.log('google sign up', result);
+      })
+      .catch((error) => {
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      // const email = error.email;
+      // const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(error);
+      });
+  });
+  
+  return registerDiv;
 };

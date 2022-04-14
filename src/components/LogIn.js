@@ -1,9 +1,13 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
+import { 
+  logInEmail,
+  logInGoogle
+} from '../lib/firebase-auth.js';
 
 export const LogIn = () => {
-  const LogInDivs = document.createElement('div');
-  const containerFullLogo = `
+  const LogInDiv = document.createElement('div');
+  const containerLogIn = `
   <div class="top">
     <i class="backIcon">Back</i>
     <figure class="containerLogoLetters">
@@ -41,12 +45,60 @@ export const LogIn = () => {
     </div>
   </div>`;
 
-  LogInDivs.innerHTML = containerFullLogo;
+  LogInDiv.innerHTML = containerLogIn;
 
-  const backIcon = LogInDivs.querySelector('.backIcon');
+  const backIcon = LogInDiv.querySelector('.backIcon');
   backIcon.addEventListener('click', () => {
     onNavigate('/');
   });
+  
+  const logInBtn = logInDiv.querySelector('#logInBtn');
+  const logInMessage = logInDiv.querySelector('#logInMessage');
 
-  return LogInDivs;
+  const googleRegBtn = logInDiv.querySelector('#googleRegBtn')
+
+
+  logInBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const email = logInDiv.querySelector('#userEmailLogIn');
+    const password = logInDiv.querySelector('#passwordLogIn');
+    
+    logInEmail(email.value, password.value)
+    .then((userCredential) => {
+      //const user = userCredential.user;
+      logInMessage.innerHTML=`The user logged in`;
+      onNavigate('/feed');
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      console.log(errorCode)
+      if (error.code === 'auth/wrong-password'){
+        logInMessage.innerHTML=`Wrong password. Try again`;
+      } else if (error.code === 'auth/user-not-found'){
+        logInMessage.innerHTML=`User not found`;
+      } else{
+        logInMessage.innerHTML=`${error.code}`;
+      }
+    }); 
+  });
+  googleRegBtn.addEventListener('click',(e) =>{
+    logInGoogle()
+    .then((result) => {
+      //const credential = GoogleAuthProvider.credentialFromResult(result);
+      //const token = credential.accessToken;
+      console.log("google sign up")
+      })
+    .catch((error) => {
+      //const errorCode = error.code;
+      //const errorMessage = error.message;
+      //const email = error.email;
+      //const credential = GoogleAuthProvider.credentialFromError(error);
+      console.log(error)
+     });
+  })
+
+
+
+  return logInDiv;
+
 };

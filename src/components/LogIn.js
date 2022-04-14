@@ -1,6 +1,7 @@
-import { 
+/* eslint-disable import/no-cycle */
+import {
   logInEmail,
-  logInGoogle
+  logInGoogle,
 } from '../lib/firebase-auth.js';
 import { onNavigate } from '../main.js';
 
@@ -11,6 +12,7 @@ export const LogIn = () => {
     <i class="icon-arrow-left2">Back</i>
     <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
   </figure>
+  
   <p id="titleLogIn" class="pink">To get started, enter your phone or email</p>
   <form action="" method="POST" class="form">
     <div class="formGroup">
@@ -44,53 +46,50 @@ export const LogIn = () => {
   </div>`;
 
   logInDiv.innerHTML = containerLogIn;
-  
+
   const logInBtn = logInDiv.querySelector('#logInBtn');
   const logInMessage = logInDiv.querySelector('#logInMessage');
 
-  const googleRegBtn = logInDiv.querySelector('#googleRegBtn')
-
+  const googleRegBtn = logInDiv.querySelector('#googleRegBtn');
 
   logInBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const email = logInDiv.querySelector('#userEmailLogIn');
     const password = logInDiv.querySelector('#passwordLogIn');
-    
+
     logInEmail(email.value, password.value)
-    .then((userCredential) => {
-      //const user = userCredential.user;
-      logInMessage.innerHTML=`The user logged in`;
-      onNavigate('/feed');
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      console.log(errorCode)
-      if (error.code === 'auth/wrong-password'){
-        logInMessage.innerHTML=`Wrong password. Try again`;
-      } else if (error.code === 'auth/user-not-found'){
-        logInMessage.innerHTML=`User not found`;
-      } else{
-        logInMessage.innerHTML=`${error.code}`;
-      }
-    }); 
-  });
-  googleRegBtn.addEventListener('click',(e) =>{
-    logInGoogle()
-    .then((result) => {
-      //const credential = GoogleAuthProvider.credentialFromResult(result);
-      //const token = credential.accessToken;
-      console.log("google sign up")
+      .then((userCredential) => {
+      // const user = userCredential.user;
+        logInMessage.innerHTML = 'The user logged in';
+        onNavigate('/feed');
       })
-    .catch((error) => {
-      //const errorCode = error.code;
-      //const errorMessage = error.message;
-      //const email = error.email;
-      //const credential = GoogleAuthProvider.credentialFromError(error);
-      console.log(error)
-     });
-  })
-
-
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode);
+        if (error.code === 'auth/wrong-password') {
+          logInMessage.innerHTML = 'Wrong password. Try again';
+        } else if (error.code === 'auth/user-not-found') {
+          logInMessage.innerHTML = 'User not found';
+        } else {
+          logInMessage.innerHTML = `${error.code}`;
+        }
+      });
+  });
+  googleRegBtn.addEventListener('click', (e) => {
+    logInGoogle()
+      .then((result) => {
+      // const credential = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken;
+        console.log('google sign up');
+      })
+      .catch((error) => {
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      // const email = error.email;
+      // const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(error);
+      });
+  });
 
   return logInDiv;
 };

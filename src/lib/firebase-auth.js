@@ -26,11 +26,12 @@ const gProvider = new GoogleAuthProvider();
 const fProvider = new FacebookAuthProvider();
 
 export const signUpEmail = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-export const verificationEmail = (auth) => sendEmailVerification(auth.currentUser);
-export const verifyUser = (auth) => onAuthStateChanged(auth, user);
+export const verificationEmail = () => sendEmailVerification(auth.currentUser);
+export const verifyUser = () => onAuthStateChanged(auth, (user));
+
 export const logInEmail = (email, password) => signInWithEmailAndPassword(auth, email, password)
 export const logOut = () => signOut(auth);
-export const logInGoogle = (auth) => signInWithPopup(auth, gProvider);
-export const logInFacebook = (auth) => signInWithPopup(auth, fProvider);
+export const logInGoogle = () => signInWithPopup(auth, gProvider);
+export const logInFacebook = () => signInWithPopup(auth, fProvider);
 
 

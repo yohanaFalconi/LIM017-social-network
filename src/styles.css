@@ -101,6 +101,7 @@ div {
 
 .backIcon {
     align-content: center;
+    cursor: pointer;
 }
 
 #aDiv {
@@ -162,14 +163,9 @@ div {
 
 .formGroup {
     justify-items: left;
-    /* margin here */
-    /* no transition cos i don't want it to grow */
 }
 
 .formLabel {
-    /* font-size */
-    /* color */
-    /* display: block; */
     margin-left: 20px;
     transform: translateY(-2.36em);
     transform-origin: 0 0;
@@ -197,4 +193,12 @@ div {
 .formItem:not(:placeholder-shown) + .formLabel
 {
     transform: translateY(-3.5em) scale(.8);
+}
+
+.valid {
+    background-color: lawngreen;
+}
+
+.invalid {
+    background-color: tomato;
 }

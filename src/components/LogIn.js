@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-cycle
+import { onNavigate } from '../main.js';
+
 export const LogIn = () => {
   const LogInDivs = document.createElement('div');
   const containerFullLogo = `
@@ -39,5 +42,11 @@ export const LogIn = () => {
   </div>`;
 
   LogInDivs.innerHTML = containerFullLogo;
+
+  const backIcon = LogInDivs.querySelector('.backIcon');
+  backIcon.addEventListener('click', () => {
+    onNavigate('/');
+  });
+
   return LogInDivs;
 };

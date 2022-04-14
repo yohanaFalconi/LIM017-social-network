@@ -5,6 +5,7 @@ import { Home } from './components/Home.js';
 import { Register } from './components/Register.js';
 import { LogIn } from './components/LogIn.js';
 import { VerifyEmail } from './components/VerifyEmail.js';
+import { Feed } from './components/Feed.js';
 
 // Router
 export const routes = {
@@ -12,6 +13,7 @@ export const routes = {
   '/register': Register,
   '/logIn': LogIn,
   '/verifyEmail': VerifyEmail,
+  '/feed': Feed,
 };
 const root = document.getElementById('root');
 root.appendChild(routes[window.location.pathname]());

@@ -1,6 +1,12 @@
+import { 
+  logInEmail,
+  logInGoogle
+} from '../lib/firebase-auth.js';
+import { onNavigate } from '../main.js';
+
 export const LogIn = () => {
-  const LogInDivs = document.createElement('div');
-  const containerFullLogo = `
+  const logInDiv = document.createElement('div');
+  const containerLogIn = `
   <figure class="top">
     <i class="icon-arrow-left2">Back</i>
     <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
@@ -17,12 +23,74 @@ export const LogIn = () => {
       <i class="icon-eye" id="eyeLogo1" ></i>
       <i class="icon-eye-blocked" id="eyeSlashLogo1" style="display: none;"></i>
     </div>
+    <input type="button" id="logInBtn" value="Log in" class="button">
+    <p id="logInMessage"></p>
+    <br>
+    <br>
+    <p>or register with</p>
+    <div id="googleRegBtn">
+      <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
+      <p class="buttonText w7">Google</p>
+    </div>
+    <div id="fbRegBtn">
+      <img class="fbIcon" src="https://i0.wp.com/uncomocorreo.com/wp-content/uploads/2017/03/facebook-logo.png?resize=300%2C300&ssl=1" alt="">
+      <p class="buttonText w7">Facebook</p>
+    </div>
   </form>
+  <br>
+  <br>
   <div id="aDiv">
     <button class="pink" id="forgotPass">I forgot my password</button>
-    <input type="button" value="Log in" class="button">
   </div>`;
 
-  LogInDivs.innerHTML = containerFullLogo;
-  return LogInDivs;
+  logInDiv.innerHTML = containerLogIn;
+  
+  const logInBtn = logInDiv.querySelector('#logInBtn');
+  const logInMessage = logInDiv.querySelector('#logInMessage');
+
+  const googleRegBtn = logInDiv.querySelector('#googleRegBtn')
+
+
+  logInBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const email = logInDiv.querySelector('#userEmailLogIn');
+    const password = logInDiv.querySelector('#passwordLogIn');
+    
+    logInEmail(email.value, password.value)
+    .then((userCredential) => {
+      //const user = userCredential.user;
+      logInMessage.innerHTML=`The user logged in`;
+      onNavigate('/feed');
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      console.log(errorCode)
+      if (error.code === 'auth/wrong-password'){
+        logInMessage.innerHTML=`Wrong password. Try again`;
+      } else if (error.code === 'auth/user-not-found'){
+        logInMessage.innerHTML=`User not found`;
+      } else{
+        logInMessage.innerHTML=`${error.code}`;
+      }
+    }); 
+  });
+  googleRegBtn.addEventListener('click',(e) =>{
+    logInGoogle()
+    .then((result) => {
+      //const credential = GoogleAuthProvider.credentialFromResult(result);
+      //const token = credential.accessToken;
+      console.log("google sign up")
+      })
+    .catch((error) => {
+      //const errorCode = error.code;
+      //const errorMessage = error.message;
+      //const email = error.email;
+      //const credential = GoogleAuthProvider.credentialFromError(error);
+      console.log(error)
+     });
+  })
+
+
+
+  return logInDiv;
 };

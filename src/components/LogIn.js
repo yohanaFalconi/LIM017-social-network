@@ -1,12 +1,15 @@
-import { logInEmail, logInGoogle } from '../lib/firebase-auth.js';
-// eslint-disable-next-line import/no-cycle
+/* eslint-disable import/no-cycle */
+import {
+  logInEmail,
+  logInGoogle,
+} from '../lib/firebase-auth.js';
+// eslint-disable-next-line import/newline-after-import
 import { onNavigate } from '../main.js';
-
 export const LogIn = () => {
   const logInDiv = document.createElement('div');
   const containerLogIn = `
   <figure class="top">
-    <i class="icon-arrow-left2">Back</i>
+    <i class="backIcon">Back</i>
     <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
   </figure>
   <p id="titleLogIn" class="pink">To get started, enter your phone or email</p>
@@ -40,25 +43,19 @@ export const LogIn = () => {
   <div id="aDiv">
     <button class="pink" id="forgotPass">I forgot my password</button>
   </div>`;
-
   logInDiv.innerHTML = containerLogIn;
-
   const logInBtn = logInDiv.querySelector('#logInBtn');
   const logInMessage = logInDiv.querySelector('#logInMessage');
-
   const googleRegBtn = logInDiv.querySelector('#googleRegBtn');
-
   logInBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const email = logInDiv.querySelector('#userEmailLogIn');
     const password = logInDiv.querySelector('#passwordLogIn');
-
     logInEmail(email.value, password.value)
-      .then((userCredential) => {
-        const user = userCredential.user;
+      .then(() => {
+      // const user = userCredential.user;
         logInMessage.innerHTML = 'The user logged in';
         onNavigate('/feed');
-        console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -74,10 +71,10 @@ export const LogIn = () => {
   });
   googleRegBtn.addEventListener('click', () => {
     logInGoogle()
-      .then((result) => {
+      .then(() => {
       // const credential = GoogleAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
-        console.log('google sign up', result);
+        console.log('google sign up');
       })
       .catch((error) => {
       // const errorCode = error.code;
@@ -86,6 +83,11 @@ export const LogIn = () => {
       // const credential = GoogleAuthProvider.credentialFromError(error);
         console.log(error);
       });
+  });
+
+  const backIcon = logInDiv.querySelector('.backIcon');
+  backIcon.addEventListener('click', () => {
+    onNavigate('/');
   });
 
   return logInDiv;

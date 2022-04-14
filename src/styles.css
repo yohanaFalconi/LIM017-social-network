@@ -69,7 +69,7 @@ div {
 
 .appName {
     width: 250px;
-    margin: 50vh 0 1vh 0;
+    margin: 45vh 0 1vh 0;
 }
 
 .navIcon {
@@ -95,18 +95,18 @@ div {
 }
 
 .top {
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 20vw 60vw 20vw;
     margin-top: 2vh;
 }
 
 .backIcon {
-    margin: auto;
-    padding: 0px 5vw;
+    align-content: center;
+    cursor: pointer;
 }
 
 #aDiv {
     display: flex;
-    justify-content: center;
+    align-items: center;
 }
 
 #forgotPass {
@@ -118,7 +118,7 @@ div {
     margin-left: 2vw;
 }
 
-#googleRegBtn {
+.googleBtn {
     display: inline-flex;
     justify-content: space-evenly;
     margin: 2vh 0;
@@ -143,7 +143,7 @@ div {
     align-content: center;
 }
 
-#fbRegBtn {
+.fbBtn {
     display: inline-flex;
     justify-content: space-evenly;
     background: #3A5B9B;
@@ -163,14 +163,9 @@ div {
 
 .formGroup {
     justify-items: left;
-    /* margin here */
-    /* no transition cos i don't want it to grow */
 }
 
 .formLabel {
-    /* font-size */
-    /* color */
-    /* display: block; */
     margin-left: 20px;
     transform: translateY(-2.36em);
     transform-origin: 0 0;
@@ -198,4 +193,12 @@ div {
 .formItem:not(:placeholder-shown) + .formLabel
 {
     transform: translateY(-3.5em) scale(.8);
+}
+
+.valid {
+    background-color: lawngreen;
+}
+
+.invalid {
+    background-color: tomato;
 }

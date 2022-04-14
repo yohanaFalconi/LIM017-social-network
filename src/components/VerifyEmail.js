@@ -9,6 +9,7 @@ export const VerifyEmail = () => {
   <button class="button" id="verifyBtn">I verified my email</button>
   <p id="signUpMessage"></p>
   `;
+
   verifyDiv.innerHTML = containerVerify;
 
   const verifyBtn = verifyDiv.querySelector('#verifyBtn');

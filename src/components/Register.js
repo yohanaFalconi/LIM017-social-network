@@ -1,4 +1,5 @@
 /* eslint-disable import/no-cycle */
+
 import { signUpEmail, verificationEmail, logInGoogle } from '../lib/firebase-auth.js';
 import { onNavigate } from '../main.js';
 

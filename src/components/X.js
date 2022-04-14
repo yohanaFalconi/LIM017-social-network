@@ -25,7 +25,7 @@ export const VerifyEmail = () => {
           onNavigate('/logIn');
         } else if (emailVerified === false) {
           signUpMessage.textContent = `${user.email} Email no verificado`;
-          // location.reload();
+          location.reload();
         } else {
           signUpMessage.textContent = 'Error :p';
         }

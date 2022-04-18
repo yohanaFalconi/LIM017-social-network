@@ -25,8 +25,8 @@ export const LogIn = () => {
     <div class="formGroup">
       <input type="password" name="password" id="passwordLogIn" placeholder="password" class="formItem">
       <label class="formLabel" for="password">password</label>
-      <i class="icon-eye" id="eyeLogo1" ></i>
-      <i class="icon-eye-blocked" id="eyeSlashLogo1" style="display: none;"></i>
+      <i class="icon-eye" id="eyeLogo1" style="display: none;"></i>
+      <i class="icon-eye-blocked" id="eyeSlashLogo1"></i>
       <input type="button" id="logInBtn" value="Log in" class="button">
       <p id="logInMessage"></p>
     </div>
@@ -118,6 +118,23 @@ export const LogIn = () => {
   const backIcon = logInDiv.querySelector('.icon-arrow-left2');
   backIcon.addEventListener('click', () => {
     onNavigate('/');
+  });
+
+  const eye = logInDiv.querySelector('#eyeLogo1');
+  const eyeSlash = logInDiv.querySelector('#eyeSlashLogo1');
+  eyeSlash.addEventListener('click', () => {
+    if (password.type === 'password') {
+      password.type = 'text';
+      eyeSlash.style.display = 'none';
+      eye.style.display = '';
+      if (eyeSlash.style.display === 'none') {
+        eye.addEventListener('click', () => {
+          password.type = 'password';
+          eyeSlash.style.display = '';
+          eye.style.display = 'none';
+        });
+      }
+    }
   });
 
   return logInDiv;

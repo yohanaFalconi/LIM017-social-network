@@ -25,8 +25,8 @@ export const Register = () => {
         <div class="formGroup">
           <input type="password" name="password" id="password" placeholder="password" class="formItem">
           <label for="password" class="formLabel">Password</label>
-          <i class="icon-eye" id="eyeLogo1" ></i>
-          <i class="icon-eye-blocked" id="eyeSlashLogo1" style="display: none;"></i>
+          <i class="icon-eye" id="eyeLogo1" style="display: none;"></i>
+          <i class="icon-eye-blocked" id="eyeSlashLogo1"></i>
         </div>
       </form>
     </div>
@@ -70,6 +70,23 @@ export const Register = () => {
     } else if (emailPattern.test(email.value)) {
       email.classList.add('valid');
       email.classList.remove('invalid');
+    }
+  });
+
+  const eye = registerDiv.querySelector('#eyeLogo1');
+  const eyeSlash = registerDiv.querySelector('#eyeSlashLogo1');
+  eyeSlash.addEventListener('click', () => {
+    if (password.type === 'password') {
+      password.type = 'text';
+      eyeSlash.style.display = 'none';
+      eye.style.display = '';
+      if (eyeSlash.style.display === 'none') {
+        eye.addEventListener('click', () => {
+          password.type = 'password';
+          eyeSlash.style.display = '';
+          eye.style.display = 'none';
+        });
+      }
     }
   });
 

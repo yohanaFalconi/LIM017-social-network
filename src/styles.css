@@ -167,6 +167,18 @@ div {
     justify-items: left;
 }
 
+#eyeSlashLogo1, #eyeLogo1 {
+    position: absolute;
+    left: 63vw;
+    transform: translateY(90%);
+    cursor: pointer;
+    transition: all 0.4;
+}
+
+#eyeSlashLogo1:hover, #eyeLogo1:hover {
+    color: #fa4564;
+}
+
 .formLabel {
     margin-left: 20px;
     transform: translateY(-2.36em);
@@ -198,14 +210,15 @@ div {
 }
 
 .valid {
-    background-color: lawngreen;
+    background-color: rgb(113, 194, 33);
 }
 
 .invalid {
-    background-color: tomato;
+    background-color: rgb(173, 49, 27);
 }
 
 #checkEmailMsg{
     grid-template-columns: 70vw;
     margin: 12vh 1vh 5vh 1vh;
 }
+

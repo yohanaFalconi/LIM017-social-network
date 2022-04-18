@@ -1,13 +1,15 @@
 /* eslint-disable import/no-cycle */
 
-import { signUpEmail, verificationEmail, logInGoogle } from '../lib/firebase-auth.js';
+import {
+  signUpEmail, verificationEmail, logInGoogle, logInFacebook,
+} from '../lib/firebase-auth.js';
 import { onNavigate } from '../main.js';
 
 export const Register = () => {
   const registerDiv = document.createElement('div');
   const containerRegister = `
   <div class="top">
-    <i class="backIcon">Back</i>
+    <i class="icon-arrow-left2"></i>
     <figure class="containerLogoLetters">
       <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
     </figure>
@@ -30,14 +32,15 @@ export const Register = () => {
     </div>
     <button class="button" id="createAccBtn">Create account</button>
     <p id="progressMsg"></p>
-    <p>or register with</p>
+    <br>
+    <p>or</p>
     <div id="googleRegBtn" class="googleBtn">
       <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
-      <p class="buttonText w7">Google</p>
+      <p class="buttonText w7">Continue with Google</p>
     </div>
     <div id="fbRegBtn" class="fbBtn">
       <img class="fbIcon" src="https://i0.wp.com/uncomocorreo.com/wp-content/uploads/2017/03/facebook-logo.png?resize=300%2C300&ssl=1" alt="">
-      <p class="buttonText w7">Facebook</p>
+      <p class="buttonText w7">Continue with Facebook</p>
     </div>
   </div>`;
 
@@ -48,17 +51,31 @@ export const Register = () => {
   const email = registerDiv.querySelector('#userEmail');
   const password = registerDiv.querySelector('#password');
   const progressMsg = registerDiv.querySelector('#progressMsg');
-  // const reenterPassword = registerDiv.querySelector('#reenterPassword');
 
+  const passwordPattern = /^[\d\w@-]{8,20}$/i;
+  password.addEventListener('keyup', () => {
+    if (!passwordPattern.test(password.value)) {
+      password.classList.add('invalid');
+      password.classList.remove('valid');
+    } else if (passwordPattern.test(password.value)) {
+      password.classList.add('valid');
+      password.classList.remove('invalid');
+    }
+  });
   const emailPattern = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
-  createAccBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+  email.addEventListener('keyup', () => {
     if (!emailPattern.test(email.value)) {
       email.classList.add('invalid');
       email.classList.remove('valid');
     } else if (emailPattern.test(email.value)) {
       email.classList.add('valid');
       email.classList.remove('invalid');
+    }
+  });
+
+  createAccBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (emailPattern.test(email.value) && passwordPattern.test(password.value)) {
       signUpEmail(email.value, password.value)
         .then((userCredential) => {
           // const user = userCredential.user;
@@ -74,23 +91,14 @@ export const Register = () => {
           const errorMessage = error.message;
           console.log(error, errorCode, errorMessage);
         });
+    } else {
+      progressMsg.innerText = 'Wrong. Please, try again.';
     }
   });
 
-  const backIcon = registerDiv.querySelector('.backIcon');
+  const backIcon = registerDiv.querySelector('.icon-arrow-left2');
   backIcon.addEventListener('click', () => {
     onNavigate('/');
-  });
-
-  const passwordPattern = /^[\d\w@-]{8,20}$/i;
-  password.addEventListener('keyup', () => {
-    if (!passwordPattern.test(password.value)) {
-      password.classList.add('invalid');
-      password.classList.remove('valid');
-    } else if (passwordPattern.test(password.value)) {
-      password.classList.add('valid');
-      password.classList.remove('invalid');
-    }
   });
 
   googleRegBtn.addEventListener('click', () => {
@@ -99,12 +107,32 @@ export const Register = () => {
       // const credential = GoogleAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
         console.log('google sign up', result);
+        onNavigate('/feed');
       })
       .catch((error) => {
       // const errorCode = error.code;
       // const errorMessage = error.message;
       // const email = error.email;
       // const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(error);
+      });
+  });
+
+  const fbRegBtn = registerDiv.querySelector('#fbRegBtn');
+  fbRegBtn.addEventListener('click', () => {
+    logInFacebook()
+      .then((result) => {
+        // const user = result.user;
+        console.log('facebook sign up', result);
+        // const credential = FacebookAuthProvider.credentialFromResult(result);
+        // const accessToken = credential.accessToken;
+        onNavigate('/feed');
+      })
+      .catch((error) => {
+        /* const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.email;
+        const credential = FacebookAuthProvider.credentialFromError(error); */
         console.log(error);
       });
   });

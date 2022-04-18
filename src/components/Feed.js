@@ -6,7 +6,6 @@ export const Feed = () => {
   const feedDiv = document.createElement('div');
   const containerFeed = `
     <figure class="top">
-        <i class="icon-arrow-left2">Back</i>
         <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
     </figure>
     <input type="button" id="logOut" value="Log out" class="button">

@@ -5,31 +5,28 @@ import { userState } from '../lib/firebase-auth.js';
 export const VerifyEmail = () => {
   const verifyDiv = document.createElement('div');
   const containerVerify = `
-  <h3>Your account has been created, <br> please check you email to continue.</h3>
+  <h2 id="checkEmailMsg" class="darkPurple">Your account has been created, <br> please check you email to continue.</h2>
   <button class="button" id="verifyBtn">I verified my email</button>
-  <p id="signUpMessage"></p>
+  <br>
+  <p id="signUpMsg"></p>
   `;
 
   verifyDiv.innerHTML = containerVerify;
 
   const verifyBtn = verifyDiv.querySelector('#verifyBtn');
-  const signUpMessage = verifyDiv.querySelector('#signUpMessage');
+  const signUpMsg = verifyDiv.querySelector('#signUpMsg');
 
   verifyBtn.addEventListener('click', () => {
     userState((user) => {
-      if (user) {
-        // const uid = user.uid;
-        // const email = user.email;
-        const emailVerified = user.emailVerified;
-        if (emailVerified === true) {
-          signUpMessage.textContent = `${user.email} Email verificado`;
-          onNavigate('/logIn');
-        } else if (emailVerified === false) {
-          signUpMessage.textContent = `${user.email} Email no verificado`;
-          // location.reload();
-        } else {
-          signUpMessage.textContent = 'Error :p';
-        }
+      // const uid = user.uid;
+      // const email = user.email;
+      const emailVerified = user.emailVerified;
+      if (emailVerified) {
+        signUpMsg.textContent = `${user.email} Email verificado`;
+        onNavigate('/logIn');
+      } else {
+        signUpMsg.textContent = `${user.email} Email no verificado`;
+        window.location.reload();
       }
     });
   });

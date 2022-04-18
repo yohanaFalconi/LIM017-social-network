@@ -99,7 +99,7 @@ div {
     margin-top: 2vh;
 }
 
-.backIcon {
+.icon-arrow-left2 {
     align-content: center;
     cursor: pointer;
 }
@@ -124,11 +124,12 @@ div {
     margin: 2vh 0;
     background: white;
     color: #444;
-    width: 130px;
+    width: 230px;
     border-radius: 5px;
     border: thin solid #888;
     box-shadow: 1px 1px 1px grey;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .googleIcon {
@@ -148,11 +149,12 @@ div {
     justify-content: space-evenly;
     background: #3A5B9B;
     color: white;
-    width: 130px;
+    width: 255px;
     border-radius: 5px;
     border: none;
     box-shadow: 1px 1px 1px grey;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 /* floating label */
@@ -201,4 +203,9 @@ div {
 
 .invalid {
     background-color: tomato;
+}
+
+#checkEmailMsg{
+    grid-template-columns: 70vw;
+    margin: 12vh 1vh 5vh 1vh;
 }

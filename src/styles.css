@@ -10,6 +10,10 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+#root {
+    background-image: url(./Imagenes/Mobile\ background.png);
+}
+
 title {
     display: none;
 }
@@ -222,3 +226,12 @@ div {
     margin: 12vh 1vh 5vh 1vh;
 }
 
+
+
+
+
+@media (min-width: 867px) and (max-width: 1300px){
+    #root {
+        background-image: url(./Imagenes/Desktop\ background.png);
+    }
+}

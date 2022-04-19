@@ -34,7 +34,7 @@ export const LogIn = () => {
     <div id="aDiv">
       <button class="pink" id="forgotPass">I forgot my password</button>
     </div>
-    <p><hr>or</p>
+    <p>or</p>
     <div id="googleRegBtn" class="googleBtn">
       <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
       <p class="buttonText w7">Continue with Google</p>

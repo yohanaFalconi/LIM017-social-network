@@ -9,24 +9,28 @@ export const Register = () => {
   const registerDiv = document.createElement('div');
   const containerRegister = `
   <div class="top">
-    <i class="icon-arrow-left2"></i>
+    <i class="icon-arrow-left2 darkPurple"></i>
     <figure class="containerLogoLetters">
       <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
     </figure>
   </div>
   <div id="containerRegister">
-    <p class="darkPurple w6">Register with email</p>
+    <p class="darkPurple w6 meow">Register with email</p>
     <div class="container">
       <form action="" method="POST" class="form">
         <div class="formGroup">
           <input type="email" name="email" id="userEmail" placeholder="email" class="formItem">
           <label for="email" class="formLabel">Email</label>
         </div>
-        <div class="formGroup">
-          <input type="password" name="password" id="password" placeholder="password" class="formItem">
-          <label for="password" class="formLabel">Password</label>
-          <i class="icon-eye" id="eyeLogo1" style="display: none;"></i>
-          <i class="icon-eye-blocked" id="eyeSlashLogo1"></i>
+        <div class="formGroup passwordGroup">
+          <div>
+            <input type="password" name="password" id="password" placeholder="password" class="formItem">
+            <label for="password" class="formLabel">Password</label>
+          </div>
+          <div>
+            <i class="icon-eye darkPurple" id="eyeLogo1" style="display: none;"></i>
+            <i class="icon-eye-blocked darkPurple" id="eyeSlashLogo1"></i>
+          </div>
         </div>
       </form>
     </div>

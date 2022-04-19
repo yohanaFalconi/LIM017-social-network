@@ -32,6 +32,7 @@ export const Register = () => {
             <i class="icon-eye-blocked darkPurple" id="eyeSlashLogo1"></i>
           </div>
         </div>
+        <p id="passMsg"></p>
       </form>
     </div>
     <button class="button" id="createAccBtn">Create account</button>
@@ -55,15 +56,19 @@ export const Register = () => {
   const email = registerDiv.querySelector('#userEmail');
   const password = registerDiv.querySelector('#password');
   const progressMsg = registerDiv.querySelector('#progressMsg');
-
-  const passwordPattern = /^[\d\w@-]{8,20}$/i;
+  const passMsg = registerDiv.querySelector('#passMsg');
+  const passwordPattern = /^[\d\w@-]{8,15}$/i;
   password.addEventListener('keyup', () => {
     if (!passwordPattern.test(password.value)) {
       password.classList.add('invalid');
       password.classList.remove('valid');
+      passMsg.innerHTML = `The password must at least have 
+       <br> a minimum of 8 characters with <br> an uppercase letter,
+       a lowercase <br>letter and number.`;
     } else if (passwordPattern.test(password.value)) {
       password.classList.add('valid');
       password.classList.remove('invalid');
+      passMsg.innerText = '';
     }
   });
   const emailPattern = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;

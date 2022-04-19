@@ -237,7 +237,9 @@ div {
     grid-template-columns: 70vw;
     margin: 12vh 1vh 5vh 1vh;
 }
-
+#passMsg{
+    font-size: 12px;
+}
 
 
 

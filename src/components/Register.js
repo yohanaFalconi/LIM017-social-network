@@ -25,9 +25,10 @@ export const Register = () => {
         <div class="formGroup">
           <input type="password" name="password" id="password" placeholder="password" class="formItem">
           <label for="password" class="formLabel">Password</label>
-          <i class="icon-eye" id="eyeLogo1" ></i>
-          <i class="icon-eye-blocked" id="eyeSlashLogo1" style="display: none;"></i>
+          <i class="icon-eye" id="eyeLogo1" style="display: none;"></i>
+          <i class="icon-eye-blocked" id="eyeSlashLogo1"></i>
         </div>
+        <p id="passMsg"></p>
       </form>
     </div>
     <button class="button" id="createAccBtn">Create account</button>
@@ -51,15 +52,19 @@ export const Register = () => {
   const email = registerDiv.querySelector('#userEmail');
   const password = registerDiv.querySelector('#password');
   const progressMsg = registerDiv.querySelector('#progressMsg');
-
-  const passwordPattern = /^[\d\w@-]{8,20}$/i;
+  const passMsg = registerDiv.querySelector('#passMsg');
+  const passwordPattern = /^[\d\w@-]{8,15}$/i;
   password.addEventListener('keyup', () => {
     if (!passwordPattern.test(password.value)) {
       password.classList.add('invalid');
       password.classList.remove('valid');
+      passMsg.innerHTML = `The password must at least have 
+       <br> a minimum of 8 characters with <br> an uppercase letter,
+       a lowercase <br>letter and number.`;
     } else if (passwordPattern.test(password.value)) {
       password.classList.add('valid');
       password.classList.remove('invalid');
+      passMsg.innerText = '';
     }
   });
   const emailPattern = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
@@ -70,6 +75,23 @@ export const Register = () => {
     } else if (emailPattern.test(email.value)) {
       email.classList.add('valid');
       email.classList.remove('invalid');
+    }
+  });
+
+  const eye = registerDiv.querySelector('#eyeLogo1');
+  const eyeSlash = registerDiv.querySelector('#eyeSlashLogo1');
+  eyeSlash.addEventListener('click', () => {
+    if (password.type === 'password') {
+      password.type = 'text';
+      eyeSlash.style.display = 'none';
+      eye.style.display = '';
+      if (eyeSlash.style.display === 'none') {
+        eye.addEventListener('click', () => {
+          password.type = 'password';
+          eyeSlash.style.display = '';
+          eye.style.display = 'none';
+        });
+      }
     }
   });
 

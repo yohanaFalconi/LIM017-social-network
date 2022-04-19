@@ -16,7 +16,7 @@ export const LogIn = () => {
     </figure>
   </div>
   <div class="containerLogin">
-    <p class="pink w6 meow">Log in with email</p>
+    <p class="purple w6 meow">Log in with email</p>
     <div class="container">
       <form action="" method="POST" class="form">
         <div class="formGroup">
@@ -42,7 +42,7 @@ export const LogIn = () => {
         <button class="pink" id="forgotPass">I forgot my password</button>
       </div>
     </div>
-    <p>or</p>
+    <p class="purple">or</p>
     <div id="googleRegBtn" class="googleBtn">
       <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
       <p class="buttonText w7">Continue with Google</p>

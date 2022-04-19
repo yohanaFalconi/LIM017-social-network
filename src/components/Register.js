@@ -15,7 +15,7 @@ export const Register = () => {
     </figure>
   </div>
   <div id="containerRegister">
-    <p class="darkPurple w6 meow">Register with email</p>
+    <p class="purple w6 meow">Register with email</p>
     <div class="container">
       <form action="" method="POST" class="form">
         <div class="formGroup">

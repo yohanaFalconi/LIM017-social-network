@@ -10,29 +10,37 @@ export const LogIn = () => {
   const logInDiv = document.createElement('div');
   const containerLogIn = `
   <div class="top">
-    <i class="icon-arrow-left2"></i>
+    <i class="icon-arrow-left2 darkPurple"></i>
     <figure class="containerLogoLetters">
       <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
     </figure>
   </div>
-  <div class="container">
-  <p id="titleLogIn" class="pink">To get started, enter your email</p>
-  <form action="" method="POST" class="form">
-    <div class="formGroup">
-      <input type="email" name="email" id="userEmailLogIn" placeholder="email" class="formItem">
-      <label class="formLabel" for="email">email</label>
-    </div>
-    <div class="formGroup">
-      <input type="password" name="password" id="passwordLogIn" placeholder="password" class="formItem">
-      <label class="formLabel" for="password">password</label>
-      <i class="icon-eye" id="eyeLogo1" style="display: none;"></i>
-      <i class="icon-eye-blocked" id="eyeSlashLogo1"></i>
-      <input type="button" id="logInBtn" value="Log in" class="button">
-      <p id="logInMessage"></p>
-    </div>
-  </form>
-    <div id="aDiv">
-      <button class="pink" id="forgotPass">I forgot my password</button>
+  <div class="containerLogin">
+    <p class="pink w6 meow">Log in with email</p>
+    <div class="container">
+      <form action="" method="POST" class="form">
+        <div class="formGroup">
+          <input type="email" name="email" id="userEmailLogIn" placeholder="email" class="formItem">
+          <label class="formLabel" for="email">Email</label>
+        </div>
+        <div class="formGroup passwordGroup">
+          <div>
+            <input type="password" name="password" id="passwordLogIn" placeholder="password" class="formItem">
+            <label class="formLabel" for="password">Password</label>
+          </div>
+          <div>
+            <i class="icon-eye darkPurple" id="eyeLogo1" style="display: none;"></i>
+            <i class="icon-eye-blocked darkPurple" id="eyeSlashLogo1"></i>
+          </div>
+        </div>
+        <div>
+          <input type="button" id="logInBtn" value="Log in" class="button">
+          <p id="logInMessage" class="w7 darkPurple"></p>
+        </div>
+      </form>
+      <div id="aDiv">
+        <button class="pink" id="forgotPass">I forgot my password</button>
+      </div>
     </div>
     <p>or</p>
     <div id="googleRegBtn" class="googleBtn">
@@ -74,7 +82,7 @@ export const LogIn = () => {
           logInMsg.innerHTML = 'Enter your password';
           password.classList.add('invalid');
         } else if (error.code === 'auth/invalid-email') {
-          logInMsg.innerHTML = 'Enter your email';
+          logInMsg.innerHTML = 'Enter a valid email';
           email.classList.add('invalid');
         } else {
           logInMsg.innerHTML = `${error.code}`;

@@ -139,7 +139,7 @@ div {
     justify-content: space-evenly;
     margin: 2vh 0;
     background: white;
-    color: #444;
+    color: rgba(68, 68, 68, 0.786);
     width: 230px;
     border-radius: 5px;
     border: thin solid #888;
@@ -200,6 +200,7 @@ div {
     transform-origin: 0 0;
     transition: all .3s;
     justify-self: left;
+    color: rgba(68, 68, 68, 0.786);;
 }
 
 .formItem {

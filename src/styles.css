@@ -10,7 +10,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-#root {
+body {
     background-image: url(./Imagenes/Mobile\ background.png);
 }
 
@@ -63,13 +63,13 @@ div {
     height: 100px;
 }
 
-.inputBoxes {
+/* .inputBoxes {
     margin: 20px;
-}
+} */
 
-#createAccBtn {
+/* #createAccBtn {
     margin-bottom: 2vh;
-}
+} */
 
 .appName {
     width: 250px;
@@ -91,6 +91,7 @@ div {
 #goToLogin {
     display: flex;
     justify-content: center;
+    margin-left: 2vw;
 }
 
 #goToLoginBtn {
@@ -108,6 +109,11 @@ div {
     cursor: pointer;
 }
 
+.meow {
+    margin: 20px 0 10px;
+    font-size: larger;
+}
+
 #aDiv {
     display: flex;
     align-items: center;
@@ -116,10 +122,12 @@ div {
 #forgotPass {
     border: none;
     background: none;
+    font-size: large;
 }
 
-#goToLogin {
-    margin-left: 2vw;
+#logInMessage {
+    margin: 2vh;
+    font-size: large;
 }
 
 .googleBtn {
@@ -167,13 +175,12 @@ div {
     margin: 16px;
 }
 
-.formGroup {
-    justify-items: left;
+.passwordGroup {
+    grid-template-columns: 90% 10%;
+    align-items: flex-start;
 }
 
 #eyeSlashLogo1, #eyeLogo1 {
-    position: absolute;
-    left: 63vw;
     transform: translateY(90%);
     cursor: pointer;
     transition: all 0.4;
@@ -188,6 +195,7 @@ div {
     transform: translateY(-2.36em);
     transform-origin: 0 0;
     transition: all .3s;
+    justify-self: left;
 }
 
 .formItem {

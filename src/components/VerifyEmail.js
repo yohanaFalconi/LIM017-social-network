@@ -24,10 +24,10 @@ export const VerifyEmail = () => {
       const emailVerified = user.emailVerified;
       console.log('antes del if', emailVerified);
       if (emailVerified) {
-        signUpMsg.textContent = `${user.email} Email verificado`;
+        signUpMsg.textContent = `${user.email} Verified email`;
         onNavigate('/logIn');
       } else {
-        signUpMsg.textContent = `${user.email} Email no verificado`;
+        signUpMsg.textContent = `${user.email} Unverified email`;
         window.location.reload();
       }
     });

@@ -6,6 +6,7 @@ import {
 } from '../lib/firebase-auth.js';
 // eslint-disable-next-line import/newline-after-import
 import { onNavigate } from '../main.js';
+
 export const LogIn = () => {
   const logInDiv = document.createElement('div');
   const containerLogIn = `
@@ -50,6 +51,7 @@ export const LogIn = () => {
   const logInBtn = logInDiv.querySelector('#logInBtn');
   const logInMsg = logInDiv.querySelector('#logInMessage');
   const googleRegBtn = logInDiv.querySelector('#googleRegBtn');
+  const forgotPass = logInDiv.querySelector('#forgotPass');
   logInBtn.addEventListener('click', (e) => {
     e.preventDefault();
     logInEmail(email.value, password.value)
@@ -80,6 +82,9 @@ export const LogIn = () => {
           logInMsg.innerHTML = `${error.code}`;
         }
       });
+  });
+  forgotPass.addEventListener('click', () => {
+    onNavigate('/resetPassword');
   });
   googleRegBtn.addEventListener('click', () => {
     logInGoogle()

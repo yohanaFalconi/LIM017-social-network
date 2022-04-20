@@ -7,6 +7,7 @@ import { Register } from './components/Register.js';
 import { LogIn } from './components/LogIn.js';
 import { VerifyEmail } from './components/VerifyEmail.js';
 import { Feed } from './components/Feed.js';
+import { ResetPassword } from './components/ResetPassword.js';
 
 // Router
 export const routes = {
@@ -15,6 +16,7 @@ export const routes = {
   '/logIn': LogIn,
   '/verifyEmail': VerifyEmail,
   '/feed': Feed,
+  '/resetPassword': ResetPassword,
 };
 const root = document.getElementById('root');
 root.appendChild(routes[window.location.pathname]());

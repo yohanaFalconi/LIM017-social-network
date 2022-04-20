@@ -11,7 +11,7 @@ export const LogIn = () => {
   const containerLogIn = `
   <div class="top">
     <i class="icon-arrow-left2 darkPurple"></i>
-    <figure class="containerLogoLetters">
+    <figure class="containerTopLogo">
       <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
     </figure>
   </div>

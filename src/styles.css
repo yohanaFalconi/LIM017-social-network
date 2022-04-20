@@ -11,7 +11,7 @@
 }
 
 body {
-    background-image: url(./Imagenes/Mobile\ background.png);
+    background-image: url(./Imagenes/mobile-background.png);
 }
 
 title {
@@ -22,9 +22,15 @@ div {
     justify-items: center;
 }
 
+section {
+    justify-items: center;
+}
+
 .button {
     border: none;
     border-radius: 20px;
+    height: fit-content;
+    width: fit-content;
     padding: 5px 25px;
     color: white;
     background-color: #fa4564;
@@ -78,14 +84,6 @@ div {
     height: 100px;
 }
 
-/* .inputBoxes {
-    margin: 20px;
-} */
-
-/* #createAccBtn {
-    margin-bottom: 2vh;
-} */
-
 .appName {
     width: 250px;
     margin: 45vh 0 1vh 0;
@@ -101,11 +99,11 @@ div {
 
 #signUpBtn {
     margin: 5vh 0;
+    font-size: larger;
 }
 
 #goToLogin {
     display: flex;
-    justify-content: center;
     margin-left: 2vw;
 }
 
@@ -265,10 +263,41 @@ div {
 }
 
 
+.desktop {
+    display: none;
+}
 
+@media (min-width: 867px) and (max-width: 1800px){
+    body {
+        background-image: url(./Imagenes/desktop-background.png);
+    }
 
-@media (min-width: 867px) and (max-width: 1300px){
-    #root {
-        background-image: url(./Imagenes/Desktop\ background.png);
+    .desktop {
+        display: grid;
+    }
+
+    #designImage {
+        height: 100vh;
+    }
+
+    #homeMain {
+        grid-template-columns: 50vw 50vw;
+    }
+
+    .containerLogo, .containerLogoLetters {
+        display: none;
+    }
+
+    #homeLogo {
+        width: 38vw;
+        margin: 15vh 6vw 0 6vw;
+    }
+
+    #desktopSlogan {
+        font-size: 3vh;
+    }
+
+    #goToLogin {
+        font-size: x-large;
     }
 }

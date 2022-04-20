@@ -20,7 +20,7 @@ export const Register = () => {
       <form action="" method="POST" class="form">
         <div class="formGroup">
           <input type="email" name="email" id="userEmail" placeholder="email" class="formItem">
-          <label for="email" class="formLabel">Email</label>
+          <label for="email" class="formLabel emailLabel">Email</label>
         </div>
         <div class="formGroup passwordGroup">
           <div>
@@ -38,7 +38,7 @@ export const Register = () => {
     <button class="button" id="createAccBtn">Create account</button>
     <p id="progressMsg"></p>
     <br>
-    <p>or</p>
+    <p class="purple">or</p>
     <div id="googleRegBtn" class="googleBtn">
       <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
       <p class="buttonText w7">Continue with Google</p>

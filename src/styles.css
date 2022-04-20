@@ -28,10 +28,21 @@ div {
     padding: 5px 25px;
     color: white;
     background-color: #fa4564;
+    transition: 0.3s;
 }
 
 .button:hover {
     cursor: pointer;
+    background-color: crimson;
+}
+
+.link {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.link:hover {
+    color: crimson;
 }
 
 .pink {
@@ -100,7 +111,6 @@ div {
 
 #goToLoginBtn {
     padding-left: 2vw;
-    cursor: pointer;
 }
 
 .top {
@@ -129,15 +139,21 @@ div {
     font-size: large;
 }
 
+#progressMsg {
+    margin-top: 3vh;
+}
+
 #logInMessage {
     margin: 2vh;
     font-size: large;
+    background-color: red;
+    font-weight: 600;
 }
 
 .googleBtn {
     display: inline-flex;
     justify-content: space-evenly;
-    margin: 2vh 0;
+    margin: 3vh 0;
     background: white;
     color: rgba(68, 68, 68, 0.786);
     width: 230px;
@@ -180,8 +196,12 @@ div {
 }
 
 .passwordGroup {
-    grid-template-columns: 90% 10%;
+    grid-template-columns: 99% 1%;
     align-items: flex-start;
+}
+
+.emailLabel {
+    padding-left: 7.5px;
 }
 
 #eyeSlashLogo1, #eyeLogo1 {
@@ -231,7 +251,7 @@ div {
 }
 
 .invalid {
-    background-color: rgb(173, 49, 27);
+    background-color: red;
 }
 
 #checkEmailMsg{
@@ -240,6 +260,8 @@ div {
 }
 #passMsg{
     font-size: 12px;
+    margin-top: -15px;
+    margin-bottom: 7px;
 }
 
 

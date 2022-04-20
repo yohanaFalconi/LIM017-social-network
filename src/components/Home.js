@@ -20,7 +20,7 @@ export const Home = () => {
         </figure>
         <figure class="containerFullLogo desktop">
           <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" id="homeLogo">
-          <p class="pink w7" id="desktopSlogan">MATCH WITH YOUR STORIES</p>
+          <p class="purple w7" id="desktopSlogan">MATCH WITH YOUR STORIES</p>
         </figure>
         <button id="signUpBtn" class="button">Create an account</button>
         <div id="goToLogin">

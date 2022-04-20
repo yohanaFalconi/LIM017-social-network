@@ -11,6 +11,7 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider,
   signInWithPopup,
+  sendPasswordResetEmail,
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
 
 const firebaseConfig = {
@@ -32,6 +33,9 @@ export const verificationEmail = () => sendEmailVerification(auth.currentUser);
 export const userState = (callback) => onAuthStateChanged(auth, callback);
 export const logInEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
 export const logInGoogle = () => signInWithPopup(auth, gProvider);
-
 export const logInFacebook = () => signInWithPopup(auth, fProvider);
+
+// Envía un correo electrónico de restablecimiento de contraseña
+export const recoverPasswordWithEmail = (email) => sendPasswordResetEmail(auth, email);
+
 export const logOut = () => signOut(auth);

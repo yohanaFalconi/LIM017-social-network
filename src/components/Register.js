@@ -116,6 +116,9 @@ export const Register = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(error, errorCode, errorMessage);
+          if (error.code === 'auth/email-already-in-use') {
+            progressMsg.innerText = 'Email already in use';
+          }
         });
     } else {
       progressMsg.innerText = 'Wrong. Please, try again.';

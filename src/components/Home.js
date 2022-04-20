@@ -2,7 +2,7 @@
 import { onNavigate } from '../main.js';
 
 export const Home = () => {
-  const LogInDivs = document.createElement('div');
+  const homeDivs = document.createElement('div');
   const containerLogo = `
     <figure class= "containerLogo">
       <img src="Imagenes/Logotipo/Logo-icon.png" alt="Binge Worthy logo" class="topLogo">
@@ -14,15 +14,15 @@ export const Home = () => {
     <button id="signUpBtn" class="button">Create an account</button>
     <div id="goToLogin">
       <p>Already have an account?</p>
-      <a id="goToLoginBtn" class="pink w5">Log in</a>
+      <a id="goToLoginBtn" class="pink w5 link">Log in</a>
     </div>`;
 
-  LogInDivs.innerHTML = containerLogo;
-  const createAccBtn = LogInDivs.querySelector('#signUpBtn');
+  homeDivs.innerHTML = containerLogo;
+  const createAccBtn = homeDivs.querySelector('#signUpBtn');
   createAccBtn.addEventListener('click', () => onNavigate('/register'));
 
-  const goToLogin = LogInDivs.querySelector('#goToLoginBtn');
+  const goToLogin = homeDivs.querySelector('#goToLoginBtn');
   goToLogin.addEventListener('click', () => onNavigate('/logIn'));
 
-  return LogInDivs;
+  return homeDivs;
 };

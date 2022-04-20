@@ -21,7 +21,7 @@ export const LogIn = () => {
       <form action="" method="POST" class="form">
         <div class="formGroup">
           <input type="email" name="email" id="userEmailLogIn" placeholder="email" class="formItem">
-          <label class="formLabel" for="email">Email</label>
+          <label class="formLabel emailLabel" for="email">Email</label>
         </div>
         <div class="formGroup passwordGroup">
           <div>
@@ -35,11 +35,11 @@ export const LogIn = () => {
         </div>
         <div>
           <input type="button" id="logInBtn" value="Log in" class="button">
-          <p id="logInMessage" class="w7 darkPurple"></p>
+          <p id="logInMessage"></p>
         </div>
       </form>
       <div id="aDiv">
-        <button class="pink" id="forgotPass">I forgot my password</button>
+        <button class="pink link" id="forgotPass">I forgot my password</button>
       </div>
     </div>
     <p class="purple">or</p>

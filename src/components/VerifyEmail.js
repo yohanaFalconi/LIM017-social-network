@@ -18,7 +18,6 @@ export const VerifyEmail = () => {
 
   verifyBtn.addEventListener('click', () => {
     userState((user) => {
-      console.log('heloooooo', userState);
       // const uid = user.uid;
       // const email = user.email;
       const emailVerified = user.emailVerified;

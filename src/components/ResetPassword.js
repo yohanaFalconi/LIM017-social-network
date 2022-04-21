@@ -5,34 +5,41 @@ import { onNavigate } from '../main.js';
 export const ResetPassword = () => {
   const resetPassDiv = document.createElement('div');
   const containerPassDiv = `
-  <form>
-    <div class="top">
-        <figure class="containerLogoLetters">
-            <img src="images/logotype/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
-        </figure>
+  <header class="headerReset">
+        <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo left">
+  </header>
+  <div class="containerFirstPart">
+    <figure>
+      <img src="Imagenes/Logotipo/padlock.png" alt="Binge Worthy padlock" class="padlock">
+    </figure>
+    <div>
+      <h2 class="purple w6 meow1" >Do you have trouble logging in?</h2>
+      <p class="purple meowFontMedium" >Enter your email and will <br>
+      send you a link to log back <br>
+      into your account</p>
     </div>
-    <h2>Do you have trouble logging in?</h2>
-    <p>Enter your email and will <br>
-    send you a link to log back <br>
-    into your account</p>
-
     <form action="" method="POST" class="form">
-        <div class="formGroup">
-            <input type="email" name="email" id="userEmailPassReset" placeholder="email" class="formItem">
-            <label class="formLabel" for="email">Email</label>
-        </div>
-        <input type="button" id="sendResetEmail" value="Send access link" class="button">
-        <br>
+      <div class="formGroup">
+        <input type="email" name="email" id="userEmailPassReset" placeholder="email" class="formItem">
+        <label class="formLabel" for="email">Email</label>
+      </div>
+      <div class="flex">
+        <input type="button" id="sendResetEmail" value="Send access link" class="button space">
+        <input type="button" id="backLogIn" value="Back to log in" class="button space">
+      </div>
+      <div>
         <p id="sendEmailMsg"></p>
-        <br>
-        <input type="button" id="backLogIn" value="Back to log in" class="button">
-  </form>
-    `;
+        <a id="goToRegisterBtn" class="purple w5 link send">Create new account</a>
+      </div>
+    </form>  
+  </div>
+  `;
   resetPassDiv.innerHTML = containerPassDiv;
   const email = resetPassDiv.querySelector('#userEmailPassReset');
   const sendResetEmail = resetPassDiv.querySelector('#sendResetEmail');
   const sendEmailMsg = resetPassDiv.querySelector('#sendEmailMsg');
   const backLogIn = resetPassDiv.querySelector('#backLogIn');
+  const goToRegisterBtn = resetPassDiv.querySelector('#goToRegisterBtn');
   sendResetEmail.addEventListener('click', () => {
     recoverPasswordWithEmail(email.value)
       .then(() => {
@@ -57,6 +64,9 @@ export const ResetPassword = () => {
   });
   backLogIn.addEventListener('click', () => {
     onNavigate('/logIn');
+  });
+  goToRegisterBtn.addEventListener('click', () => {
+    onNavigate('/register');
   });
   return resetPassDiv;
 };

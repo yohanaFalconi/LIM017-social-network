@@ -193,6 +193,10 @@ section {
     margin: 16px;
 }
 
+#labelResetPass{
+    margin-left: 74px;
+}
+
 .passwordGroup {
     grid-template-columns: 99% 1%;
     align-items: flex-start;

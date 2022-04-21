@@ -6,11 +6,11 @@ export const ResetPassword = () => {
   const resetPassDiv = document.createElement('div');
   const containerPassDiv = `
   <header class="headerReset">
-        <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo left">
+        <img src="images/logotype/Full-logo.png" alt="Binge Worthy logo" class="fullLogo left">
   </header>
   <div class="containerFirstPart">
     <figure>
-      <img src="Imagenes/Logotipo/padlock.png" alt="Binge Worthy padlock" class="padlock">
+      <img src="images/desktop/padlock.png" alt="Binge Worthy padlock" class="padlock">
     </figure>
     <div>
       <h2 class="purple w6 meow1" >Do you have trouble logging in?</h2>
@@ -21,7 +21,7 @@ export const ResetPassword = () => {
     <form action="" method="POST" class="form">
       <div class="formGroup">
         <input type="email" name="email" id="userEmailPassReset" placeholder="email" class="formItem">
-        <label class="formLabel" for="email">Email</label>
+        <label class="formLabel" for="email" id="labelResetPass">Email</label>
       </div>
       <div class="flex">
         <input type="button" id="sendResetEmail" value="Send access link" class="button space">

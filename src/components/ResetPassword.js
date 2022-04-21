@@ -8,7 +8,7 @@ export const ResetPassword = () => {
   <form>
     <div class="top">
         <figure class="containerLogoLetters">
-            <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
+            <img src="images/logotype/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
         </figure>
     </div>
     <h2>Do you have trouble logging in?</h2>

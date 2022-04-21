@@ -12,7 +12,7 @@ export const Register = () => {
     <div class="top">
       <i class="icon-arrow-left2 darkPurple"></i>
       <figure class="containerTopLogo">
-        <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
+        <img src="images/logotype/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
       </figure>
     </div>
     <div id="containerRegister">

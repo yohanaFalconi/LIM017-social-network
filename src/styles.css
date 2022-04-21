@@ -11,7 +11,7 @@
 }
 
 body {
-    background-image: url(./Imagenes/mobile-background.png);
+    background-image: url(./images/mobile/mobile-background.png);
 }
 
 title {
@@ -285,28 +285,30 @@ section {
     height: 40px
 }
 
-/* .white{
-    background: #fff;
-} */
-
 .footerFeed{
     grid-template-columns: 15vw 15vw 15vw 15vw 15vw;
     position: fixed;
     left: 0;
+    right: 0;
     bottom: 0;
+    padding: 40px;
+    background: #fff;
+    border-radius: 60px 60px 0px 0px;
+    box-shadow: 0px 0px 4px 1px #d4cdcd;
+    justify-content: space-around;
 }
 
 #uploadPost{
     height: 60px;
     position: absolute;
-    bottom: 10%;
+    bottom: 15%;
 }
 
 
 
 @media (min-width: 867px) and (max-width: 1800px){
     body {
-        background-image: url(./Imagenes/Desktop/desktop-background.png);
+        background-image: url(./images/desktop/desktop-background.png);
     }
 
     .desktop {
@@ -341,7 +343,7 @@ section {
     /* styles for register */
     #registerMain, #loginMain {
         background-color: white;
-        box-shadow: 5px 10px 18px #888888;
+        box-shadow: 0px 0px 9px 2px #d4cdcd;
         width: 35vw;
         position: absolute;
         top: 50%;
@@ -355,4 +357,5 @@ section {
     .orContinueWith {
         margin-bottom: 5vh;
     }
+
 }

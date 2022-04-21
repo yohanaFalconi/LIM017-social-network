@@ -218,7 +218,7 @@ section {
     transform-origin: 0 0;
     transition: all .3s;
     justify-self: left;
-    color: rgba(68, 68, 68, 0.786);;
+    color: rgba(68, 68, 68, 0.786);
 }
 
 .formItem {
@@ -281,7 +281,7 @@ section {
     }
 
     #homeMain {
-        grid-template-columns: 50vw 50vw;
+        grid-template-columns: 42vw 58vw;
     }
 
     .containerLogo, .containerLogoLetters {
@@ -294,10 +294,28 @@ section {
     }
 
     #desktopSlogan {
-        font-size: 3vh;
+        font-size: 3.5vh;
     }
 
     #goToLogin {
-        font-size: x-large;
+        font-size: larger;
+    }
+
+    /* styles for register */
+    #registerMain, #loginMain {
+        background-color: white;
+        box-shadow: 5px 10px 18px #888888;
+        width: 40vw;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
+    .top {
+        grid-template-columns: 20% 60% 20%;
+    }
+
+    .orContinueWith {
+        margin-bottom: 5vh;
     }
 }

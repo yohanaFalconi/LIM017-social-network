@@ -7,7 +7,7 @@ export const Home = () => {
     <main id="homeMain">
       <aside id="desktopDesign" class="desktop">
         <figure>
-          <img src="Imagenes/desktop-design.png" id="designImage">
+          <img src="Imagenes/desktop-design-05.png" id="designImage">
         </figure>
       </aside>
       <section>

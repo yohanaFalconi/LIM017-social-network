@@ -261,7 +261,31 @@ section {
     margin-top: -15px;
     margin-bottom: 7px;
 }
-
+/***yohana cambios **/
+.padlock{
+    width: 140px;
+    margin: 5vh 0 4vh 0;
+}
+.meowFontMedium {
+    margin: 1px 0 20px 0px;
+    font-size: medium;
+}
+.send{
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+.flex {
+    display: flex;
+    margin-top: 5px;
+}
+.space{
+    margin: 5px;
+}
+.meow1 {
+    margin: 5px 0 5px;
+    font-size: larger;
+}
+/*********/
 
 .desktop {
     display: none;
@@ -299,5 +323,22 @@ section {
 
     #goToLogin {
         font-size: x-large;
+    }
+
+    .headerReset {
+        width: 100vw;
+        background: white;
+        box-shadow: 0px 10px 15px -5px #ccc;
+    }
+    .left{
+        margin-left: 10vh;
+        height: 90px;
+    }
+    .containerFirstPart{
+        background: white;
+        margin: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 9px 2px #d4cdcd;
+        width: 35vw;
     }
 }

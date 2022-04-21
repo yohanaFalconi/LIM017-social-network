@@ -305,7 +305,7 @@ section {
     #registerMain, #loginMain {
         background-color: white;
         box-shadow: 5px 10px 18px #888888;
-        width: 40vw;
+        width: 35vw;
         position: absolute;
         top: 50%;
         transform: translate(0, -50%);

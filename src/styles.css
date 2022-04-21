@@ -11,7 +11,7 @@
 }
 
 body {
-    background-image: url(./Imagenes/mobile-background.png);
+    background-image: url(./images/mobile/mobile-background.png);
 }
 
 title {
@@ -35,6 +35,7 @@ section {
     color: white;
     background-color: #fa4564;
     transition: 0.3s;
+    margin-top: 50%;
 }
 
 .button:hover {
@@ -218,7 +219,7 @@ section {
     transform-origin: 0 0;
     transition: all .3s;
     justify-self: left;
-    color: rgba(68, 68, 68, 0.786);;
+    color: rgba(68, 68, 68, 0.786);
 }
 
 .formItem {
@@ -261,6 +262,7 @@ section {
     margin-top: -15px;
     margin-bottom: 7px;
 }
+
 /***yohana cambios **/
 .padlock{
     width: 140px;
@@ -291,9 +293,48 @@ section {
     display: none;
 }
 
+.logoFeed{
+    height: 65px;
+    margin: 5px 0px 0px 30px;
+}
+
+.navFeed{
+    background: #fff;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #DEDEE2;
+}
+
+.nav{
+    position: relative;
+    left: 100%;
+    top: 23%;
+    height: 40px
+}
+
+.footerFeed{
+    grid-template-columns: 15vw 15vw 15vw 15vw 15vw;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 40px;
+    background: #fff;
+    border-radius: 60px 60px 0px 0px;
+    box-shadow: 0px 0px 4px 1px #d4cdcd;
+    justify-content: space-around;
+}
+
+#uploadPost{
+    height: 60px;
+    position: absolute;
+    bottom: 15%;
+}
+
+
+
 @media (min-width: 867px) and (max-width: 1800px){
     body {
-        background-image: url(./Imagenes/desktop-background.png);
+        background-image: url(./images/desktop/desktop-background.png);
     }
 
     .desktop {
@@ -305,7 +346,7 @@ section {
     }
 
     #homeMain {
-        grid-template-columns: 50vw 50vw;
+        grid-template-columns: 42vw 58vw;
     }
 
     .containerLogo, .containerLogoLetters {
@@ -318,11 +359,21 @@ section {
     }
 
     #desktopSlogan {
-        font-size: 3vh;
+        font-size: 3.5vh;
     }
 
     #goToLogin {
-        font-size: x-large;
+        font-size: larger;
+    }
+
+    /* styles for register */
+    #registerMain, #loginMain {
+        background-color: white;
+        box-shadow: 0px 0px 9px 2px #d4cdcd;
+        width: 35vw;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
     }
 
     .headerReset {
@@ -341,4 +392,13 @@ section {
         box-shadow: 0px 0px 9px 2px #d4cdcd;
         width: 35vw;
     }
+  
+    .top {
+        grid-template-columns: 20% 60% 20%;
+    }
+
+    .orContinueWith {
+        margin-bottom: 5vh;
+    }
+
 }

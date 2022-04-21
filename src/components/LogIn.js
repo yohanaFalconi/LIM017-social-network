@@ -10,49 +10,53 @@ import { onNavigate } from '../main.js';
 export const LogIn = () => {
   const logInDiv = document.createElement('div');
   const containerLogIn = `
-  <div class="top">
-    <i class="icon-arrow-left2 darkPurple"></i>
-    <figure class="containerTopLogo">
-      <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
-    </figure>
-  </div>
-  <div class="containerLogin">
-    <p class="purple w6 meow">Log in with email</p>
-    <div class="container">
-      <form action="" method="POST" class="form">
-        <div class="formGroup">
-          <input type="email" name="email" id="userEmailLogIn" placeholder="email" class="formItem">
-          <label class="formLabel emailLabel" for="email">Email</label>
-        </div>
-        <div class="formGroup passwordGroup">
-          <div>
-            <input type="password" name="password" id="passwordLogIn" placeholder="password" class="formItem">
-            <label class="formLabel" for="password">Password</label>
+  <main id="loginMain">
+    <div class="top">
+      <i class="icon-arrow-left2 darkPurple"></i>
+      <figure class="containerTopLogo">
+        <img src="images/logotype/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
+      </figure>
+    </div>
+    <div class="containerLogin">
+      <p class="purple w6 meow">Log in with email</p>
+      <div class="container">
+        <form action="" method="POST" class="form">
+          <div class="formGroup">
+            <input type="email" name="email" id="userEmailLogIn" placeholder="email" class="formItem">
+            <label class="formLabel emailLabel" for="email">Email</label>
+          </div>
+          <div class="formGroup passwordGroup">
+            <div>
+              <input type="password" name="password" id="passwordLogIn" placeholder="password" class="formItem">
+              <label class="formLabel" for="password">Password</label>
+            </div>
+            <div>
+              <i class="icon-eye darkPurple" id="eyeLogo1" style="display: none;"></i>
+              <i class="icon-eye-blocked darkPurple" id="eyeSlashLogo1"></i>
+            </div>
           </div>
           <div>
-            <i class="icon-eye darkPurple" id="eyeLogo1" style="display: none;"></i>
-            <i class="icon-eye-blocked darkPurple" id="eyeSlashLogo1"></i>
+            <input type="button" id="logInBtn" value="Log in" class="button">
+            <p id="logInMessage"></p>
           </div>
+        </form>
+        <div id="aDiv">
+          <button class="pink link" id="forgotPass">I forgot my password</button>
         </div>
-        <div>
-          <input type="button" id="logInBtn" value="Log in" class="button">
-          <p id="logInMessage"></p>
+      </div>
+      <div class="orContinueWith">
+        <p class="purple">or</p>
+        <div id="googleRegBtn" class="googleBtn">
+          <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
+          <p class="buttonText w7">Continue with Google</p>
         </div>
-      </form>
-      <div id="aDiv">
-        <button class="pink link" id="forgotPass">I forgot my password</button>
+        <div id="fbLogBtn" class="fbBtn">
+          <img class="fbIcon" src="https://i0.wp.com/uncomocorreo.com/wp-content/uploads/2017/03/facebook-logo.png?resize=300%2C300&ssl=1" alt="">
+          <p class="buttonText w7">Continue with Facebook</p>
+        </div>
       </div>
     </div>
-    <p class="purple">or</p>
-    <div id="googleRegBtn" class="googleBtn">
-      <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
-      <p class="buttonText w7">Continue with Google</p>
-    </div>
-    <div id="fbLogBtn" class="fbBtn">
-      <img class="fbIcon" src="https://i0.wp.com/uncomocorreo.com/wp-content/uploads/2017/03/facebook-logo.png?resize=300%2C300&ssl=1" alt="">
-      <p class="buttonText w7">Continue with Facebook</p>
-    </div>
-  </div>`;
+  </main>`;
   logInDiv.innerHTML = containerLogIn;
   const email = logInDiv.querySelector('#userEmailLogIn');
   const password = logInDiv.querySelector('#passwordLogIn');

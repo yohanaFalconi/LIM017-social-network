@@ -7,19 +7,19 @@ export const Home = () => {
     <main id="homeMain">
       <aside id="desktopDesign" class="desktop">
         <figure>
-          <img src="Imagenes/desktop-design.png" id="designImage">
+          <img src="images/Desktop/desktop-design.png" id="designImage">
         </figure>
       </aside>
       <section>
         <figure class="containerLogo">
-          <img src="Imagenes/Logotipo/Logo-icon.png" alt="Binge Worthy logo" class="topLogo">
+          <img src="images/logotype/Logo-icon.png" alt="Binge Worthy logo" class="topLogo">
         </figure>
         <figure class="containerLogoLetters">
-          <img src="Imagenes/Logotipo/Logo-letters-only.png" alt="Binge Worthy logo" class="appName">
+          <img src="images/logotype/Logo-letters-only.png" alt="Binge Worthy logo" class="appName">
           <p class="pink w7">MATCH WITH YOUR STORIES</p>
         </figure>
         <figure class="containerFullLogo desktop">
-          <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" id="homeLogo">
+          <img src="images/logotype/Full-logo.png" alt="Binge Worthy logo" id="homeLogo">
           <p class="purple w7" id="desktopSlogan">MATCH WITH YOUR STORIES</p>
         </figure>
         <button id="signUpBtn" class="button">Create an account</button>

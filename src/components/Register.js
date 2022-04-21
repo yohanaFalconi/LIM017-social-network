@@ -12,7 +12,7 @@ export const Register = () => {
     <div class="top">
       <i class="icon-arrow-left2 darkPurple"></i>
       <figure class="containerTopLogo">
-        <img src="Imagenes/Logotipo/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
+        <img src="images/logotype/Full-logo.png" alt="Binge Worthy logo" class="fullLogo">
       </figure>
     </div>
     <div id="containerRegister">
@@ -39,14 +39,16 @@ export const Register = () => {
       <button class="button" id="createAccBtn">Create account</button>
       <p id="progressMsg"></p>
       <br>
-      <p class="purple">or</p>
-      <div id="googleRegBtn" class="googleBtn">
-        <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
-        <p class="buttonText w7">Continue with Google</p>
-      </div>
-      <div id="fbRegBtn" class="fbBtn">
-        <img class="fbIcon" src="https://i0.wp.com/uncomocorreo.com/wp-content/uploads/2017/03/facebook-logo.png?resize=300%2C300&ssl=1" alt="">
-        <p class="buttonText w7">Continue with Facebook</p>
+      <div class="orContinueWith">
+        <p class="purple">or</p>
+        <div id="googleRegBtn" class="googleBtn">
+          <img class="googleIcon" src="https://developers.google.com/identity/images/g-logo.png" alt="">
+          <p class="buttonText w7">Continue with Google</p>
+        </div>
+        <div id="fbRegBtn" class="fbBtn">
+          <img class="fbIcon" src="https://i0.wp.com/uncomocorreo.com/wp-content/uploads/2017/03/facebook-logo.png?resize=300%2C300&ssl=1" alt="">
+          <p class="buttonText w7">Continue with Facebook</p>
+        </div>
       </div>
     </div>
   </main>`;

@@ -35,6 +35,7 @@ section {
     color: white;
     background-color: #fa4564;
     transition: 0.3s;
+    margin-top: 50%;
 }
 
 .button:hover {
@@ -262,14 +263,50 @@ section {
     margin-bottom: 7px;
 }
 
-
 .desktop {
     display: none;
 }
 
+.logoFeed{
+    height: 65px;
+    margin: 5px 0px 0px 30px;
+}
+
+.navFeed{
+    background: #fff;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #DEDEE2;
+}
+
+.nav{
+    position: relative;
+    left: 100%;
+    top: 23%;
+    height: 40px
+}
+
+/* .white{
+    background: #fff;
+} */
+
+.footerFeed{
+    grid-template-columns: 15vw 15vw 15vw 15vw 15vw;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+#uploadPost{
+    height: 60px;
+    position: absolute;
+    bottom: 10%;
+}
+
+
+
 @media (min-width: 867px) and (max-width: 1800px){
     body {
-        background-image: url(./Imagenes/desktop-background.png);
+        background-image: url(./Imagenes/Desktop/desktop-background.png);
     }
 
     .desktop {

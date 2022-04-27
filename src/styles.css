@@ -290,6 +290,76 @@ section {
     margin: 5px 0 5px;
     font-size: larger;
 }
+
+/** Yohana cambios feed*/
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border-radius: 20px;
+    z-index: 10;
+    width: 65vh;
+    max-width: 80%;
+    height: 50vh;
+    padding: 10px;
+}
+.modal.inactive {
+    transform: translate(-50%, -50%) scale(0);
+}
+.modal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+#overlay {
+    position: fixed;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#overlay.inactive {
+    opacity: 0;
+    pointer-events: none;
+}
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+#postForm {
+    background-color:white;
+    box-shadow: 0px 10px 15px -5px #141414;
+}
+#postDescription {
+    resize: none;
+    height: 150px;
+    background: white;
+    border-radius: 10px;
+}
+.allPost {
+    border: 1px solid #d7d4d4;
+}
+#userName {
+    margin: 5px;
+    font-weight: bold;
+}
+.select {
+    height: 4vh;
+    background: white;
+    border-radius: 10px;
+}
+.post {
+    grid-template-columns: 1fr 1fr;
+}
+.gridColum {
+    grid-template-columns: 2fr 1fr;
+}
+.mtop {
+    margin-top: 15px;
+}
+
 /*********/
 
 .desktop {
@@ -305,7 +375,7 @@ section {
     background: #fff;
     padding-bottom: 10px;
     border-bottom: solid 1px #DEDEE2;
-}
+} 
 
 .nav{
     position: relative;
@@ -315,12 +385,12 @@ section {
 }
 
 .footerFeed{
-    grid-template-columns: 15vw 15vw 15vw 15vw 15vw;
+    grid-template-columns: 20vw 20vw 20vw 20vw 20vw;
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 40px;
+    padding: 30px;
     background: #fff;
     border-radius: 60px 60px 0px 0px;
     box-shadow: 0px 0px 4px 1px #d4cdcd;
@@ -332,8 +402,27 @@ section {
     position: absolute;
     bottom: 15%;
 }
+#uploadPost:hover {
+    cursor: pointer;
+}
 
-
+#postFormContainer {
+    background: white;
+    box-shadow: 0px 10px 15px -5px #c6c6c6;
+    border-radius: 10px;
+    width: 40vh;
+}
+.postBody {
+    background: #efecec;
+    border-radius: 0px 0px 10px 10px;
+    height: 150px;
+}
+#postContainer {
+    gap: 20px;
+}
+.usersEmail {
+    padding: 15px;
+}
 
 @media (min-width: 867px) and (max-width: 1800px){
     body {
@@ -404,4 +493,10 @@ section {
         margin-bottom: 5vh;
     }
 
+    #postContainer {
+        gap: 20px;
+    }
+    #postFormContainer {
+        width: 60vh;
+    }
 }

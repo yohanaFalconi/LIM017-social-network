@@ -48,3 +48,23 @@ window.addEventListener('DOMContentLoaded', () => {
   // const params = new URLSearchParams(querystring);
   onNavigate(pathname);
 });
+
+export const checkEmail = (str) => {
+  const emailPattern = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
+  if (!emailPattern.test(str)) {
+    return false;
+  } if (emailPattern.test(str)) {
+    return true;
+  }
+  return checkEmail(str);
+};
+
+export const checkPassword = (str) => {
+  const passwordPattern = /^[\d\w@-]{8,15}$/i;
+  if (!passwordPattern.test(str)) {
+    return false;
+  } if (passwordPattern.test(str)) {
+    return true;
+  }
+  return checkPassword(str);
+};

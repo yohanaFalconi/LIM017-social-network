@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable import/no-unresolved */
 import { Register } from '../../src/components/Register.js';
-import { onNavigate } from '../../src/main.js';
+import { onNavigate, checkEmail, checkPassword } from '../../src/main.js';
 // import { createUserWithEmailAndPassword } from '../../src/lib/firebaseUtils.js';
 
 jest.mock('../../src/lib/firebaseUtils.js');
@@ -9,6 +9,66 @@ jest.mock('../../src/lib/firebaseUtils.js');
 beforeEach(() => {
   document.body.innerHTML = "<div id='root'></div>";
   Register();
+});
+
+describe('checkPassword', () => {
+  it('should be a function', () => {
+    expect(typeof checkPassword).toBe('function');
+  });
+  it('should return true for a string of lowercase letters', () => {
+    expect(checkPassword('asdfghjkl')).toBe(true);
+  });
+  it('should return true for a string of uppercase letters', () => {
+    expect(checkPassword('ASDFGHJKL')).toBe(true);
+  });
+  it('should return true for a string of numbers', () => {
+    expect(checkPassword('123456789')).toBe(true);
+  });
+  it('should return false for a string shorter than 8 characters', () => {
+    expect(checkPassword('1234567')).toBe(false);
+  });
+  it('should return false for a string longer than 15 characters', () => {
+    expect(checkPassword('1234567890123456')).toBe(false);
+  });
+  it('should return false for a string containing special characters', () => {
+    expect(checkPassword('asdfghjk!')).toBe(false);
+  });
+});
+
+describe('checkEmail', () => {
+  it('should be a function', () => {
+    expect(typeof checkEmail).toBe('function');
+  });
+  it('should return true for "example@gmail.com"', () => {
+    expect(checkEmail('example@gmail.com')).toBe(true);
+  });
+  it('should return true for "example_example@gmail.com"', () => {
+    expect(checkEmail('example_example@gmail.com')).toBe(true);
+  });
+  it('should return true for "example-example@gmail.com"', () => {
+    expect(checkEmail('example-example@gmail.com')).toBe(true);
+  });
+  it('should return true for "example.example@gmail.com"', () => {
+    expect(checkEmail('example.example@gmail.com')).toBe(true);
+  });
+  it('should return false for "example.@gmail.com"', () => {
+    expect(checkEmail('example.@gmail.com')).toBe(false);
+  });
+  it('should return false for "example"', () => {
+    expect(checkEmail('example')).toBe(false);
+  });
+  it('should return false for "example@"', () => {
+    expect(checkEmail('example@')).toBe(false);
+  });
+  it('should return false for "example@.com"', () => {
+    expect(checkEmail('example@.com')).toBe(false);
+  });
+  it('should return true for "example@gmail.com.pe"', () => {
+    expect(checkEmail('example@gmail.com.pe')).toBe(true);
+  });
+  it('should return true for "example@gmail.com."', () => {
+    expect(checkEmail('example@gmail.com.')).toBe(false);
+  });
 });
 
 /* it.only('devuelve a home', () => {
@@ -19,7 +79,7 @@ beforeEach(() => {
   expect(onNavigate()).toEqual(onNavigate('/'));
 }); */
 
-it('Regex correo', () => {
+/* it.skip('Regex correo', () => {
   document.body.innerHTML = '<div id="userEmail"></div>';
   Register();
   const emailPattern = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
@@ -30,7 +90,7 @@ it('Regex correo', () => {
   const result = !emailPattern.test(inputEmail.value);
 
   expect(result.classList).toBe('invalid');
-});
+}); */
 
 /* describe('al enviar el formulario', () => {
   it('valida los valores del formulario', (done) => {

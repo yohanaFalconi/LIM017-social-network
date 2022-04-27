@@ -3,7 +3,7 @@
 import {
   signUpEmail, verificationEmail, logInGoogle, logInFacebook,
 } from '../lib/firebaseAuth.js';
-import { onNavigate } from '../main.js';
+import { onNavigate, checkEmail, checkPassword } from '../main.js';
 
 export const Register = () => {
   const registerDiv = document.createElement('div');
@@ -62,26 +62,25 @@ export const Register = () => {
   const progressMsg = registerDiv.querySelector('#progressMsg');
   const passMsg = registerDiv.querySelector('#passMsg');
 
-  const emailPattern = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
   email.addEventListener('keyup', () => {
-    if (!emailPattern.test(email.value)) {
+    const validEmail = checkEmail(email.value);
+    if (validEmail === false) {
       email.classList.add('invalid');
       email.classList.remove('valid');
-    } else if (emailPattern.test(email.value)) {
+    } else if (validEmail === true) {
       email.classList.add('valid');
       email.classList.remove('invalid');
     }
   });
 
-  const passwordPattern = /^[\d\w@-]{8,15}$/i;
   password.addEventListener('keyup', () => {
-    if (!passwordPattern.test(password.value)) {
+    const validPassword = checkPassword(password.value);
+    if (validPassword === false) {
       password.classList.add('invalid');
       password.classList.remove('valid');
-      passMsg.innerHTML = `The password must at least have
-      <br> a minimum of 8 characters with <br> an uppercase letter,
-      a lowercase <br>letter and number.`;
-    } else if (passwordPattern.test(password.value)) {
+      passMsg.innerHTML = `The password must be between 8 and 15 characters long
+       <br> uppercase letters and numbers are allowed.`;
+    } else if (validPassword === true) {
       password.classList.add('valid');
       password.classList.remove('invalid');
       passMsg.innerText = '';

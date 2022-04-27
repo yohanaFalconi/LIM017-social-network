@@ -13,3 +13,11 @@ export {
   signInWithPopup,
   sendPasswordResetEmail,
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
+
+export {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  onSnapshot,
+} from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';

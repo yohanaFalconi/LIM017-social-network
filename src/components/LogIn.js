@@ -150,6 +150,5 @@ export const LogIn = () => {
       }
     }
   });
-
   return logInDiv;
 };

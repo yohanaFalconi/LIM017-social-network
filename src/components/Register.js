@@ -79,7 +79,7 @@ export const Register = () => {
       password.classList.add('invalid');
       password.classList.remove('valid');
       passMsg.innerHTML = `The password must be between 8 and 15 characters long
-       <br> uppercase letters and numbers are allowed.`;
+      <br> uppercase letters and numbers are allowed.`;
     } else if (validPassword === true) {
       password.classList.add('valid');
       password.classList.remove('invalid');
@@ -106,6 +106,8 @@ export const Register = () => {
 
   createAccBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    const emailPattern = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
+    const passwordPattern = /^[\d\w@-]{8,15}$/i;
     if (emailPattern.test(email.value) && passwordPattern.test(password.value)) {
       signUpEmail(email.value, password.value)
         .then(() => {

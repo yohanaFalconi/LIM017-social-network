@@ -51,7 +51,7 @@ export const logOut = () => signOut(auth);
 /* eslint-disable max-len */
 
 /** firebase */
-const db = getFirestore(app);
+const db = () => getFirestore(app);
 // Guardar post en FireStore
 export const savePost = async (description) => {
   const docRefPosts = await addDoc(collection(db, 'posts'), {

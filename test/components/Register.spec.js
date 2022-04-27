@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable import/no-unresolved */
 import { Register } from '../../src/components/Register.js';
-import { onNavigate, checkEmail, checkPassword } from '../../src/main.js';
+import { checkPassword, checkEmail } from '../../src/main.js';
 // import { createUserWithEmailAndPassword } from '../../src/lib/firebaseUtils.js';
 
 jest.mock('../../src/lib/firebaseUtils.js');
@@ -18,6 +18,7 @@ describe('checkPassword', () => {
   it('should return true for a string of lowercase letters', () => {
     expect(checkPassword('asdfghjkl')).toBe(true);
   });
+
   it('should return true for a string of uppercase letters', () => {
     expect(checkPassword('ASDFGHJKL')).toBe(true);
   });
@@ -51,6 +52,7 @@ describe('checkEmail', () => {
   it('should return true for "example.example@gmail.com"', () => {
     expect(checkEmail('example.example@gmail.com')).toBe(true);
   });
+
   it('should return false for "example.@gmail.com"', () => {
     expect(checkEmail('example.@gmail.com')).toBe(false);
   });
@@ -126,7 +128,7 @@ describe('Registar un usuario', () => {
   createUser('hola@gmail.com', '123456', 'angelica');
     expect(createUserWithEmailAndPassword.mock.calls[0]).toEqual(['front@end.la', '123456']);
   });
-}); */
+});
 
 // RegisterUser
 /* it.skip('Debería devolder el correo de registro', () => registerUser('front@end.la', '123456', 'fullname')

@@ -62,11 +62,36 @@ export const Register = () => {
   const progressMsg = registerDiv.querySelector('#progressMsg');
   const passMsg = registerDiv.querySelector('#passMsg');
   const passwordPattern = /^[\d\w@-]{8,15}$/i;
+  // new version of the regex function
+  // eslint-disable-next-line consistent-return
+  function checkPassword(str) {
+    if (!passwordPattern.test(str)) {
+      return false;
+    } if (passwordPattern.test(str)) {
+      return true;
+    }
+  }
+
+  password.addEventListener('keyup', () => {
+    const validPassword = checkPassword(password.value);
+    if (validPassword === false) {
+      password.classList.add('invalid');
+      password.classList.remove('valid');
+      passMsg.innerHTML = `The password must be between 8 and 15 characters long
+       <br> uppercase letters and numbers are allowed.`;
+    } else if (validPassword === true) {
+      password.classList.add('valid');
+      password.classList.remove('invalid');
+      passMsg.innerText = '';
+    }
+  });
+  /*
+  older version
   password.addEventListener('keyup', () => {
     if (!passwordPattern.test(password.value)) {
       password.classList.add('invalid');
       password.classList.remove('valid');
-      passMsg.innerHTML = `The password must at least have 
+      passMsg.innerHTML = `The password must at least have
        <br> a minimum of 8 characters with <br> an uppercase letter,
        a lowercase <br>letter and number.`;
     } else if (passwordPattern.test(password.value)) {
@@ -75,12 +100,26 @@ export const Register = () => {
       passMsg.innerText = '';
     }
   });
-  const emailPattern = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
+  */
+
+  const emailPattern = /^([a-z\d.-_]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
+  // /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
+  // new version
+  // eslint-disable-next-line consistent-return
+  function checkEmail(str) {
+    if (!emailPattern.test(str)) {
+      return false;
+    } if (emailPattern.test(str)) {
+      return true;
+    }
+  }
+
   email.addEventListener('keyup', () => {
-    if (!emailPattern.test(email.value)) {
+    const validEmail = checkEmail(email.value);
+    if (validEmail === false) {
       email.classList.add('invalid');
       email.classList.remove('valid');
-    } else if (emailPattern.test(email.value)) {
+    } else if (validEmail === true) {
       email.classList.add('valid');
       email.classList.remove('invalid');
     }

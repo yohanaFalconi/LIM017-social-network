@@ -1,4 +1,4 @@
-import { logOut } from '../lib/firebase-auth.js';
+import { logOut } from '../lib/firebaseAuth.js';
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 

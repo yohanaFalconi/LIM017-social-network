@@ -18,10 +18,19 @@ export const routes = {
   '/feed': Feed,
   '/resetPassword': ResetPassword,
 };
-const root = document.getElementById('root');
-root.appendChild(routes[window.location.pathname]());
+
+/* const observatorIt = () => {
+  window.addEventListener('DOMContentLoaded', () => {
+    observatorIt();
+    console.log('okay');
+  });
+  console.log('afuera del evento');
+  return observatorIt;
+};
+console.log(observatorIt); */
 
 export const onNavigate = (pathname) => {
+  const root = document.getElementById('root');
   window.history.pushState(
     {},
     pathname,
@@ -29,6 +38,13 @@ export const onNavigate = (pathname) => {
   );
   while (root.firstChild) {
     root.removeChild(root.firstChild);
-  }
-  return root.appendChild(routes[pathname]());
+  } return root.appendChild(routes[pathname]());
 };
+
+window.addEventListener('DOMContentLoaded', () => {
+  const pathname = window.location.pathname;
+  // window.addEventListener('popstate', () => {});
+  // const querystring = window.location.search;
+  // const params = new URLSearchParams(querystring);
+  onNavigate(pathname);
+});

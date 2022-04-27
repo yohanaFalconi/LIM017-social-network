@@ -2,7 +2,7 @@
 
 import {
   signUpEmail, verificationEmail, logInGoogle, logInFacebook,
-} from '../lib/firebase-auth.js';
+} from '../lib/firebaseAuth.js';
 import { onNavigate } from '../main.js';
 
 export const Register = () => {
@@ -61,20 +61,7 @@ export const Register = () => {
   const password = registerDiv.querySelector('#password');
   const progressMsg = registerDiv.querySelector('#progressMsg');
   const passMsg = registerDiv.querySelector('#passMsg');
-  const passwordPattern = /^[\d\w@-]{8,15}$/i;
-  password.addEventListener('keyup', () => {
-    if (!passwordPattern.test(password.value)) {
-      password.classList.add('invalid');
-      password.classList.remove('valid');
-      passMsg.innerHTML = `The password must at least have 
-       <br> a minimum of 8 characters with <br> an uppercase letter,
-       a lowercase <br>letter and number.`;
-    } else if (passwordPattern.test(password.value)) {
-      password.classList.add('valid');
-      password.classList.remove('invalid');
-      passMsg.innerText = '';
-    }
-  });
+
   const emailPattern = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
   email.addEventListener('keyup', () => {
     if (!emailPattern.test(email.value)) {
@@ -83,6 +70,21 @@ export const Register = () => {
     } else if (emailPattern.test(email.value)) {
       email.classList.add('valid');
       email.classList.remove('invalid');
+    }
+  });
+
+  const passwordPattern = /^[\d\w@-]{8,15}$/i;
+  password.addEventListener('keyup', () => {
+    if (!passwordPattern.test(password.value)) {
+      password.classList.add('invalid');
+      password.classList.remove('valid');
+      passMsg.innerHTML = `The password must at least have
+      <br> a minimum of 8 characters with <br> an uppercase letter,
+      a lowercase <br>letter and number.`;
+    } else if (passwordPattern.test(password.value)) {
+      password.classList.add('valid');
+      password.classList.remove('invalid');
+      passMsg.innerText = '';
     }
   });
 
@@ -107,9 +109,8 @@ export const Register = () => {
     e.preventDefault();
     if (emailPattern.test(email.value) && passwordPattern.test(password.value)) {
       signUpEmail(email.value, password.value)
-        .then((userCredential) => {
-          // const user = userCredential.user;
-          console.log(userCredential);
+        .then(() => {
+        /*   console.log(userCredential); COMO PARAMETRO userCredential */
           progressMsg.innerText = 'Your account is being created, please wait';
           verificationEmail()
             .then(() => {
@@ -117,9 +118,6 @@ export const Register = () => {
             });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(error, errorCode, errorMessage);
           if (error.code === 'auth/email-already-in-use') {
             progressMsg.innerText = 'Email already in use';
           }
@@ -136,38 +134,24 @@ export const Register = () => {
 
   googleRegBtn.addEventListener('click', () => {
     logInGoogle()
-      .then((result) => {
-      // const credential = GoogleAuthProvider.credentialFromResult(result);
-      // const token = credential.accessToken;
-        console.log('google sign up', result);
+      .then(() => {
         onNavigate('/feed');
-      })
-      .catch((error) => {
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      // const email = error.email;
-      // const credential = GoogleAuthProvider.credentialFromError(error);
-        console.log(error);
       });
   });
 
   const fbRegBtn = registerDiv.querySelector('#fbRegBtn');
   fbRegBtn.addEventListener('click', () => {
     logInFacebook()
-      .then((result) => {
-        // const user = result.user;
-        console.log('facebook sign up', result);
-        // const credential = FacebookAuthProvider.credentialFromResult(result);
-        // const accessToken = credential.accessToken;
+      .then(() => {
         onNavigate('/feed');
-      })
-      .catch((error) => {
-        /* const errorCode = error.code;
+      });
+    /* .catch((error) => {
+        const errorCode = error.code;
         const errorMessage = error.message;
         const email = error.email;
-        const credential = FacebookAuthProvider.credentialFromError(error); */
+        const credential = FacebookAuthProvider.credentialFromError(error);
         console.log(error);
-      });
+      }); */
   });
 
   return registerDiv;

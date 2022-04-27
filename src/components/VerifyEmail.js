@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import { onNavigate } from '../main.js';
-import { userState } from '../lib/firebase-auth.js';
+import { userState } from '../lib/firebaseAuth.js';
 
 export const VerifyEmail = () => {
   const verifyDiv = document.createElement('div');

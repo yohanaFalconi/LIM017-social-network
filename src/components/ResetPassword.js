@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import { recoverPasswordWithEmail } from '../lib/firebase-auth.js';
+import { recoverPasswordWithEmail } from '../lib/firebaseAuth.js';
 import { onNavigate } from '../main.js';
 
 export const ResetPassword = () => {

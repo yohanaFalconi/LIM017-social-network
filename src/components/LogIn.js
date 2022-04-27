@@ -1,10 +1,10 @@
 /* eslint-disable import/no-cycle */
+// eslint-disable-next-line import/newline-after-import
 import {
   logInEmail,
   logInGoogle,
   logInFacebook,
-} from '../lib/firebase-auth.js';
-// eslint-disable-next-line import/newline-after-import
+} from '../lib/firebaseAuth.js';
 import { onNavigate } from '../main.js';
 
 export const LogIn = () => {
@@ -68,7 +68,6 @@ export const LogIn = () => {
     e.preventDefault();
     logInEmail(email.value, password.value)
       .then(() => {
-      // const user = userCredential.user;
         logInMsg.innerHTML = 'The user logged in';
         email.classList.add('valid');
         password.classList.add('valid');
@@ -77,7 +76,6 @@ export const LogIn = () => {
         }, 2000);
       })
       .catch((error) => {
-        // const errorCode = error.code;
         if (error.code === 'auth/user-not-found') {
           logInMsg.innerHTML = 'User not found';
           email.classList.add('invalid');
@@ -103,7 +101,6 @@ export const LogIn = () => {
       .then(() => {
       // const credential = GoogleAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
-        console.log('google sign up');
         onNavigate('/feed');
       })
       .catch((error) => {

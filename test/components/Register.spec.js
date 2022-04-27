@@ -52,7 +52,6 @@ describe('checkEmail', () => {
   it('should return true for "example.example@gmail.com"', () => {
     expect(checkEmail('example.example@gmail.com')).toBe(true);
   });
-
   it('should return false for "example.@gmail.com"', () => {
     expect(checkEmail('example.@gmail.com')).toBe(false);
   });
@@ -70,6 +69,9 @@ describe('checkEmail', () => {
   });
   it('should return true for "example@gmail.com."', () => {
     expect(checkEmail('example@gmail.com.')).toBe(false);
+  });
+  it('should return true for "!@gmail.com."', () => {
+    expect(checkEmail('!@gmail.com.')).toBe(false);
   });
 });
 

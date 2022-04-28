@@ -1,102 +1,130 @@
 /* eslint-disable max-len */
 /* eslint-disable import/no-unresolved */
 import { Register } from '../../src/components/Register.js';
-import { checkPassword, checkEmail, onNavigate } from '../../src/main.js';
-import { signInWithPopup, GoogleAuthProvider } from '../../src/lib/firebaseUtils';
-import { logInGoogle } from '../../src/lib/firebaseAuth.js';
+import { checkEmail, checkPassword } from '../../src/main.js';
 
 jest.mock('../../src/lib/firebaseUtils.js');
+jest.mock('../../src/components/Feed.js');
 
 beforeEach(() => {
   document.body.innerHTML = "<div id='root'></div>";
   Register();
 });
 
-describe('checkPassword', () => {
-  it('should be a function', () => {
-    expect(typeof checkPassword).toBe('function');
-  });
-  it('should return true for a string of lowercase letters', () => {
-    expect(checkPassword('asdfghjkl')).toBe(true);
+describe('Ingreso con cuentas externas a la App', () => {
+  it('Registra usuario de Google, ingresa, y lo lleva al Feed', (done) => {
+    const registerDiv = Register();
+    const buttonLoginGoogle = registerDiv.querySelector('#googleRegBtn');
+    buttonLoginGoogle.dispatchEvent(new Event('click'));
+    setTimeout(() => {
+      expect(window.location.pathname).toBe('/feed');
+      done();
+    });
   });
 
-  it('should return true for a string of uppercase letters', () => {
-    expect(checkPassword('ASDFGHJKL')).toBe(true);
-  });
-  it('should return true for a string of numbers', () => {
-    expect(checkPassword('123456789')).toBe(true);
-  });
-  it('should return false for a string shorter than 8 characters', () => {
-    expect(checkPassword('1234567')).toBe(false);
-  });
-  it('should return false for a string longer than 15 characters', () => {
-    expect(checkPassword('1234567890123456')).toBe(false);
-  });
-  it('should return false for a string containing special characters', () => {
-    expect(checkPassword('asdfghjk!')).toBe(false);
+  it('Registra usuario de Facebook, ingresa, y lo lleva al Feed', (done) => {
+    const registerDiv = Register();
+    const buttonLoginFacebook = registerDiv.querySelector('#fbRegBtn');
+    buttonLoginFacebook.dispatchEvent(new Event('click'));
+    setTimeout(() => {
+      expect(window.location.pathname).toBe('/feed');
+      done();
+    });
   });
 });
 
-describe('checkEmail', () => {
-  it('should be a function', () => {
-    expect(typeof checkEmail).toBe('function');
-  });
-  it('should return true for "example@gmail.com"', () => {
-    expect(checkEmail('example@gmail.com')).toBe(true);
-  });
-  it('should return true for "example_example@gmail.com"', () => {
-    expect(checkEmail('example_example@gmail.com')).toBe(true);
-  });
-  it.skip('should return true for "example-example@gmail.com"', () => {
-    expect(checkEmail('example-example@gmail.com')).toBe(true);
-  });
-  it.skip('should return true for "example.example@gmail.com"', () => {
-    expect(checkEmail('example.example@gmail.com')).toBe(true);
-  });
-
-  it('should return false for "example.@gmail.com"', () => {
-    expect(checkEmail('example.@gmail.com')).toBe(false);
-  });
-  it('should return false for "example"', () => {
-    expect(checkEmail('example')).toBe(false);
-  });
-  it('should return false for "example@"', () => {
-    expect(checkEmail('example@')).toBe(false);
-  });
-  it('should return false for "example@.com"', () => {
-    expect(checkEmail('example@.com')).toBe(false);
-  });
-  it('should return true for "example@gmail.com.pe"', () => {
-    expect(checkEmail('example@gmail.com.pe')).toBe(true);
-  });
-  it('should return true for "example@gmail.com."', () => {
-    expect(checkEmail('example@gmail.com.')).toBe(false);
+describe('Flecha de atrás', () => {
+  it('Devuelve a la página anterior', () => {
+    const registerDiv = Register();
+    const buttonLogin = registerDiv.querySelector('.icon-arrow-left2');
+    buttonLogin.dispatchEvent(new Event('click'));
+    expect(window.location.pathname).toBe('/');
   });
 });
 
-describe('registerAndLoginGoogle', () => {
-  it('Debería retornar una función', () => {
-    expect(logInGoogle()).toEqual(signInWithPopup());
+describe('Validación de email mientras el usuario ingresa el texto', () => {
+  it('El correo está bien escrito, el input es verde, ósea válido', () => {
+    const registerDiv = Register();
+    const email = registerDiv.querySelector('#userEmail');
+    email.value = 'front@end.la';
+    const result = checkEmail(email.value);
+    email.dispatchEvent(new Event('keyup'));
+    expect(result).toBe(true);
   });
-  it('Debería llamar la función al menos una vez con los argumentos especificados(email and password)', () => signInWithPopup()
-    .then(() => {
-      expect(signInWithPopup).toHaveBeenCalled();
-      // expect(signInWithPopup.mock.calls).toHaveLength(3);
-      // expect(signInWithPopup.mock.calls[0][0]).toEqual(getAuth());
-      expect(signInWithPopup.mock.calls[0][1]).toEqual(new GoogleAuthProvider());
-    }));
 });
 
-it.only('devuelve a home', () => {
-  document.body.innerHTML = '<div id="googleRegBtn"></div>';
-  Register();
-  const buttonLogin = document.querySelector('#googleRegBtn');
-  buttonLogin.dispatchEvent(new Event('click'));
-  expect(logInGoogle()).toEqual(signInWithPopup());
-  expect(signInWithPopup.mock.calls[0][1]).toEqual(new GoogleAuthProvider());
-  // expect().toEqual(new GoogleAuthProvider());
-  expect(onNavigate()).toBe('/feed');
+it('El correo está mal escrito, el input es rojo ósea, inválido', () => {
+  const registerDiv = Register();
+  const email = registerDiv.querySelector('#userEmail');
+  email.value = 'frontend.la';
+  const result = checkEmail(email.value);
+  email.dispatchEvent(new Event('keyup'));
+  expect(result).toBe(false);
 });
+
+describe('Validación de contraseña mientras el usuario ingresa el texto', () => {
+  it('La contraseña está bien escrita, el input es verde ósea válido', () => {
+    const registerDiv = Register();
+    const password = registerDiv.querySelector('#password');
+    password.value = '12345678';
+    const result = checkPassword(password.value);
+    password.dispatchEvent(new Event('keyup'));
+    expect(result).toBe(true);
+  });
+});
+
+it('La contraseña está mal escrita, el input es rojo ósea inválido', () => {
+  const registerDiv = Register();
+  const password = registerDiv.querySelector('#password');
+  password.value = '12345';
+  const result = checkPassword(password.value);
+  password.dispatchEvent(new Event('keyup'));
+  expect(result).toBe(false);
+});
+
+describe('Mostar y ocultar contraseña', () => {
+  it('Icono que muestra la contraseña', () => {
+    const registerDiv = Register();
+    const eyeSlash = registerDiv.querySelector('#eyeSlashLogo1');
+    const password = registerDiv.querySelector('#password');
+    password.type = 'password';
+    eyeSlash.style.display = '';
+    eyeSlash.dispatchEvent(new Event('click'));
+    expect(password.type).toBe('text');
+    expect(eyeSlash.style.display).toBe('none');
+  });
+});
+
+it('Icono que oculta la contraseña', () => {
+  const registerDiv = Register();
+  const eye = registerDiv.querySelector('#eyeLogo1');
+  const eyeSlash = registerDiv.querySelector('#eyeSlashLogo1');
+  const password = registerDiv.querySelector('#password');
+  eyeSlash.style.display = 'none';
+  eye.style.display = '';
+  password.type = 'text';
+  if (eyeSlash.style.display === 'none') { eye.dispatchEvent(new Event('click')); }
+
+  console.log(eye.dispatchEvent(new Event('click')));
+  expect(password.type).toBe('password');
+  console.log(password.type);
+  expect(eyeSlash.style.display).toBe('');
+  expect(eye.style.display).toBe('none');
+});
+
+/* describe('Verifica y concede permisos de entrada', () => {
+  it('Correo y contraseña correctos para enviar a página de verificación', (done) => {
+    const registerDiv = Register();
+    const buttonLoginGoogle = registerDiv.querySelector('createAccBtn');
+    buttonLoginGoogle.dispatchEvent(new Event('click'));
+    email.value = 'frontend.la';
+    password.value = '12345678'
+    const result = checkEmail(email.value) && checkPassword(password.value);
+    setTimeout(() => {
+      expect(window.location.pathname).toBe('/verifyEmail');
+      done();
+    });
+  }); */
 
 /* it.skip('Regex correo', () => {
   document.body.innerHTML = '<div id="userEmail"></div>';

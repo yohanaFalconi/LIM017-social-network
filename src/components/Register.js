@@ -96,6 +96,7 @@ export const Register = () => {
       eye.style.display = '';
       if (eyeSlash.style.display === 'none') {
         eye.addEventListener('click', () => {
+          console.log('eyeeeeee');
           password.type = 'password';
           eyeSlash.style.display = '';
           eye.style.display = 'none';
@@ -106,9 +107,7 @@ export const Register = () => {
 
   createAccBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    const emailPattern = /^([a-z\d.-_]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
-    const passwordPattern = /^[\d\w@-]{8,15}$/i;
-    if (emailPattern.test(email.value) && passwordPattern.test(password.value)) {
+    if (checkEmail(email.value) && checkPassword(password.value)) {
       signUpEmail(email.value, password.value)
         .then(() => {
         /*   console.log(userCredential); COMO PARAMETRO userCredential */

@@ -29,12 +29,12 @@ export const routes = {
 };
 console.log(observatorIt); */
 
-export const onNavigate = (pathname) => {
+export const onNavigate = (pathname, urlParam) => {
   const root = document.getElementById('root');
   window.history.pushState(
     {},
     pathname,
-    window.location.origin + pathname,
+    window.location.origin + pathname + (urlParam ? `?${urlParam.toString()}` : ''),
   );
   while (root.firstChild) {
     root.removeChild(root.firstChild);
@@ -44,9 +44,9 @@ export const onNavigate = (pathname) => {
 window.addEventListener('DOMContentLoaded', () => {
   const pathname = window.location.pathname;
   // window.addEventListener('popstate', () => {});
-  // const querystring = window.location.search;
-  // const params = new URLSearchParams(querystring);
-  onNavigate(pathname);
+  const querystring = window.location.search;
+  const params = new URLSearchParams(querystring);
+  onNavigate(pathname, params);
 });
 
 export const checkEmail = (str) => {

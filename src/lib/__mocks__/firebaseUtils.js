@@ -7,7 +7,8 @@ export const getAuth = () => ({});
 // eslint-disable-next-line max-len
 export const createUserWithEmailAndPassword = jest.fn((auth, email, password) => { Promise.resolve({ user: { email, password } }); });
 export const updateProfile = jest.fn((fullName) => ({ displayName: fullName }));
-export const GoogleAuthProvider = jest.fn();
+export const logInGoogle = jest.fn(() => ({}));
+export class GoogleAuthProvider {}
 
 export const FacebookAuthProvider = jest.fn();
 

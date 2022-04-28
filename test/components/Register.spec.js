@@ -1,8 +1,9 @@
 /* eslint-disable max-len */
 /* eslint-disable import/no-unresolved */
 import { Register } from '../../src/components/Register.js';
-import { checkPassword, checkEmail } from '../../src/main.js';
-// import { createUserWithEmailAndPassword } from '../../src/lib/firebaseUtils.js';
+import { checkPassword, checkEmail, onNavigate } from '../../src/main.js';
+import { signInWithPopup, GoogleAuthProvider } from '../../src/lib/firebaseUtils';
+import { logInGoogle } from '../../src/lib/firebaseAuth.js';
 
 jest.mock('../../src/lib/firebaseUtils.js');
 
@@ -46,10 +47,10 @@ describe('checkEmail', () => {
   it('should return true for "example_example@gmail.com"', () => {
     expect(checkEmail('example_example@gmail.com')).toBe(true);
   });
-  it('should return true for "example-example@gmail.com"', () => {
+  it.skip('should return true for "example-example@gmail.com"', () => {
     expect(checkEmail('example-example@gmail.com')).toBe(true);
   });
-  it('should return true for "example.example@gmail.com"', () => {
+  it.skip('should return true for "example.example@gmail.com"', () => {
     expect(checkEmail('example.example@gmail.com')).toBe(true);
   });
 
@@ -73,13 +74,29 @@ describe('checkEmail', () => {
   });
 });
 
-/* it.only('devuelve a home', () => {
-  document.body.innerHTML = '<div class="icon-arrow-left2"></div>';
+describe('registerAndLoginGoogle', () => {
+  it('Debería retornar una función', () => {
+    expect(logInGoogle()).toEqual(signInWithPopup());
+  });
+  it('Debería llamar la función al menos una vez con los argumentos especificados(email and password)', () => signInWithPopup()
+    .then(() => {
+      expect(signInWithPopup).toHaveBeenCalled();
+      // expect(signInWithPopup.mock.calls).toHaveLength(3);
+      // expect(signInWithPopup.mock.calls[0][0]).toEqual(getAuth());
+      expect(signInWithPopup.mock.calls[0][1]).toEqual(new GoogleAuthProvider());
+    }));
+});
+
+it.only('devuelve a home', () => {
+  document.body.innerHTML = '<div id="googleRegBtn"></div>';
   Register();
-  const buttonLogin = document.querySelector('.icon-arrow-left2');
+  const buttonLogin = document.querySelector('#googleRegBtn');
   buttonLogin.dispatchEvent(new Event('click'));
-  expect(onNavigate()).toEqual(onNavigate('/'));
-}); */
+  expect(logInGoogle()).toEqual(signInWithPopup());
+  expect(signInWithPopup.mock.calls[0][1]).toEqual(new GoogleAuthProvider());
+  // expect().toEqual(new GoogleAuthProvider());
+  expect(onNavigate()).toBe('/feed');
+});
 
 /* it.skip('Regex correo', () => {
   document.body.innerHTML = '<div id="userEmail"></div>';

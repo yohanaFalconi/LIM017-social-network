@@ -18,8 +18,9 @@ import {
   getFirestore,
   collection,
   addDoc,
-  getDocs,
   onSnapshot,
+  query,
+  orderBy,
 } from './firebaseUtils.js';
 
 const firebaseConfig = {
@@ -51,21 +52,15 @@ export const logOut = () => signOut(auth);
 /* eslint-disable max-len */
 
 /** firebase */
-const db = () => getFirestore(app);
+const db = getFirestore(app);
 // Guardar post en FireStore
-export const savePost = async (description) => {
-  const docRefPosts = await addDoc(collection(db, 'posts'), {
-    description,
-  });
-  console.log('Se guardo publicacion en la db con el id: ', docRefPosts.id);
-};
-// Listar los post que ya existan
-export const getPosts = () => getDocs(collection(db, 'posts'));
-/* const querySnapshot = await getDocs(collection(db, "users"));
-querySnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data()}`);
+export const savePost = (description, tag) => addDoc(collection(db, 'posts'), {
+  description,
+  tag,
 });
-*/
-
 // funcion que reconoce/escucha datos nuevos onSnapshot : en instantánea
-export const onGetPost = (callback) => onSnapshot(collection(db, 'posts'), callback);
+export const onGetPost = (callback) => {
+  const dataSort = query(collection(db, 'posts'), orderBy('description'));
+  const d = onSnapshot(dataSort, callback);
+  return d;
+};

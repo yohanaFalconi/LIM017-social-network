@@ -17,7 +17,7 @@ export const Feed = () => {
     <form id="postForm" class="modal" class="inactive">
       <div class="gridColum mtop">
         <p id="userName" class="purple">example@gmail.com</p>
-        <select class="select">
+        <select class="select" id="tag">
           <option disabled selected >Type</option>
           <option value="movieSlted">Movie</option>
           <option value="bookSlted">Book</option>
@@ -51,34 +51,39 @@ export const Feed = () => {
   const postBtn = feedDiv.querySelector('#postBtn');
   const postForm = feedDiv.querySelector('#postForm');
   const postContainer = feedDiv.querySelector('#postContainer');
-  window.addEventListener('DOMContentLoaded', async () => {
-    // querySnapshot : consulta Instantánea
-    // const querySnapshot = await getPosts();
+  const tag = feedDiv.querySelector('#tag');
+
+  const fetchPosts = () => {
     onGetPost((querySnapshot) => {
       // console.log(querySnapshot); // objeto donde nos interesa los docs de tipo array
       let emptyPostContainer = '';
       querySnapshot.forEach((doc) => {
         // console.log(doc);
         // console.log(doc.data()); // data() transforma a un objeto de javascript
-        // console.log(doc.id); //devuelve el id cada post
-        // console.log(`${doc.id} => ${doc.data()}`);
         const postData = doc.data();
         emptyPostContainer += `
-          <form id="postFormContainer" id="postForm">
+          <div id="postFormContainer" id="postForm">
             <div class="usersEmail">
               <p id="userName" class="darkPurple">example@gmail.com</p>
             </div>
             <p class="postBody">${postData.description}</p>
-          </form>
-          `;
+          </div>`;
       });
       postContainer.innerHTML = emptyPostContainer;
     });
-  });
+  };
+  fetchPosts();
+
   postBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    // vamos a guardar los post
-    savePost(description.value);
+    const MyTag = tag;
+    savePost(description.value, MyTag.value)
+      .then((docRef) => {
+        console.log('Se guardo publicacion en la db con el id: ', docRef.id);
+      })
+      .catch((error) => {
+        console.log('Error adding document: ', error);
+      });
     postForm.reset();
   });
   logOutBtn.addEventListener('click', () => {
@@ -110,6 +115,5 @@ export const Feed = () => {
     postForm.classList.remove('active');
     overlay.classList.remove('active');
   });
-
   return feedDiv;
 };

@@ -6,13 +6,15 @@ export const getAuth = () => ({});
 export const getFirestore = () => ({});
 // { currentUser: { displayName: '' } };
 // eslint-disable-next-line max-len
-export const createUserWithEmailAndPassword = jest.fn((auth, email, password) => { Promise.resolve({ user: { email, password } }); });
+export const createUserWithEmailAndPassword = jest.fn((auth, email, password) => {
+  Promise.resolve({ user: { email, password } });
+  return Promise.resolve({ user: { email, password } });
+});
 export const updateProfile = jest.fn((fullName) => ({ displayName: fullName }));
 
 export class GoogleAuthProvider {}
 
 export const FacebookAuthProvider = jest.fn();
-
 export const sendEmailVerification = () => Promise.resolve({});
 export const signInWithPopup = jest.fn((auth, provider) => Promise.resolve({}));
 

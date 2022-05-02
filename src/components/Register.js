@@ -96,7 +96,6 @@ export const Register = () => {
       eye.style.display = '';
       if (eyeSlash.style.display === 'none') {
         eye.addEventListener('click', () => {
-          console.log('eyeeeeee');
           password.type = 'password';
           eyeSlash.style.display = '';
           eye.style.display = 'none';
@@ -109,13 +108,13 @@ export const Register = () => {
     e.preventDefault();
     if (checkEmail(email.value) && checkPassword(password.value)) {
       signUpEmail(email.value, password.value)
-        .then(() => {
-        /*   console.log(userCredential); COMO PARAMETRO userCredential */
+        .then((userCredential) => {
           progressMsg.innerText = 'Your account is being created, please wait';
           verificationEmail()
             .then(() => {
               onNavigate('/verifyEmail');
             });
+          return userCredential.user;
         })
         .catch((error) => {
           if (error.code === 'auth/email-already-in-use') {

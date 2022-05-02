@@ -77,6 +77,7 @@ export const LogIn = () => {
         }, 2000);
       })
       .catch((error) => {
+        console.log('entreeee al error');
         if (error.code === 'auth/user-not-found') {
           logInMsg.innerHTML = 'User not found';
           email.classList.add('invalid');

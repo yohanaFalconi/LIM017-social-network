@@ -43,6 +43,7 @@ export const ResetPassword = () => {
   sendResetEmail.addEventListener('click', () => {
     recoverPasswordWithEmail(email.value)
       .then(() => {
+        console.log('reconoció el correo');
         sendEmailMsg.innerHTML = 'Password reset email sent,<br>please check you email';
         email.classList.add('valid');
       })

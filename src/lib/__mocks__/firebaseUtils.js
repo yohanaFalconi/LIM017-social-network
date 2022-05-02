@@ -15,7 +15,7 @@ export const updateProfile = jest.fn((fullName) => ({ displayName: fullName }));
 export class GoogleAuthProvider {}
 
 export const FacebookAuthProvider = jest.fn();
-export const sendEmailVerification = () => Promise.resolve({});
+export const sendEmailVerification = () => ({});
 export const signInWithPopup = jest.fn((auth, provider) => Promise.resolve({}));
 
 // eslint-disable-next-line max-len

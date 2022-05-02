@@ -1,4 +1,4 @@
-import { LogIn } from '../../src/components/LogIn';
+import { LogIn } from '../../src/components/LogIn.js';
 import { createUserWithEmailAndPassword } from '../../src/lib/firebaseUtils.js';
 import { logInEmail } from '../../src/lib/firebaseAuth.js';
 /* import { checkEmail, checkPassword } from '../../src/main.js';
@@ -70,10 +70,11 @@ describe('Ingreso con cuentas externas a la App', () => {
   });
 });
 
-describe('Inicia sesión o muestra los errores en pantalla', () => {
+describe('Inicia sesión o mostrar los errores en pantalla', () => {
   beforeEach(() => createUserWithEmailAndPassword.mockClear());
 
   it('Inicia sesión y muestra en pantalla, antes de derivar a feed el mensaje: The user logged in', (done) => {
+    // jest.setTimeout();
     const LogInDiv = LogIn();
     const logInBtn = LogInDiv.querySelector('#logInBtn');
     const email = LogInDiv.querySelector('#userEmailLogIn');
@@ -97,4 +98,44 @@ describe('Inicia sesión o muestra los errores en pantalla', () => {
       done();
     }, 2000);
   });
+
+  /*  it('Debería devolder el correo de registro', () => logInEmail('front@end.la', '')
+    .catch((error) => {
+      console.log('soyyy el errooooooor', error);
+      expect(error.code === 'auth/internal-error').toBe('Enter your password');
+      expect(createUserWithEmailAndPassword).toHaveBeenCalled();
+      // expect(createUserWithEmailAndPassword.mock.calls[0]).toEqual([{'front@end.la', '123456']);
+    })); */
+/*
+  it.skip('Error', (done) => {
+    jest.setTimeout();
+    const LogInDiv = LogIn();
+    const logInBtn = LogInDiv.querySelector('#logInBtn');
+    const email = LogInDiv.querySelector('#userEmailLogIn');
+    email.value = 'front@end.la';
+    const password = LogInDiv.querySelector('#passwordLogIn');
+    password.value = '';
+    logInBtn.dispatchEvent(new Event('click'));
+    logInEmail(email.value, password.value).catch((error) => {
+      console.log('soy el errorrr', error);
+      expect(error.code).toBe('Enter your password');
+      console.log('soy el errorrrr.codeee', error.code);
+      done();
+    });
+  }); */
 });
+
+/*  it('Error de inicio de sesión', (done) => {
+    .catch() => {
+    jest.setTimeout();
+    const LogInDiv = LogIn();
+    const logInBtn = LogInDiv.querySelector('#logInBtn');
+    const email = LogInDiv.querySelector('#userEmailLogIn');
+    email.value = 'front@end.la';
+    const password = LogInDiv.querySelector('#passwordLogIn');
+    password.value = '';
+    logInBtn.dispatchEvent(new Event('click'));
+    expect(LogInDiv.querySelector('#logInMessage').innerHTML).toEqual('Enter your password');
+    done();
+  }));
+}); */

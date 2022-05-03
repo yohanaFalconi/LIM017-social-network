@@ -2,7 +2,6 @@
 /* eslint-disable import/no-unresolved */
 import { Register } from '../../src/components/Register.js';
 import { VerifyEmail } from '../../src/components/VerifyEmail.js';
-import { Home } from '../../src/components/Home.js';
 import { onNavigate, checkEmail, checkPassword } from '../../src/main.js';
 import { signUpEmail } from '../../src/lib/firebaseAuth.js';
 import { createUserWithEmailAndPassword /* sendEmailVerification */ } from '../../src/lib/firebaseUtils.js';

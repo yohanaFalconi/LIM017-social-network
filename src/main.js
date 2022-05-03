@@ -19,22 +19,12 @@ export const routes = {
   '/resetPassword': ResetPassword,
 };
 
-/* const observatorIt = () => {
-  window.addEventListener('DOMContentLoaded', () => {
-    observatorIt();
-    console.log('okay');
-  });
-  console.log('afuera del evento');
-  return observatorIt;
-};
-console.log(observatorIt); */
-
 export const onNavigate = (pathname) => {
   const root = document.getElementById('root');
   window.history.pushState(
     {},
     pathname,
-    window.location.origin + pathname,
+    pathname,
   );
   while (root.firstChild) {
     root.removeChild(root.firstChild);
@@ -43,9 +33,6 @@ export const onNavigate = (pathname) => {
 
 window.addEventListener('DOMContentLoaded', () => {
   const pathname = window.location.pathname;
-  // window.addEventListener('popstate', () => {});
-  // const querystring = window.location.search;
-  // const params = new URLSearchParams(querystring);
   onNavigate(pathname);
 });
 
@@ -56,7 +43,7 @@ export const checkEmail = (str) => {
   } if (emailPattern.test(str)) {
     return true;
   }
-  return checkEmail(str);
+  return checkEmail();
 };
 
 export const checkPassword = (str) => {
@@ -66,5 +53,5 @@ export const checkPassword = (str) => {
   } if (passwordPattern.test(str)) {
     return true;
   }
-  return checkPassword(str);
+  return checkPassword();
 };

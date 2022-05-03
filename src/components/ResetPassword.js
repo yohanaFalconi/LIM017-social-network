@@ -31,7 +31,7 @@ export const ResetPassword = () => {
         <p id="sendEmailMsg"></p>
         <a id="goToRegisterBtn" class="purple w5 link send">Create new account</a>
       </div>
-    </form>  
+    </form>
   </div>
   `;
   resetPassDiv.innerHTML = containerPassDiv;
@@ -43,13 +43,13 @@ export const ResetPassword = () => {
   sendResetEmail.addEventListener('click', () => {
     recoverPasswordWithEmail(email.value)
       .then(() => {
+        console.log('reconoció el correo');
         sendEmailMsg.innerHTML = 'Password reset email sent,<br>please check you email';
         email.classList.add('valid');
       })
       .catch((error) => {
         // const errorCode = error.code;
         // const errorMessage = error.message;
-        console.log(error);
         if (error.code === 'auth/missing-email') {
           sendEmailMsg.innerHTML = 'Enter your email';
           email.classList.add('invalid');

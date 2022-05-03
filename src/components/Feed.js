@@ -11,9 +11,9 @@ export const Feed = () => {
       <figure class="top headerReset">
         <img src="images/logotype/Full-logo.png" alt="Binge Worthy logo" class="logoFeed">
         <img src="images/mobile/Mobile icon nav.png" class="nav">
+        <input type="button" id="logOut" value="Log out" class="button">
       </figure>
     </header>
-    <input type="button" id="logOut" value="Log out" class="button">
     <form id="postForm" class="modal" class="inactive">
       <div class="gridColum mtop">
         <p id="originalPost" class="purple originalPost"></p>
@@ -58,6 +58,7 @@ export const Feed = () => {
   const overlay = feedDiv.querySelector('#overlay');
   let id = '';
   let editStatus = false;
+
   function changeToEditingStatus() {
     postBtn.value = 'Update';
   }
@@ -78,6 +79,7 @@ export const Feed = () => {
     postForm.classList.remove('active');
     overlay.classList.remove('active');
   }
+
   openModalPost.addEventListener('click', openModal);
   postBtn.addEventListener('click', closeModal);
   closeModalBtn.addEventListener('click', () => {
@@ -87,13 +89,10 @@ export const Feed = () => {
 
   const fetchPosts = () => {
     onGetPost((querySnapshot) => {
-      // console.log(querySnapshot); // objeto donde nos interesa los docs de tipo array
-      let emptyPostContainer = '';
+      let posts = '';
       querySnapshot.forEach((doc) => {
-        // console.log(doc);
-        // console.log(doc.data()); // data() transforma a un objeto de javascript
         const postData = doc.data();
-        emptyPostContainer += `
+        posts += `
           <div id="postFormContainer" id="postForm">
             <div class="usersEmail">
               <p>op</p>
@@ -107,16 +106,14 @@ export const Feed = () => {
           </div>
         `;
       });
+      postContainer.innerHTML = posts;
 
-      postContainer.innerHTML = emptyPostContainer;
       const editBtns = feedDiv.querySelectorAll('.btnEdit');
-      // console.log(editBtns);
       editBtns.forEach((btn) => {
         btn.addEventListener('click', async ({ target: { dataset } }) => {
           editStatus = true;
           changeToEditingStatus();
           openModal();
-          console.log(dataset.id);
           const doc = await getPost(dataset.id);
           const post = doc.data();
           description.value = post.description;

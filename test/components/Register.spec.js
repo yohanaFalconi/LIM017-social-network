@@ -42,8 +42,7 @@ describe('Flecha de atrás', () => {
     buttonLogin.dispatchEvent(new Event('click'));
     expect(window.location.pathname).toBe('/');
   });
-});
-
+  
 describe('Validación de email mientras el usuario ingresa el texto', () => {
   it('El correo está bien escrito, el input es verde, ósea válido', () => {
     const registerDiv = Register();
@@ -53,7 +52,6 @@ describe('Validación de email mientras el usuario ingresa el texto', () => {
     email.dispatchEvent(new Event('keyup'));
     expect(result).toBe(true);
   });
-});
 
 it('El correo está mal escrito, el input es rojo ósea, inválido', () => {
   const registerDiv = Register();

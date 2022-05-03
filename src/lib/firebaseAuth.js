@@ -54,6 +54,9 @@ export const logOut = () => signOut(auth);
 
 /** firebase */
 
+// Función que devuelve datos del usuario:
+export const getUserLocalStorage = () => JSON.parse(localStorage.getItem('user'));
+
 // Guardar post en FireStore
 export const savePost = (description, tag) => addDoc(collection(db, 'posts'), {
   description,

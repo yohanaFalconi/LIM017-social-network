@@ -1,5 +1,5 @@
 import {
-  logOut, savePost, onGetPost,
+  logOut, savePost, onGetPost, getUserLocalStorage,
 } from '../lib/firebaseAuth.js';
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
@@ -67,6 +67,8 @@ export const Feed = () => {
               <p id="userName" class="darkPurple">example@gmail.com</p>
             </div>
             <p class="postBody">${postData.description}</p>
+            <i class="icon-heart" id= "like"></i>
+            <p class="counter-likes">${doc.data().Likes.length}</p>
           </div>`;
       });
       postContainer.innerHTML = emptyPostContainer;
@@ -114,6 +116,22 @@ export const Feed = () => {
     overlay.classList.add('inactive');
     postForm.classList.remove('active');
     overlay.classList.remove('active');
+  });
+
+  const counterLikes = feedDiv.querySelector('.counter-likes');
+  const userData = getUserLocalStorage();
+  const arrayLikes = doc.data().Likes;
+  const arrayLength = arrayLikes.length;
+  const btnLike = feedDiv.querySelector('#like');
+
+  if (doc.data().Likes.length === 0) {
+    counterLikes.style.display = 'none';
+  }
+  if (arrayLikes.includes(userData.uid)) {
+    btnLike.classList.add('icon-like-red');
+  }
+  btnLike.addEventListener('click', () => {
+
   });
   return feedDiv;
 };

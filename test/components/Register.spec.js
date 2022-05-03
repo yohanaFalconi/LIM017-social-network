@@ -1,9 +1,11 @@
 /* eslint-disable max-len */
 /* eslint-disable import/no-unresolved */
 import { Register } from '../../src/components/Register.js';
-import { checkEmail, checkPassword } from '../../src/main.js';
+import { Home } from '../../src/components/Home.js';
+import { VerifyEmail } from '../../src/components/VerifyEmail.js';
+import { onNavigate, checkEmail, checkPassword } from '../../src/main.js';
 import { signUpEmail } from '../../src/lib/firebaseAuth.js';
-import { createUserWithEmailAndPassword } from '../../src/lib/firebaseUtils.js';
+import { createUserWithEmailAndPassword, sendEmailVerification } from '../../src/lib/firebaseUtils.js';
 
 jest.mock('../../src/lib/firebaseUtils.js');
 jest.mock('../../src/components/Feed.js');
@@ -40,7 +42,8 @@ describe('Flecha de atrás', () => {
     const registerDiv = Register();
     const buttonLogin = registerDiv.querySelector('.icon-arrow-left2');
     buttonLogin.dispatchEvent(new Event('click'));
-    expect(window.location.pathname).toBe('/');
+    const homeComponent = Home();
+    expect(onNavigate('/')).toEqual(homeComponent);
   });
 });
 
@@ -115,28 +118,40 @@ describe('Verifica creación de cuenta y si hay errores los muestra en pantalla'
     password.value = '12345678';
     buttonRegister.dispatchEvent(new Event('click'));
     signUpEmail(email.value, password.value);
+    /* .then(() => { */
     const result = registerDiv.querySelector('#progressMsg');
     result.innerText = 'Your account is being created, please wait';
     expect(result.innerText).toEqual('Your account is being created, please wait');
+    /* const auth = 'front@end.la';
+        sendEmailVerification(auth, email, password)
+          .then(() => {
+            const homeComponent = VerifyEmail();
+            expect(onNavigate('/verifyEmail')).toStrictEqual(homeComponent);
+            console.log(onNavigate('/verifyEmail'), homeComponent);
+          }); */
+    // });
+
     done();
   });
 });
 
 /* it('Error de correo en uso', (done) => {
-  jest.setTimeout();
-  // expect.assertions(1);
+  // jest.setTimeout(0.1);
+  // expect.assertions(0);
   const registerDiv = Register();
   const buttonRegister = registerDiv.querySelector('#createAccBtn');
   const email = registerDiv.querySelector('#userEmail');
-  email.value = 'front@end.la';
-  const password = registerDiv.querySelector('#password');
-  password.value = '12345678';
+  email.value = 'auth/email-already-in-use';
   buttonRegister.dispatchEvent(new Event('click'));
-  signUpEmail(email.value, password.value);
-  return signUpEmail(1).catch((error) => {
-    const result = registerDiv.querySelector('#progressMsg');
-    result.innerText = 'Email already in use';
-    expect(error.code === 'auth/email-already-in-use').toEqual('Email already in use');
+  setTimeout(() => {
+    signUpEmail(email.value)
+      .catch((error) => {
+        console.error(error);
+        const result = registerDiv.querySelector('#progressMsg');
+        result.innerText = 'Email already in use';
+        expect(error.code === 'auth/email-already-in-use').toEqual('Email already in use');
+      });
+
     done();
   });
 }); */
@@ -154,3 +169,42 @@ it('Muestra mensajes si hay errores al crear la cuenta', (done) => {
   expect(result.innerText).toEqual('Wrong. Please, try again.');
   done();
 });
+
+/* it('DEBERIA FALLAR', () => {
+  expect.assertions(0);
+  return (signUpEmail().catch((error) => {
+    console.log(error, signUpEmail());
+    const registerDiv = Register();
+    const progressMsg = registerDiv.querySelector('#progressMsg');
+    progressMsg.innerText = 'Email already in use';
+    expect(error.code).toEqual('auth/email-already-in-use');
+    console.log(error.code);
+    expect(progressMsg.innerText).toEqual('Email already in use');
+  }));
+}); */
+
+/* describe('Mensaje de error correo en uso', () => {
+  it('Se debe mostrar un mensaje de error', () => {
+    const signUpEmailMock = jest.fn((emailLogin, passwordLogin) => Promise.resolve({
+      email: emailLogin,
+      password: passwordLogin,
+      emailVerified: false.valueOf,
+    }));
+
+    signUpEmailMock.mockRejectedValue('Email already in use');
+    const registerDiv = Register();
+    const btn = registerDiv.querySelector('#createAccBtn');
+    const inputEmail = registerDiv.querySelector('#userEmail');
+    const inputPassword = registerDiv.querySelector('#password');
+    inputEmail.value = 'front@end.la';
+    inputPassword.value = '12345678';
+    signUpEmailMock().catch((error) => {
+      btn.dispatchEvent(new Event('click'));
+      if (error.code === 'auth/email-already-in-use') {
+        console.log(error.code);
+        const result = registerDiv.querySelector('#progressMsg');
+        expect(result.innerText).toEqual('Email already in use');
+      }
+    });
+  });
+}); */

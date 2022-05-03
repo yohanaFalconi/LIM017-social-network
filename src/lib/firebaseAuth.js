@@ -37,6 +37,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 const gProvider = new GoogleAuthProvider();
 const fProvider = new FacebookAuthProvider();
 
@@ -55,7 +56,7 @@ export const logOut = () => signOut(auth);
 /* eslint-disable max-len */
 
 /** firebase */
-const db = getFirestore(app);
+
 // Guardar post en FireStore
 export const savePost = (description, tag) => addDoc(collection(db, 'posts'), {
   description,

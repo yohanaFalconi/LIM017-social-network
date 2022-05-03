@@ -106,17 +106,15 @@ export const Register = () => {
 
   createAccBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    const emailPattern = /^([a-z\d]+)([.\-_][a-z\d]+)?@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
-    const passwordPattern = /^[\d\w@-]{8,15}$/i;
-    if (emailPattern.test(email.value) && passwordPattern.test(password.value)) {
+    if (checkEmail(email.value) && checkPassword(password.value)) {
       signUpEmail(email.value, password.value)
-        .then(() => {
-        /*   console.log(userCredential); COMO PARAMETRO userCredential */
+        .then((userCredential) => {
           progressMsg.innerText = 'Your account is being created, please wait';
           verificationEmail()
             .then(() => {
               onNavigate('/verifyEmail');
             });
+          return userCredential.user;
         })
         .catch((error) => {
           if (error.code === 'auth/email-already-in-use') {

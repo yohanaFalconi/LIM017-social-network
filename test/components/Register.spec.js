@@ -123,19 +123,9 @@ describe('Validación de email mientras el usuario ingresa el texto', () => {
       password.value = '12345678';
       buttonRegister.dispatchEvent(new Event('click'));
       signUpEmail(email.value, password.value);
-      /* .then(() => { */
       const result = registerDiv.querySelector('#progressMsg');
       result.innerText = 'Your account is being created, please wait';
       expect(result.innerText).toEqual('Your account is being created, please wait');
-      /* const auth = 'front@end.la';
-        sendEmailVerification(auth, email, password)
-          .then(() => {
-            const homeComponent = VerifyEmail();
-            expect(onNavigate('/verifyEmail')).toStrictEqual(homeComponent);
-            console.log(onNavigate('/verifyEmail'), homeComponent);
-          }); */
-      // });
-
       done();
     });
   });
@@ -191,7 +181,7 @@ describe('Validación de email mientras el usuario ingresa el texto', () => {
 
 /* describe('Mensaje de error correo en uso', () => {
   it('Se debe mostrar un mensaje de error', async () => {
-  /* createUserWithEmailAndPassword = jest.fn(() => Promise.reject({
+  createUserWithEmailAndPassword = jest.fn(() => Promise.reject({
         code: 'auth/email-already-in-use',
     })); */
 

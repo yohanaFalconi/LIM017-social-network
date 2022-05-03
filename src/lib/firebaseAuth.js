@@ -21,6 +21,9 @@ import {
   onSnapshot,
   query,
   orderBy,
+  getDoc,
+  doc,
+  updateDoc,
 } from './firebaseUtils.js';
 
 const firebaseConfig = {
@@ -68,3 +71,7 @@ export const onGetPost = (callback) => {
   const d = onSnapshot(dataSort, callback);
   return d;
 };
+
+export const getPost = (id) => getDoc(doc(db, 'posts', id));
+
+export const updatePost = (id, editedFields) => updateDoc(doc(db, 'posts', id), editedFields);

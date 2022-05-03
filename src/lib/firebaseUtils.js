@@ -22,4 +22,7 @@ export {
   onSnapshot,
   query,
   orderBy,
+  getDoc,
+  doc,
+  updateDoc,
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';

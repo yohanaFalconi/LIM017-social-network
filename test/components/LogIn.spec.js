@@ -1,5 +1,8 @@
 import { LogIn } from '../../src/components/LogIn.js';
+import { ResetPassword } from '../../src/components/ResetPassword.js';
+import { Home } from '../../src/components/Home.js';
 import { createUserWithEmailAndPassword } from '../../src/lib/firebaseUtils.js';
+import { onNavigate } from '../../src/main.js';
 import { logInEmail } from '../../src/lib/firebaseAuth.js';
 /* import { checkEmail, checkPassword } from '../../src/main.js';
 import { signUpEmail } from '../../src/lib/firebaseAuth.js';
@@ -14,18 +17,20 @@ beforeEach(() => {
 });
 
 describe('Rutas de navegación', () => {
+  it('Lleva a ResetPassword', () => {
+    const logInDiv = LogIn();
+    const buttonLogin = logInDiv.querySelector('#forgotPass');
+    buttonLogin.dispatchEvent(new Event('click'));
+    const ResetPasswordComponent = ResetPassword();
+    expect(onNavigate('/resetPassword')).toEqual(ResetPasswordComponent);
+  });
+
   it('Devuelve a la página anterior', () => {
     const logInDiv = LogIn();
     const buttonLogin = logInDiv.querySelector('.icon-arrow-left2');
     buttonLogin.dispatchEvent(new Event('click'));
-    expect(window.location.pathname).toBe('/');
-  });
-
-  it('Lleva a la página de ReserPassword', () => {
-    const logInDiv = LogIn();
-    const buttonLogin = logInDiv.querySelector('#forgotPass');
-    buttonLogin.dispatchEvent(new Event('click'));
-    expect(window.location.pathname).toBe('/resetPassword');
+    const HomeComponent = Home();
+    expect(onNavigate('/')).toEqual(HomeComponent);
   });
 });
 

@@ -43,7 +43,7 @@ export const checkEmail = (str) => {
   } if (emailPattern.test(str)) {
     return true;
   }
-  return checkEmail();
+  return emailPattern;
 };
 
 export const checkPassword = (str) => {

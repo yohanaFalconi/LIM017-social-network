@@ -31,8 +31,8 @@ describe('Rutas de navegación', () => {
 
 describe('Ingreso con cuentas externas a la App', () => {
   it('Registra usuario de Google, ingresa, y lo lleva al Feed', (done) => {
-    const LogInDiv = LogIn();
-    const buttonLoginGoogle = LogInDiv.querySelector('#googleRegBtn');
+    const logInDiv = LogIn();
+    const buttonLoginGoogle = logInDiv.querySelector('#googleRegBtn');
     buttonLoginGoogle.dispatchEvent(new Event('click'));
     setTimeout(() => {
       expect(window.location.pathname).toBe('/feed');
@@ -41,8 +41,8 @@ describe('Ingreso con cuentas externas a la App', () => {
   });
 
   it('Registra usuario de Facebook, ingresa, y lo lleva al Feed', (done) => {
-    const LogInDiv = LogIn();
-    const buttonLoginFacebook = LogInDiv.querySelector('#fbLogBtn');
+    const logInDiv = LogIn();
+    const buttonLoginFacebook = logInDiv.querySelector('#fbLogBtn');
     buttonLoginFacebook.dispatchEvent(new Event('click'));
     setTimeout(() => {
       expect(window.location.pathname).toBe('/feed');
@@ -52,16 +52,16 @@ describe('Ingreso con cuentas externas a la App', () => {
 
   describe('Mostar y ocultar contraseña', () => {
     it('Icono de ojo que muestra y oculta la contraseña', () => {
-      const LogInDiv = LogIn();
-      const eyeSlash = LogInDiv.querySelector('#eyeSlashLogo1');
-      const password = LogInDiv.querySelector('#passwordLogIn');
+      const logInDiv = LogIn();
+      const eyeSlash = logInDiv.querySelector('#eyeSlashLogo1');
+      const password = logInDiv.querySelector('#passwordLogIn');
       password.type = 'password';
       eyeSlash.style.display = '';
       eyeSlash.dispatchEvent(new Event('click'));
       expect(password.type).toBe('text');
       expect(eyeSlash.style.display).toBe('none');
       if (eyeSlash.style.display === 'none') {
-        const eye = LogInDiv.querySelector('#eyeLogo1');
+        const eye = logInDiv.querySelector('#eyeLogo1');
         eye.dispatchEvent(new Event('click'));
         expect(password.type).toBe('password');
         expect(eyeSlash.style.display).toBe('');
@@ -75,15 +75,15 @@ describe('Inicia sesión o mostrar los errores en pantalla', () => {
 
   it('Inicia sesión y muestra en pantalla, antes de derivar a feed el mensaje: The user logged in', (done) => {
     // jest.setTimeout();
-    const LogInDiv = LogIn();
-    const logInBtn = LogInDiv.querySelector('#logInBtn');
-    const email = LogInDiv.querySelector('#userEmailLogIn');
+    const logInDiv = LogIn();
+    const logInBtn = logInDiv.querySelector('#logInBtn');
+    const email = logInDiv.querySelector('#userEmailLogIn');
     email.value = 'front@end.la';
-    const password = LogInDiv.querySelector('#passwordLogIn');
+    const password = logInDiv.querySelector('#passwordLogIn');
     password.value = '12345678';
     logInBtn.dispatchEvent(new Event('click'));
     logInEmail(email.value, password.value);
-    const result = LogInDiv.querySelector('#logInMessage');
+    const result = logInDiv.querySelector('#logInMessage');
     result.innerHTML = 'The user logged in';
     expect(result.innerHTML).toEqual('The user logged in');
     done();
@@ -98,14 +98,32 @@ describe('Inicia sesión o mostrar los errores en pantalla', () => {
       done();
     }, 2000);
   });
+});
 
-  /*  it('Debería devolder el correo de registro', () => logInEmail('front@end.la', '')
-    .catch((error) => {
-      console.log('soyyy el errooooooor', error);
-      expect(error.code === 'auth/internal-error').toBe('Enter your password');
-      expect(createUserWithEmailAndPassword).toHaveBeenCalled();
-      // expect(createUserWithEmailAndPassword.mock.calls[0]).toEqual([{'front@end.la', '123456']);
-    })); */
+/*   it.only('Error en contraseña', () => {
+    logInEmail()
+      .then(() => {
+        const logInDiv = LogIn();
+        const email = logInDiv.querySelector('#userEmailLogIn');
+        email.value = 'froendla';
+        const password = logInDiv.querySelector('#passwordLogIn');
+        password.value = '';
+        const logInBtn = logInDiv.querySelector('#logInBtn');
+        logInBtn.dispatchEvent(new Event('click'));
+        console.log('sooooy el boton', logInBtn, logInEmail(email.value, password.value));
+        logInEmail(email.value, password.value);
+      })
+
+      .catch((error) => {
+        const logInDiv = LogIn();
+        console.log('Soooooy logInEmail', logInEmail());
+        const logInMsg = logInDiv.querySelector('#logInMessage');
+        logInMsg.innerHTML = `${error.code}`;
+        console.log('soyyy el errooooooor', error.code);
+        expect(logInMsg.innerHTML).toBe(`${error.code}`);
+      // expect(createUserWithEmailAndPassword).toHaveBeenCalled();
+      });
+  }); */
 /*
   it.skip('Error', (done) => {
     jest.setTimeout();
@@ -123,7 +141,6 @@ describe('Inicia sesión o mostrar los errores en pantalla', () => {
       done();
     });
   }); */
-});
 
 /*  it('Error de inicio de sesión', (done) => {
     .catch() => {

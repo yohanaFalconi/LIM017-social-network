@@ -98,9 +98,8 @@ export const Feed = () => {
               <p>op</p>
               <p>${postData.tag}</p>
             </div>
-            <div>
-              <p class="postBody">${postData.description}</p>
-            </div>
+            <p class="postBody">${postData.description}</p>
+            <i class="icon-heart" id= "like"></i>
             <div>
               <button class="btnEdit" data-id=${doc.id}>Edit</button>
             </div>
@@ -154,5 +153,39 @@ export const Feed = () => {
       });
   });
 
+  openModalPost.addEventListener('click', () => {
+    postForm.classList.add('active');
+    overlay.classList.add('active');
+    postForm.classList.remove('inactive');
+    overlay.classList.remove('inactive');
+  });
+  closeModalBtn.addEventListener('click', () => {
+    postForm.classList.add('inactive');
+    overlay.classList.add('inactive');
+    postForm.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+  postBtn.addEventListener('click', () => {
+    postForm.classList.add('inactive');
+    overlay.classList.add('inactive');
+    postForm.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  /*   const counterLikes = feedDiv.querySelector('.counter-likes');
+  const userData = getUserLocalStorage();
+  const arrayLikes = doc.data().Likes;
+  const arrayLength = arrayLikes.length;
+  const btnLike = feedDiv.querySelector('#like');
+
+  if (doc.data().Likes.length === 0) {
+    counterLikes.style.display = 'none';
+  }
+  if (arrayLikes.includes(userData.uid)) {
+    btnLike.classList.add('icon-like-red');
+  }
+  btnLike.addEventListener('click', () => {
+
+  }); */
   return feedDiv;
 };

@@ -108,13 +108,12 @@ export const Register = () => {
     e.preventDefault();
     if (checkEmail(email.value) && checkPassword(password.value)) {
       signUpEmail(email.value, password.value)
-        .then((userCredential) => {
+        .then(() => {
           progressMsg.innerText = 'Your account is being created, please wait';
           verificationEmail()
             .then(() => {
               onNavigate('/verifyEmail');
             });
-          return userCredential.user;
         })
         .catch((error) => {
           if (error.code === 'auth/email-already-in-use') {

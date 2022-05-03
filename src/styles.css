@@ -424,6 +424,10 @@ section {
     padding: 15px;
 }
 
+#like {
+    cursor: pointer;
+}
+
 @media (min-width: 867px) and (max-width: 1800px){
     body {
         background-image: url(./images/desktop/desktop-background.png);

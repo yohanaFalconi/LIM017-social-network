@@ -371,7 +371,7 @@ section {
 
 .logoFeed{
     height: 65px;
-    margin: 5px 0px 0px 30px;
+    margin-left: 2vw;
 }
 
 .navFeed{
@@ -427,6 +427,10 @@ section {
     padding: 15px;
 }
 
+#like {
+    cursor: pointer;
+}
+
 @media (min-width: 867px) and (max-width: 1800px){
     body {
         background-image: url(./images/desktop/desktop-background.png);
@@ -471,10 +475,9 @@ section {
         transform: translate(0, -50%);
     }
 
+    /* styles for feed */
     .headerReset {
         width: 100vw;
-        background: white;
-        box-shadow: 0px 10px 15px -5px #ccc;
     }
     .left{
         margin-left: 10vh;
@@ -490,6 +493,10 @@ section {
   
     .top {
         grid-template-columns: 20% 60% 20%;
+    }
+
+    .nav {
+        display: none;
     }
 
     .orContinueWith {

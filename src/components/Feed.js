@@ -57,7 +57,7 @@ export const Feed = () => {
   feedDiv.innerHTML = containerFeed;
 
   const logOutBtn = feedDiv.querySelector('#logOut');
-  const post = feedDiv.querySelector('#postDescription');
+  const postDescription = feedDiv.querySelector('#postDescription');
   const postBtn = feedDiv.querySelector('#postBtn');
   const postForm = feedDiv.querySelector('#postForm');
   const postContainer = feedDiv.querySelector('#postContainer');
@@ -108,9 +108,10 @@ export const Feed = () => {
   const home = feedDiv.querySelector('#home');
 
   const user = auth.currentUser; // Contiene toda la info del usuario
-  console.log(user);
-  console.log(user.displayName);
-  console.log(user.email);
+  // console.log(user);
+  const userEmail = user.email;
+  // console.log(user.displayName);
+  console.log(userEmail);
   const userInfo = () => {
     getUser(user.uid)
       .then((re) => {
@@ -160,10 +161,9 @@ export const Feed = () => {
           changeToEditingStatus();
           openModal();
           const doc = await getPost(dataset.id);
-          console.log(doc);
-          // const post = doc.data();
-          post.value = post.description;
-          tag.value = post.tag;
+          const postDoc = doc.data();
+          postDescription.value = postDoc.post;
+          tag.value = postDoc.tag;
           id = dataset.id;
         });
       });
@@ -184,12 +184,12 @@ export const Feed = () => {
 
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    savePost(user.uid, post, tag);
+    savePost(user.uid, postDescription, tag);
     if (!editStatus) {
-      savePost(post, tag);
+      savePost(postDescription, tag);
     } else {
       updatePost(id, {
-        post: post.value,
+        post: postDescription.value,
         tag: tag.value,
       });
       changeToPostingStatus();

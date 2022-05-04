@@ -18,8 +18,11 @@ export {
   getFirestore,
   collection,
   addDoc,
-  getDocs,
   onSnapshot,
   query,
   orderBy,
+  serverTimestamp,
+  doc,
+  deleteDoc,
+  where,
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';

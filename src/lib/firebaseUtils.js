@@ -25,4 +25,7 @@ export {
   getDoc,
   doc,
   updateDoc,
+  arrayUnion,
+  arrayRemove,
+  setDoc,
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';

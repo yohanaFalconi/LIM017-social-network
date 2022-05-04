@@ -424,8 +424,12 @@ section {
     padding: 15px;
 }
 
-#like {
+.likeButton {
     cursor: pointer;
+    color: #5F256E;
+}
+.icon-like-red{
+    color: red;
 }
 
 @media (min-width: 867px) and (max-width: 1800px){

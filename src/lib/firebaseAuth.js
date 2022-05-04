@@ -24,6 +24,9 @@ import {
   getDoc,
   doc,
   updateDoc,
+  arrayUnion,
+  arrayRemove,
+  setDoc,
 } from './firebaseUtils.js';
 
 const firebaseConfig = {
@@ -36,10 +39,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
 const gProvider = new GoogleAuthProvider();
 const fProvider = new FacebookAuthProvider();
+export const auth = getAuth(app);
 
 export const signUpEmail = (email, password) => createUserWithEmailAndPassword(auth, email, password);
 export const verificationEmail = () => sendEmailVerification(auth.currentUser);
@@ -60,11 +63,40 @@ export const logOut = () => signOut(auth);
 // Función que devuelve datos del usuario:
 export const getUserLocalStorage = () => JSON.parse(localStorage.getItem('user'));
 
+export function removeLikes(docId, userId) {
+  const removeLikePost = doc(db, 'publications', docId);
+  return updateDoc(removeLikePost, {
+    Likes: arrayRemove(userId), // Aquí estamos borrando el id del user en el array Likes.
+  });
+}
+
+// Funcion para añadir likes
+export function addLikes(docId, userId) {
+  const addLikePost = doc(db, 'publications', docId);
+  return updateDoc(addLikePost, {
+    Likes: arrayUnion(userId), // Aquí estamos añadiendo el id del user en el array Likes.
+  });
+}
+
+// Funcion que sube un nuevo array con los ids de los usuarios que han dado like a la publicacion
+export function postLike(id, newArray) {
+  return setDoc(doc(db, 'posts', id), { likes: newArray }, { merge: true });
+}
+// Funcion que obtiene el array de likes de una publicacion
+export async function getArrayLikes(e) {
+  const docSnap = await getDoc(doc(db, 'posts', e));
+  // eslint-disable-next-line prefer-const
+  let likesPublications = docSnap.data().likes;
+  return likesPublications;
+}
+
 // Guardar post en FireStore
 export const savePost = (description, tag) => addDoc(collection(db, 'posts'), {
   description,
   tag,
+  likes: [],
 });
+
 // funcion que reconoce/escucha datos nuevos onSnapshot : en instantánea
 export const onGetPost = (callback) => {
   const dataSort = query(collection(db, 'posts'), orderBy('description'));

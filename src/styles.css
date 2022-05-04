@@ -328,10 +328,11 @@ section {
     opacity: 1;
     pointer-events: all;
 }
-#postForm {
+#postForm, #deleteDiv {
     background-color:white;
     box-shadow: 0px 10px 15px -5px #141414;
 }
+
 #postDescription {
     resize: none;
     height: 150px;
@@ -359,7 +360,9 @@ section {
 .mtop {
     margin-top: 15px;
 }
-
+.deletePopUp {
+    display: block;
+}
 /*********/
 
 .desktop {

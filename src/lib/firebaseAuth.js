@@ -24,6 +24,10 @@ import {
   getDoc,
   doc,
   updateDoc,
+  serverTimestamp,
+  doc,
+  deleteDoc,
+  where,
 } from './firebaseUtils.js';
 
 const firebaseConfig = {
@@ -47,13 +51,10 @@ export const userState = (callback) => onAuthStateChanged(auth, callback);
 export const logInEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
 export const logInGoogle = () => signInWithPopup(auth, gProvider);
 export const logInFacebook = () => signInWithPopup(auth, fProvider);
-
-// Envía un correo electrónico de restablecimiento de contraseña
 export const recoverPasswordWithEmail = (email) => sendPasswordResetEmail(auth, email);
-
 export const logOut = () => signOut(auth);
-/* eslint-disable import/no-unresolved */
-/* eslint-disable max-len */
+
+const db = getFirestore(app);
 
 /** firebase */
 
@@ -61,15 +62,21 @@ export const logOut = () => signOut(auth);
 export const getUserLocalStorage = () => JSON.parse(localStorage.getItem('user'));
 
 // Guardar post en FireStore
-export const savePost = (description, tag) => addDoc(collection(db, 'posts'), {
-  description,
-  tag,
+export const savePost = (post, tag) => addDoc(collection(db, 'posts'), {
+  post: post.value,
+  tag: tag.value,
+  date: serverTimestamp(),
 });
 // funcion que reconoce/escucha datos nuevos onSnapshot : en instantánea
 export const onGetPost = (callback) => {
-  const dataSort = query(collection(db, 'posts'), orderBy('description'));
-  const d = onSnapshot(dataSort, callback);
-  return d;
+  const dataSort = query(collection(db, 'posts'), orderBy('date', 'desc'));
+  return onSnapshot(dataSort, callback);
+};
+export const deletePost = (id) => deleteDoc(doc(db, 'posts', id));
+
+export const getDataWithFilters = (tag, callback) => {
+  const dataSort = query(collection(db, 'posts'), where('tag', '==', tag));
+  return onSnapshot(dataSort, callback);
 };
 
 export const getPost = (id) => getDoc(doc(db, 'posts', id));

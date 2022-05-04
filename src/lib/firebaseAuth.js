@@ -25,6 +25,7 @@ import {
   doc,
   deleteDoc,
   where,
+  getDoc,
 } from './firebaseUtils.js';
 
 const firebaseConfig = {
@@ -37,7 +38,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+export const auth = getAuth(app);
 const gProvider = new GoogleAuthProvider();
 const fProvider = new FacebookAuthProvider();
 
@@ -52,10 +53,11 @@ export const logOut = () => signOut(auth);
 
 const db = getFirestore(app);
 // Guardar post en FireStore
-export const savePost = (post, tag) => addDoc(collection(db, 'posts'), {
+export const savePost = (user, post, tag) => addDoc(collection(db, 'posts'), {
   post: post.value,
   tag: tag.value,
   date: serverTimestamp(),
+  userId: user,
 });
 // funcion que reconoce/escucha datos nuevos onSnapshot : en instantánea
 export const onGetPost = (callback) => {
@@ -67,4 +69,10 @@ export const deletePost = (id) => deleteDoc(doc(db, 'posts', id));
 export const getDataWithFilters = (tag, callback) => {
   const dataSort = query(collection(db, 'posts'), where('tag', '==', tag));
   return onSnapshot(dataSort, callback);
+};
+
+// Obtener data un usuario de FireStore
+export const getUser = (id) => {
+  const docRefUsers = doc(db, 'users', id);
+  return getDoc(docRefUsers);
 };

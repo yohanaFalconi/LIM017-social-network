@@ -25,4 +25,5 @@ export {
   doc,
   deleteDoc,
   where,
+  getDoc,
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';

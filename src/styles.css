@@ -265,7 +265,11 @@ section {
     margin-top: -15px;
     margin-bottom: 7px;
 }
-
+.flexDlt {
+    display: flex;
+    margin-top: 5px;
+    gap: 15px;
+}
 /***yohana cambios **/
 .padlock{
     width: 140px;
@@ -290,7 +294,9 @@ section {
     margin: 5px 0 5px;
     font-size: larger;
 }
-
+.margin{
+    margin: 20px;
+}
 /** Yohana cambios feed*/
 .modal {
     position: fixed;
@@ -305,10 +311,23 @@ section {
     height: 50vh;
     padding: 10px;
 }
-.modal.inactive {
+.modalDlt {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border-radius: 20px;
+    z-index: 10;
+    width: 50vh;
+    max-width: 80%;
+    height: 30vh;
+    padding: 10px;
+}
+.modal.inactive, .modalDlt.inactive {
     transform: translate(-50%, -50%) scale(0);
 }
-.modal.active {
+.modal.active, .modalDlt.active {
     transform: translate(-50%, -50%) scale(1);
 }
 #overlay {

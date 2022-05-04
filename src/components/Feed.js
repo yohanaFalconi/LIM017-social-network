@@ -1,5 +1,5 @@
 import {
-  logOut, savePost, onGetPost, deletePost, getDataWithFilters,
+  auth, logOut, savePost, onGetPost, deletePost, getDataWithFilters, getUser,
 } from '../lib/firebaseAuth.js';
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
@@ -33,10 +33,12 @@ export const Feed = () => {
     </form>
     <div id="overlay" class="inactive"></div>
 
-    <div id="deleteDiv" class="inactive modal">
-      <h3>Are you sure to delete?</h3>
-      <input type="button" id="cancelPopUpBtn" value="Cancel" class="button">
-      <input type="button" id="yesDelete" value="Yes" class="button">
+    <div id="deleteDiv" class="inactive modalDlt">
+      <h3 class="margin purple">Are you sure to delete?</h3>
+      <div class="flexDlt">
+        <input type="button" id="cancelPopUpBtn" value="Cancel" class="button">
+        <input type="button" id="yesDelete" value="Yes" class="button">
+      </div>
     </div>
     <div id="overlay" class="inactive"></div>
     <div id="postContainer"></div>
@@ -73,6 +75,18 @@ export const Feed = () => {
   const tvShowFilter = feedDiv.querySelector('#tvShowFilter');
   const home = feedDiv.querySelector('#home');
 
+  const user = auth.currentUser; // Contiene toda la info del usuario
+  console.log(user);
+  console.log(user.displayName);
+  console.log(user.email);
+  const userInfo = () => {
+    getUser(user.uid)
+      .then((re) => {
+        console.log(re);
+      })
+      .catch((err) => err);
+  };
+  userInfo();
   const fetchPosts = () => {
     onGetPost((querySnapshot) => {
       // console.log(querySnapshot); // objeto donde nos interesa los docs de tipo array
@@ -89,7 +103,7 @@ export const Feed = () => {
               <p id="tagSelected">${postData.tag}</p>
             </div>
             <p class="postBody">${postData.post}</p>
-            <input type="button" class="deleteBtns" value="Delete" data-id="${doc.id}" class="button">
+            <input type="button" class="button deleteBtns" value="Delete" data-id="${doc.id}">
           </div>
           `;
       });
@@ -128,7 +142,7 @@ export const Feed = () => {
 
   postBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    savePost(post, tag)
+    savePost(user.uid, post, tag)
       .then((docRef) => {
         console.log('Se guardo publicacion en la db con el id: ', docRef.id);
       })
@@ -181,7 +195,6 @@ export const Feed = () => {
             <p id="tagSelected">${postData.tag}</p>
           </div>
           <p class="postBody">${postData.post}</p>
-          <input type="button" id="openPopUpBtn" value="Delete" data-id="${doc.id}" class="button">
         </div>
         `;
       });
@@ -201,7 +214,6 @@ export const Feed = () => {
             <p id="tagSelected">${postData.tag}</p>
           </div>
           <p class="postBody">${postData.post}</p>
-          <input type="button" id="openPopUpBtn" value="Delete" data-id="${doc.id}" class="button">
         </div>
         `;
       });
@@ -221,7 +233,6 @@ export const Feed = () => {
             <p id="tagSelected">${postData.tag}</p>
           </div>
           <p class="postBody">${postData.post}</p>
-          <input type="button" id="openPopUpBtn" value="Delete" data-id="${doc.id}" class="button">
         </div>
         `;
       });

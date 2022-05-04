@@ -1,5 +1,5 @@
 import {
-  auth, logOut, savePost, onGetPost, deletePost, getDataWithFilters, getUser,
+  auth, logOut, savePost, onGetPost, deletePost, getDataWithFilters, getUser, updatePost, getPost,
 } from '../lib/firebaseAuth.js';
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
@@ -11,23 +11,22 @@ export const Feed = () => {
       <figure class="top headerReset">
         <img src="images/logotype/Full-logo.png" alt="Binge Worthy logo" class="logoFeed">
         <img src="images/mobile/Mobile icon nav.png" class="nav">
+        <input type="button" id="logOut" value="Log out" class="button">
       </figure>
     </header>
-    <input type="button" id="logOut" value="Log out" class="button">
-
     <form id="postForm" class="modal" class="inactive">
       <div class="gridColum mtop">
-        <p id="userName" class="purple">example@gmail.com</p>
+        <p id="originalPost" class="purple originalPost"></p>
         <select class="select" id="tag">
           <option disabled selected >Type</option>
-          <option value="movie">Movie</option>
-          <option value="book">Book</option>
-          <option value="tvShow">TvShow</option>
+          <option value="Movie">Movie</option>
+          <option value="Book">Book</option>
+          <option value="TV Show">TV Show</option>
         </select>
       </div>
       <textarea id="postDescription" placeholder="Write your recommendation here"></textarea>
       <div class="post">
-        <input type="button" id="postBtn" value="Post" class="button">
+        <input type="submit" id="postBtn" value="Post" class="button">
         <input type="button" id="cancelBtn" value="Cancel" class="button">
       </div>
     </form>
@@ -40,7 +39,7 @@ export const Feed = () => {
         <input type="button" id="yesDelete" value="Yes" class="button">
       </div>
     </div>
-    <div id="overlay" class="inactive"></div>
+    <div id="overlayDelete" class="inactive"></div>
     <div id="postContainer"></div>
 
     <footer>
@@ -62,10 +61,43 @@ export const Feed = () => {
   const postBtn = feedDiv.querySelector('#postBtn');
   const postForm = feedDiv.querySelector('#postForm');
   const postContainer = feedDiv.querySelector('#postContainer');
+  // const op = feedDiv.querySelector('.originalPost');
   const tag = feedDiv.querySelector('#tag');
+  const openModalPost = feedDiv.querySelector('#uploadPost');
+  const closeModalBtn = feedDiv.querySelector('#cancelBtn');
+  const overlay = feedDiv.querySelector('#overlay');
+  let id = '';
+  let editStatus = false;
+  function changeToEditingStatus() {
+    postBtn.value = 'Update';
+  }
+  function changeToPostingStatus() {
+    postBtn.value = 'Post';
+  }
+
+  // Funciones de la ventana modal
+  function openModal() {
+    postForm.classList.add('active');
+    overlay.classList.add('active');
+    postForm.classList.remove('inactive');
+    overlay.classList.remove('inactive');
+  }
+  function closeModal() {
+    postForm.classList.add('inactive');
+    overlay.classList.add('inactive');
+    postForm.classList.remove('active');
+    overlay.classList.remove('active');
+  }
+
+  openModalPost.addEventListener('click', openModal);
+  postBtn.addEventListener('click', closeModal);
+  closeModalBtn.addEventListener('click', () => {
+    closeModal();
+    postForm.reset();
+  });
   // Funciones de la ventana modal de delete
   const closePopUpBtn = feedDiv.querySelectorAll('#cancelPopUpBtn');
-  const overlayModal = feedDiv.querySelector('#overlay');
+  const overlayModal = feedDiv.querySelector('#overlayDelete');
   const deleteDiv = feedDiv.querySelector('#deleteDiv');
   const yesDelete = feedDiv.querySelector('#yesDelete');
   let deleteId = '';
@@ -89,12 +121,8 @@ export const Feed = () => {
   userInfo();
   const fetchPosts = () => {
     onGetPost((querySnapshot) => {
-      // console.log(querySnapshot); // objeto donde nos interesa los docs de tipo array
       let posts = '';
       querySnapshot.forEach((doc) => {
-        // console.log(doc);
-        // console.log(doc.id);
-        // console.log(doc.data()); // data() transforma a un objeto de javascript
         const postData = doc.data();
         posts += `
           <div id="postFormContainer" id="postForm">
@@ -103,7 +131,11 @@ export const Feed = () => {
               <p id="tagSelected">${postData.tag}</p>
             </div>
             <p class="postBody">${postData.post}</p>
-            <input type="button" class="button deleteBtns" value="Delete" data-id="${doc.id}">
+            <i class="icon-heart" id= "like"></i>
+            <div>
+            <button class="btnEdit" data-id=${doc.id}>Edit</button>
+            </div>
+            <input type="button" class="deleteBtns" value="Delete" data-id="${doc.id}" class="button">
           </div>
           `;
       });
@@ -112,23 +144,33 @@ export const Feed = () => {
       deleteBtns.forEach((btn) => {
         btn.addEventListener('click', ({ target: { dataset } }) => {
           deleteId = dataset.id;
-          deleteDiv.classList.add('active');
-          overlayModal.classList.add('active');
-          deleteDiv.classList.remove('inactive');
-          overlayModal.classList.remove('inactive');
+          openModal();
         });
       });
       closePopUpBtn.forEach((btn) => {
         btn.addEventListener('click', () => {
-          deleteDiv.classList.add('inactive');
-          overlayModal.classList.add('inactive');
-          deleteDiv.classList.remove('active');
-          overlayModal.classList.remove('active');
+          closeModal();
+        });
+      });
+
+      const editBtns = feedDiv.querySelectorAll('.btnEdit');
+      editBtns.forEach((btn) => {
+        btn.addEventListener('click', async ({ target: { dataset } }) => {
+          editStatus = true;
+          changeToEditingStatus();
+          openModal();
+          const doc = await getPost(dataset.id);
+          console.log(doc);
+          // const post = doc.data();
+          post.value = post.description;
+          tag.value = post.tag;
+          id = dataset.id;
         });
       });
     });
   };
   fetchPosts();
+
   yesDelete.addEventListener('click', () => {
     deletePost(deleteId)
       .then(() => {
@@ -140,45 +182,27 @@ export const Feed = () => {
       });
   });
 
-  postBtn.addEventListener('click', (e) => {
+  postForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    savePost(user.uid, post, tag)
-      .then((docRef) => {
-        console.log('Se guardo publicacion en la db con el id: ', docRef.id);
-      })
-      .catch((error) => {
-        console.log('Error adding document: ', error);
+    savePost(user.uid, post, tag);
+    if (!editStatus) {
+      savePost(post, tag);
+    } else {
+      updatePost(id, {
+        post: post.value,
+        tag: tag.value,
       });
+      changeToPostingStatus();
+      editStatus = false;
+    }
     postForm.reset();
   });
+
   logOutBtn.addEventListener('click', () => {
     logOut()
       .then(() => {
         onNavigate('/');
       });
-  });
-
-  // Funciones de la ventana modal de post
-  const openModalPost = feedDiv.querySelector('#uploadPost');
-  const closeModalBtn = feedDiv.querySelector('#cancelBtn');
-  const overlay = feedDiv.querySelector('#overlay');
-  openModalPost.addEventListener('click', () => {
-    postForm.classList.add('active');
-    overlay.classList.add('active');
-    postForm.classList.remove('inactive');
-    overlay.classList.remove('inactive');
-  });
-  closeModalBtn.addEventListener('click', () => {
-    postForm.classList.add('inactive');
-    overlay.classList.add('inactive');
-    postForm.classList.remove('active');
-    overlay.classList.remove('active');
-  });
-  postBtn.addEventListener('click', () => {
-    postForm.classList.add('inactive');
-    overlay.classList.add('inactive');
-    postForm.classList.remove('active');
-    overlay.classList.remove('active');
   });
 
   // Filtro tag según: movie, book, tvShow
@@ -243,6 +267,22 @@ export const Feed = () => {
   home.addEventListener('click', () => {
     onNavigate('/feed');
   });
+
+  /*   const counterLikes = feedDiv.querySelector('.counter-likes');
+  const userData = getUserLocalStorage();
+  const arrayLikes = doc.data().Likes;
+  const arrayLength = arrayLikes.length;
+  const btnLike = feedDiv.querySelector('#like');
+
+  if (doc.data().Likes.length === 0) {
+    counterLikes.style.display = 'none';
+  }
+  if (arrayLikes.includes(userData.uid)) {
+    btnLike.classList.add('icon-like-red');
+  }
+  btnLike.addEventListener('click', () => {
+
+  }); */
 
   return feedDiv;
 };

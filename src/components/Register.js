@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 
 import {
-  signUpEmail, verificationEmail, logInGoogle, logInFacebook, getUser, savePost,
+  signUpEmail, verificationEmail, logInGoogle, logInFacebook, getUser,
 } from '../lib/firebaseAuth.js';
 import { onNavigate, checkEmail, checkPassword } from '../main.js';
 
@@ -106,9 +106,7 @@ export const Register = () => {
 
   createAccBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    const emailPattern = /^([a-z\d.-_]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
-    const passwordPattern = /^[\d\w@-]{8,15}$/i;
-    if (emailPattern.test(email.value) && passwordPattern.test(password.value)) {
+    if (checkEmail(email.value) && checkPassword(password.value)) {
       signUpEmail(email.value, password.value)
         .then((userCredential) => {
           const user = userCredential.user; // COMO PARAMETRO userCredential */

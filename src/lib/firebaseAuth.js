@@ -21,11 +21,12 @@ import {
   onSnapshot,
   query,
   orderBy,
-  serverTimestamp,
+  getDoc,
   doc,
+  updateDoc,
+  serverTimestamp,
   deleteDoc,
   where,
-  getDoc,
 } from './firebaseUtils.js';
 
 const firebaseConfig = {
@@ -39,6 +40,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+const db = getFirestore(app);
 const gProvider = new GoogleAuthProvider();
 const fProvider = new FacebookAuthProvider();
 
@@ -51,7 +53,11 @@ export const logInFacebook = () => signInWithPopup(auth, fProvider);
 export const recoverPasswordWithEmail = (email) => sendPasswordResetEmail(auth, email);
 export const logOut = () => signOut(auth);
 
-const db = getFirestore(app);
+/** firebase */
+
+// Función que devuelve datos del usuario:
+export const getUserLocalStorage = () => JSON.parse(localStorage.getItem('user'));
+
 // Guardar post en FireStore
 export const savePost = (user, post, tag) => addDoc(collection(db, 'posts'), {
   post: post.value,
@@ -76,3 +82,6 @@ export const getUser = (id) => {
   const docRefUsers = doc(db, 'users', id);
   return getDoc(docRefUsers);
 };
+export const getPost = (id) => getDoc(doc(db, 'posts', id));
+
+export const updatePost = (id, editedFields) => updateDoc(doc(db, 'posts', id), editedFields);

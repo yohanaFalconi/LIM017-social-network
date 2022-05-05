@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import {
-  logOut, savePost, onGetPost, getPost, updatePost, getArrayLikes, postLike, auth,
+  logOut, savePost, onGetPost, getPost, updatePost, getArrayLikes, postLike,
   deletePost, getDataWithFilters,
 } from '../lib/firebaseAuth.js';
 // eslint-disable-next-line import/no-cycle
@@ -126,48 +126,19 @@ export const Feed = () => {
   const tvShowFilter = feedDiv.querySelector('#tvShowFilter');
   const home = feedDiv.querySelector('#home');
 
-  /*   function like(idP, likesP) {
-    const btnLike = feedDiv.querySelector('.btnLike');
-    const arrayLikes = likesP;
-    let arrayLength = likesP.length;
-    const userData = getUserLocalStorage();
-    const counterLikes = feedDiv.querySelector('.counter-likes');
-    if (arrayLikes === 0) {
-      counterLikes.style.display = 'none';
-    }
-    if (arrayLikes.includes(userData.uid)) {
-      btnLike.classList.add('icon-like-red');
-    }
-    // Si el ícono de like está de color rojo, quiere decir que el usuario si le gustaba el post
-    if (btnLike.classList.contains('icon-like-red')) {
-      btnLike.classList.toggle('icon-like-red'); // Hacemos que cambie de color al quitarle la clase.
-      arrayLength -= 1;
-      removeLikes(idP, userData.uid);
-      // Llamamos a la función que se encarla de eliminar el id del user que ya no le gusta el post
-      if (arrayLength === 0) {
-        counterLikes.style.display = 'none';
-      }
-    } else {
-      btnLike.classList.add('icon-like-red'); // Añadimos la clase para darle color rojo al corazón
-      arrayLength += 1;
-      counterLikes.style.display = 'block'; // Esto lo ponemos en caso, no haya tenido antes likes
-      addLikes(idP, userData.uid);
-    // Actualizamos el post, añadiendo el id del usuario que ha dado like al array 'Likes'.
-    }
-    // Cambiamos el valor del contador:
-    counterLikes.innerText = arrayLength;
-  }
-  console.log('SOyyyy LIKEEEEEEE', like()); */
-
-  function AddLikes(user) {
+  function addLikesPost(user) {
+    console.log('soooy usuario', user);
     const likeButton = feedDiv.querySelectorAll('.likeButton');
     likeButton.forEach((e) => {
       e.addEventListener('click', async () => {
-        console.log('entreee al botón likeeeeeee');
+        console.log('entreee al botón likeeeeeee', getArrayLikes(e.id));
+        // likeButton.classList.add('icon-like-red');
         // eslint-disable-next-line prefer-const
         let arrayLikes = await getArrayLikes(e.id);
+        console.log('entreee getarraLikesssss', e.id);
         let count = 0;
         const arrayCounter = arrayLikes.length;
+        console.log('soooooy arrayCounter', arrayCounter, arrayLikes.length, arrayLikes);
         // eslint-disable-next-line no-plusplus
         for (let i = 0; i < arrayLikes.length; i++) {
           if (arrayLikes[i] === user.uid) {
@@ -199,7 +170,7 @@ export const Feed = () => {
               <p id="tagSelected">${postData.tag}</p>
             </div>
             <p id="postBody">${postData.post}</p>
-            <i class="icon-heart" id= "like"></i>
+            <i class="icon-heart likeButton"></i>
             <div>
             <button class="btnEdit" data-id=${doc.id}>Edit</button>
             </div>
@@ -208,7 +179,8 @@ export const Feed = () => {
           `;
       });
       postContainer.innerHTML = posts;
-      AddLikes(auth.currentUser);
+      addLikesPost();
+      // console.log('SOOOY la ejecución de like', addLikes());
 
       const deleteBtns = feedDiv.querySelectorAll('.deleteBtns');
       deleteBtns.forEach((btn) => {
@@ -239,7 +211,7 @@ export const Feed = () => {
     });
   };
   fetchPosts();
-  console.log('soy feccccch', fetchPosts(), AddLikes());
+  console.log('soy feccccch', fetchPosts(), addLikesPost);
 
   confirmDelete.addEventListener('click', () => {
     deletePost(deleteId)

@@ -1,5 +1,8 @@
+/* eslint-disable max-len */
 import {
-  auth, logOut, savePost, onGetPost, deletePost, getDataWithFilters, getUser, updatePost, getPost,
+  updatePost, getPost,
+  logOut, savePost, onGetPost, getArrayLikes, postLike,
+  deletePost, getDataWithFilters,
 } from '../lib/firebaseAuth.js';
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
@@ -14,7 +17,8 @@ export const Feed = () => {
         <input type="button" id="logOut" value="Log out" class="button">
       </figure>
     </header>
-    <form id="postForm" class="modal" class="inactive">
+
+    <form id="postForm" class="modal inactive">
       <div class="gridColum mtop">
         <p id="originalPost" class="purple originalPost"></p>
         <select class="select" id="tag">
@@ -27,21 +31,22 @@ export const Feed = () => {
       <textarea id="postDescription" placeholder="Write your recommendation here"></textarea>
       <div class="post">
         <input type="submit" id="postBtn" value="Post" class="button">
-        <input type="button" id="cancelBtn" value="Cancel" class="button">
+        <input type="button" id="cancelUpload" value="Cancel" class="button">
       </div>
     </form>
-    <div id="overlay" class="inactive"></div>
 
-    <div id="deleteDiv" class="inactive modalDlt">
-      <h3 class="margin purple">Are you sure to delete?</h3>
+    <div id="overlay" class="inactive"></div> 
+    <div id="deleteDiv" class="inactive modal">
+      <h3 class="margin purple" >Are you sure to delete?</h3>
       <div class="flexDlt">
-        <input type="button" id="cancelPopUpBtn" value="Cancel" class="button">
-        <input type="button" id="yesDelete" value="Yes" class="button">
+        <input type="button" id="cancelDelete" value="Cancel" class="button">
+        <input type="button" id="confirmDelete" value="Delete" class="button">
       </div>
     </div>
     <div id="overlayDelete" class="inactive"></div>
-    <div id="postContainer"></div>
 
+    <div id="postContainer"></div>
+    
     <footer>
       <nav id= "footerMobile">
         <ul class="footerFeed darkPurple">
@@ -63,8 +68,10 @@ export const Feed = () => {
   const postContainer = feedDiv.querySelector('#postContainer');
   // const op = feedDiv.querySelector('.originalPost');
   const tag = feedDiv.querySelector('#tag');
+  // const postBody = feedDiv.querySelector('#postBody');
+
   const openModalPost = feedDiv.querySelector('#uploadPost');
-  const closeModalBtn = feedDiv.querySelector('#cancelBtn');
+  const closeModalBtn = feedDiv.querySelector('#cancelUpload');
   const overlay = feedDiv.querySelector('#overlay');
   let id = '';
   let editStatus = false;
@@ -76,54 +83,98 @@ export const Feed = () => {
   }
 
   // Funciones de la ventana modal
-  function openModal() {
+  function openPostModal() {
     postForm.classList.add('active');
     overlay.classList.add('active');
     postForm.classList.remove('inactive');
     overlay.classList.remove('inactive');
   }
-  function closeModal() {
+  function closePostModal() {
     postForm.classList.add('inactive');
     overlay.classList.add('inactive');
     postForm.classList.remove('active');
     overlay.classList.remove('active');
   }
 
-  openModalPost.addEventListener('click', openModal);
-  postBtn.addEventListener('click', closeModal);
+  openModalPost.addEventListener('click', openPostModal);
+  postBtn.addEventListener('click', closePostModal);
   closeModalBtn.addEventListener('click', () => {
-    closeModal();
+    closePostModal();
     postForm.reset();
+    changeToPostingStatus();
   });
   // Funciones de la ventana modal de delete
-  const closePopUpBtn = feedDiv.querySelectorAll('#cancelPopUpBtn');
-  const overlayModal = feedDiv.querySelector('#overlayDelete');
+  const cancelDelete = feedDiv.querySelectorAll('#cancelDelete');
+  const overlayDelete = feedDiv.querySelector('#overlayDelete');
   const deleteDiv = feedDiv.querySelector('#deleteDiv');
-  const yesDelete = feedDiv.querySelector('#yesDelete');
+  const confirmDelete = feedDiv.querySelector('#confirmDelete');
   let deleteId = '';
+
+  function openDeleteModal() {
+    deleteDiv.classList.add('active');
+    overlayDelete.classList.add('active');
+    deleteDiv.classList.remove('inactive');
+    overlayDelete.classList.remove('inactive');
+  }
+  function closeDeleteModal() {
+    deleteDiv.classList.add('inactive');
+    overlayDelete.classList.add('inactive');
+    deleteDiv.classList.remove('active');
+    overlayDelete.classList.remove('active');
+  }
 
   const movieFilter = feedDiv.querySelector('#MovieFilter');
   const BookFilter = feedDiv.querySelector('#BookFilter');
   const tvShowFilter = feedDiv.querySelector('#tvShowFilter');
   const home = feedDiv.querySelector('#home');
 
-  const user = auth.currentUser; // Contiene toda la info del usuario
+  /* const currentUser = auth.currentUser; // Contiene toda la info del usuario
   // console.log(user);
-  const userEmail = user.email;
+  const userEmail = currentUser.email;
   // console.log(user.displayName);
   console.log(userEmail);
   const userInfo = () => {
-    getUser(user.uid)
+    getUser(currentUser.uid)
       .then((re) => {
         console.log(re);
       })
       .catch((err) => err);
   };
-  userInfo();
+  userInfo(); */
+
+  function AddLikes(user) {
+    const likeButton = feedDiv.querySelectorAll('.likeButton');
+    likeButton.forEach((e) => {
+      e.addEventListener('click', async () => {
+        console.log('entreee al botón likeeeeeee');
+        // eslint-disable-next-line prefer-const
+        let arrayLikes = await getArrayLikes(e.id);
+        let count = 0;
+        const arrayCounter = arrayLikes.length;
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < arrayLikes.length; i++) {
+          if (arrayLikes[i] === user.uid) {
+            arrayLikes.splice(i, 1);
+            postLike(e.id, arrayLikes);
+            break;
+          } else {
+            // eslint-disable-next-line no-plusplus
+            count++;
+          }
+        }
+        if (count === arrayCounter) {
+          arrayLikes.push(user.uid);
+          postLike(e.id, arrayLikes);
+        }
+      });
+    });
+  }
+
   const fetchPosts = () => {
     onGetPost((querySnapshot) => {
       let posts = '';
       querySnapshot.forEach((doc) => {
+        console.log('soy un documento', doc);
         const postData = doc.data();
         posts += `
           <div id="postFormContainer" id="postForm">
@@ -131,26 +182,28 @@ export const Feed = () => {
               <p id="userName" class="darkPurple">example@gmail.com</p>
               <p id="tagSelected">${postData.tag}</p>
             </div>
-            <p class="postBody">${postData.post}</p>
-            <i class="icon-heart" id= "like"></i>
+            <p id="postBody">${postData.post}</p>
+            <i class="icon-heart likeButton"></i>
             <div>
             <button class="btnEdit" data-id=${doc.id}>Edit</button>
             </div>
-            <input type="button" class="deleteBtns" value="Delete" data-id="${doc.id}" class="button">
+            <input type="button" class="deleteBtns" value="Delete" data-id="${doc.id}"> 
           </div>
           `;
       });
       postContainer.innerHTML = posts;
+      AddLikes();
+
       const deleteBtns = feedDiv.querySelectorAll('.deleteBtns');
       deleteBtns.forEach((btn) => {
         btn.addEventListener('click', ({ target: { dataset } }) => {
           deleteId = dataset.id;
-          openModal();
+          openDeleteModal();
         });
       });
-      closePopUpBtn.forEach((btn) => {
+      cancelDelete.forEach((btn) => {
         btn.addEventListener('click', () => {
-          closeModal();
+          closeDeleteModal();
         });
       });
 
@@ -159,7 +212,7 @@ export const Feed = () => {
         btn.addEventListener('click', async ({ target: { dataset } }) => {
           editStatus = true;
           changeToEditingStatus();
-          openModal();
+          openPostModal();
           const doc = await getPost(dataset.id);
           const postDoc = doc.data();
           postDescription.value = postDoc.post;
@@ -170,21 +223,21 @@ export const Feed = () => {
     });
   };
   fetchPosts();
+  console.log('soy feccccch', AddLikes());
 
-  yesDelete.addEventListener('click', () => {
+  confirmDelete.addEventListener('click', () => {
     deletePost(deleteId)
       .then(() => {
         console.log('se eliminó tu post', deleteId);
         deleteDiv.classList.add('inactive');
-        overlayModal.classList.add('inactive');
+        overlayDelete.classList.add('inactive');
         deleteDiv.classList.remove('active');
-        overlayModal.classList.remove('active');
+        overlayDelete.classList.remove('active');
       });
   });
 
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    savePost(user.uid, postDescription, tag);
     if (!editStatus) {
       savePost(postDescription, tag);
     } else {
@@ -193,6 +246,7 @@ export const Feed = () => {
         tag: tag.value,
       });
       changeToPostingStatus();
+      console.log('valor botonsito', postBtn.value);
       editStatus = false;
     }
     postForm.reset();
@@ -207,22 +261,13 @@ export const Feed = () => {
 
   // Filtro tag según: movie, book, tvShow
   movieFilter.addEventListener('click', () => {
-    getDataWithFilters('movie', (querySnapshot) => {
-      let posts = '';
-      postContainer.innerHTML = '';
-      querySnapshot.forEach((doc) => {
-        const postData = doc.data();
-        posts += `
-        <div id="postFormContainer" id="postForm">
-          <div class="usersEmail">
-            <p id="userName" class="darkPurple">example@gmail.com</p>
-            <p id="tagSelected">${postData.tag}</p>
-          </div>
-          <p class="postBody">${postData.post}</p>
-        </div>
-        `;
+    getDataWithFilters('movie', (query) => {
+      console.log(query);
+      query.forEach((doc) => {
+        // const postDoc = doc.data();
+        const postDocument = doc.data();
+        console.log(postDocument);
       });
-      postContainer.innerHTML = posts;
     });
   });
   BookFilter.addEventListener('click', () => {
@@ -267,22 +312,5 @@ export const Feed = () => {
   home.addEventListener('click', () => {
     onNavigate('/feed');
   });
-
-  /*   const counterLikes = feedDiv.querySelector('.counter-likes');
-  const userData = getUserLocalStorage();
-  const arrayLikes = doc.data().Likes;
-  const arrayLength = arrayLikes.length;
-  const btnLike = feedDiv.querySelector('#like');
-
-  if (doc.data().Likes.length === 0) {
-    counterLikes.style.display = 'none';
-  }
-  if (arrayLikes.includes(userData.uid)) {
-    btnLike.classList.add('icon-like-red');
-  }
-  btnLike.addEventListener('click', () => {
-
-  }); */
-
   return feedDiv;
 };

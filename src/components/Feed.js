@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import {
-  logOut, savePost, onGetPost, getPost, updatePost, getArrayLikes, postLike,
+  updatePost, getPost,
+  logOut, savePost, onGetPost, getArrayLikes, postLike,
   deletePost, getDataWithFilters,
 } from '../lib/firebaseAuth.js';
 // eslint-disable-next-line import/no-cycle
@@ -34,16 +35,18 @@ export const Feed = () => {
       </div>
     </form>
 
-    <div id="overlay" class="inactive"></div>
+    <div id="overlay" class="inactive"></div> 
     <div id="deleteDiv" class="inactive modal">
-      <h3>Are you sure to delete?</h3>
-      <input type="button" id="cancelDelete" value="Cancel" class="button">
-      <input type="button" id="confirmDelete" value="Delete" class="button">
+      <h3 class="margin purple" >Are you sure to delete?</h3>
+      <div class="flexDlt">
+        <input type="button" id="cancelDelete" value="Cancel" class="button">
+        <input type="button" id="confirmDelete" value="Delete" class="button">
+      </div>
     </div>
     <div id="overlayDelete" class="inactive"></div>
 
     <div id="postContainer"></div>
-
+    
     <footer>
       <nav id= "footerMobile">
         <ul class="footerFeed darkPurple">
@@ -59,8 +62,7 @@ export const Feed = () => {
   feedDiv.innerHTML = containerFeed;
 
   const logOutBtn = feedDiv.querySelector('#logOut');
-  const description = feedDiv.querySelector('#postDescription');
-  const post = feedDiv.querySelector('#postDescription');
+  const postDescription = feedDiv.querySelector('#postDescription');
   const postBtn = feedDiv.querySelector('#postBtn');
   const postForm = feedDiv.querySelector('#postForm');
   const postContainer = feedDiv.querySelector('#postContainer');
@@ -162,6 +164,7 @@ export const Feed = () => {
     onGetPost((querySnapshot) => {
       let posts = '';
       querySnapshot.forEach((doc) => {
+        console.log('soy un documento', doc);
         const postData = doc.data();
         posts += `
           <div id="postFormContainer" id="postForm">
@@ -174,7 +177,7 @@ export const Feed = () => {
             <div>
             <button class="btnEdit" data-id=${doc.id}>Edit</button>
             </div>
-            <input type="button" class="deleteBtns" value="Delete" data-id="${doc.id}" class="button">
+            <input type="button" class="deleteBtns" value="Delete" data-id="${doc.id}"> 
           </div>
           `;
       });
@@ -203,7 +206,7 @@ export const Feed = () => {
           openPostModal();
           const doc = await getPost(dataset.id);
           const postDoc = doc.data();
-          description.value = postDoc.post;
+          postDescription.value = postDoc.post;
           tag.value = postDoc.tag;
           id = dataset.id;
         });
@@ -227,17 +230,16 @@ export const Feed = () => {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!editStatus) {
-      savePost(post, tag);
+      savePost(postDescription, tag);
     } else {
       updatePost(id, {
-        post: post.value,
+        post: postDescription.value,
         tag: tag.value,
       });
       changeToPostingStatus();
       console.log('valor botonsito', postBtn.value);
       editStatus = false;
     }
-
     postForm.reset();
   });
 
@@ -250,23 +252,13 @@ export const Feed = () => {
 
   // Filtro tag según: movie, book, tvShow
   movieFilter.addEventListener('click', () => {
-    getDataWithFilters('movie', (querySnapshot) => {
-      let posts = '';
-      postContainer.innerHTML = '';
-      querySnapshot.forEach((doc) => {
-        const postData = doc.data();
-        posts += `
-        <div id="postFormContainer" id="postForm">
-          <div class="usersEmail">
-            <p id="userName" class="darkPurple">example@gmail.com</p>
-            <p id="tagSelected">${postData.tag}</p>
-          </div>
-          <p id="postBody">${postData.post}</p>
-          <input type="button" id="openPopUpBtn" value="Delete" data-id="${doc.id}" class="button">
-        </div>
-        `;
+    getDataWithFilters('movie', (query) => {
+      console.log(query);
+      query.forEach((doc) => {
+        // const postDoc = doc.data();
+        const postDocument = doc.data();
+        console.log(postDocument);
       });
-      postContainer.innerHTML = posts;
     });
   });
   BookFilter.addEventListener('click', () => {
@@ -281,8 +273,7 @@ export const Feed = () => {
             <p id="userName" class="darkPurple">example@gmail.com</p>
             <p id="tagSelected">${postData.tag}</p>
           </div>
-          <p id="postBody">${postData.post}</p>
-          <input type="button" id="openPopUpBtn" value="Delete" data-id="${doc.id}" class="button">
+          <p class="postBody">${postData.post}</p>
         </div>
         `;
       });
@@ -301,8 +292,7 @@ export const Feed = () => {
             <p id="userName" class="darkPurple">example@gmail.com</p>
             <p id="tagSelected">${postData.tag}</p>
           </div>
-          <p id="postBody">${postData.post}</p>
-          <input type="button" id="openPopUpBtn" value="Delete" data-id="${doc.id}" class="button">
+          <p class="postBody">${postData.post}</p>
         </div>
         `;
       });
@@ -313,6 +303,5 @@ export const Feed = () => {
   home.addEventListener('click', () => {
     onNavigate('/feed');
   });
-
   return feedDiv;
 };

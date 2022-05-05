@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import {
-  logOut, savePost, onGetPost, getPost, updatePost, getArrayLikes, postLike, auth,
+  updatePost, getPost,
+  logOut, savePost, onGetPost, getArrayLikes, postLike,
   deletePost, getDataWithFilters,
 } from '../lib/firebaseAuth.js';
 // eslint-disable-next-line import/no-cycle
@@ -34,16 +35,18 @@ export const Feed = () => {
       </div>
     </form>
 
-    <div id="overlay" class="inactive"></div>
+    <div id="overlay" class="inactive"></div> 
     <div id="deleteDiv" class="inactive modal">
-      <h3>Are you sure to delete?</h3>
-      <input type="button" id="cancelDelete" value="Cancel" class="button">
-      <input type="button" id="confirmDelete" value="Delete" class="button">
+      <h3 class="margin purple" >Are you sure to delete?</h3>
+      <div class="flexDlt">
+        <input type="button" id="cancelDelete" value="Cancel" class="button">
+        <input type="button" id="confirmDelete" value="Delete" class="button">
+      </div>
     </div>
     <div id="overlayDelete" class="inactive"></div>
 
     <div id="postContainer"></div>
-
+    
     <footer>
       <nav id= "footerMobile">
         <ul class="footerFeed darkPurple">
@@ -59,8 +62,7 @@ export const Feed = () => {
   feedDiv.innerHTML = containerFeed;
 
   const logOutBtn = feedDiv.querySelector('#logOut');
-  const description = feedDiv.querySelector('#postDescription');
-  const post = feedDiv.querySelector('#postDescription');
+  const postDescription = feedDiv.querySelector('#postDescription');
   const postBtn = feedDiv.querySelector('#postBtn');
   const postForm = feedDiv.querySelector('#postForm');
   const postContainer = feedDiv.querySelector('#postContainer');
@@ -126,38 +128,19 @@ export const Feed = () => {
   const tvShowFilter = feedDiv.querySelector('#tvShowFilter');
   const home = feedDiv.querySelector('#home');
 
-  /*   function like(idP, likesP) {
-    const btnLike = feedDiv.querySelector('.btnLike');
-    const arrayLikes = likesP;
-    let arrayLength = likesP.length;
-    const userData = getUserLocalStorage();
-    const counterLikes = feedDiv.querySelector('.counter-likes');
-    if (arrayLikes === 0) {
-      counterLikes.style.display = 'none';
-    }
-    if (arrayLikes.includes(userData.uid)) {
-      btnLike.classList.add('icon-like-red');
-    }
-    // Si el ícono de like está de color rojo, quiere decir que el usuario si le gustaba el post
-    if (btnLike.classList.contains('icon-like-red')) {
-      btnLike.classList.toggle('icon-like-red'); // Hacemos que cambie de color al quitarle la clase.
-      arrayLength -= 1;
-      removeLikes(idP, userData.uid);
-      // Llamamos a la función que se encarla de eliminar el id del user que ya no le gusta el post
-      if (arrayLength === 0) {
-        counterLikes.style.display = 'none';
-      }
-    } else {
-      btnLike.classList.add('icon-like-red'); // Añadimos la clase para darle color rojo al corazón
-      arrayLength += 1;
-      counterLikes.style.display = 'block'; // Esto lo ponemos en caso, no haya tenido antes likes
-      addLikes(idP, userData.uid);
-    // Actualizamos el post, añadiendo el id del usuario que ha dado like al array 'Likes'.
-    }
-    // Cambiamos el valor del contador:
-    counterLikes.innerText = arrayLength;
-  }
-  console.log('SOyyyy LIKEEEEEEE', like()); */
+  /* const currentUser = auth.currentUser; // Contiene toda la info del usuario
+  // console.log(user);
+  const userEmail = currentUser.email;
+  // console.log(user.displayName);
+  console.log(userEmail);
+  const userInfo = () => {
+    getUser(currentUser.uid)
+      .then((re) => {
+        console.log(re);
+      })
+      .catch((err) => err);
+  };
+  userInfo(); */
 
   function AddLikes(user) {
     const likeButton = feedDiv.querySelectorAll('.likeButton');
@@ -191,6 +174,7 @@ export const Feed = () => {
     onGetPost((querySnapshot) => {
       let posts = '';
       querySnapshot.forEach((doc) => {
+        console.log('soy un documento', doc);
         const postData = doc.data();
         posts += `
           <div id="postFormContainer" id="postForm">
@@ -199,16 +183,16 @@ export const Feed = () => {
               <p id="tagSelected">${postData.tag}</p>
             </div>
             <p id="postBody">${postData.post}</p>
-            <i class="icon-heart" id= "like"></i>
+            <i class="icon-heart likeButton"></i>
             <div>
             <button class="btnEdit" data-id=${doc.id}>Edit</button>
             </div>
-            <input type="button" class="deleteBtns" value="Delete" data-id="${doc.id}" class="button">
+            <input type="button" class="deleteBtns" value="Delete" data-id="${doc.id}"> 
           </div>
           `;
       });
       postContainer.innerHTML = posts;
-      AddLikes(auth.currentUser);
+      AddLikes();
 
       const deleteBtns = feedDiv.querySelectorAll('.deleteBtns');
       deleteBtns.forEach((btn) => {
@@ -231,7 +215,7 @@ export const Feed = () => {
           openPostModal();
           const doc = await getPost(dataset.id);
           const postDoc = doc.data();
-          description.value = postDoc.post;
+          postDescription.value = postDoc.post;
           tag.value = postDoc.tag;
           id = dataset.id;
         });
@@ -239,7 +223,7 @@ export const Feed = () => {
     });
   };
   fetchPosts();
-  console.log('soy feccccch', fetchPosts(), AddLikes());
+  console.log('soy feccccch', AddLikes());
 
   confirmDelete.addEventListener('click', () => {
     deletePost(deleteId)
@@ -255,17 +239,16 @@ export const Feed = () => {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!editStatus) {
-      savePost(post, tag);
+      savePost(postDescription, tag);
     } else {
       updatePost(id, {
-        post: post.value,
+        post: postDescription.value,
         tag: tag.value,
       });
       changeToPostingStatus();
       console.log('valor botonsito', postBtn.value);
       editStatus = false;
     }
-
     postForm.reset();
   });
 
@@ -278,23 +261,13 @@ export const Feed = () => {
 
   // Filtro tag según: movie, book, tvShow
   movieFilter.addEventListener('click', () => {
-    getDataWithFilters('movie', (querySnapshot) => {
-      let posts = '';
-      postContainer.innerHTML = '';
-      querySnapshot.forEach((doc) => {
-        const postData = doc.data();
-        posts += `
-        <div id="postFormContainer" id="postForm">
-          <div class="usersEmail">
-            <p id="userName" class="darkPurple">example@gmail.com</p>
-            <p id="tagSelected">${postData.tag}</p>
-          </div>
-          <p id="postBody">${postData.post}</p>
-          <input type="button" id="openPopUpBtn" value="Delete" data-id="${doc.id}" class="button">
-        </div>
-        `;
+    getDataWithFilters('movie', (query) => {
+      console.log(query);
+      query.forEach((doc) => {
+        // const postDoc = doc.data();
+        const postDocument = doc.data();
+        console.log(postDocument);
       });
-      postContainer.innerHTML = posts;
     });
   });
   BookFilter.addEventListener('click', () => {
@@ -309,8 +282,7 @@ export const Feed = () => {
             <p id="userName" class="darkPurple">example@gmail.com</p>
             <p id="tagSelected">${postData.tag}</p>
           </div>
-          <p id="postBody">${postData.post}</p>
-          <input type="button" id="openPopUpBtn" value="Delete" data-id="${doc.id}" class="button">
+          <p class="postBody">${postData.post}</p>
         </div>
         `;
       });
@@ -329,8 +301,7 @@ export const Feed = () => {
             <p id="userName" class="darkPurple">example@gmail.com</p>
             <p id="tagSelected">${postData.tag}</p>
           </div>
-          <p id="postBody">${postData.post}</p>
-          <input type="button" id="openPopUpBtn" value="Delete" data-id="${doc.id}" class="button">
+          <p class="postBody">${postData.post}</p>
         </div>
         `;
       });
@@ -341,6 +312,5 @@ export const Feed = () => {
   home.addEventListener('click', () => {
     onNavigate('/feed');
   });
-
   return feedDiv;
 };

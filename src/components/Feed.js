@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import {
-  updatePost, getPost,
+  updatePost, getPost, auth,
   logOut, savePost, onGetPost, getArrayLikes, postLike,
   deletePost, getDataWithFilters,
 } from '../lib/firebaseAuth.js';
@@ -136,16 +136,18 @@ export const Feed = () => {
         console.log('entreee al botón likeeeeeee', getArrayLikes(e.id));
         // likeButton.classList.add('icon-like-red');
         // eslint-disable-next-line prefer-const
-        let arrayLikes = await getArrayLikes(e.id);
-        console.log('entreee getarraLikesssss', e.id);
+        let arrayLikes = await getArrayLikes();
+        console.log('entreee getarraLikesssss', getArrayLikes, e.id);
         let count = 0;
         const arrayCounter = arrayLikes.length;
         console.log('soooooy arrayCounter', arrayCounter, arrayLikes.length, arrayLikes);
         // eslint-disable-next-line no-plusplus
         for (let i = 0; i < arrayLikes.length; i++) {
+          console.log('soooooy foooooooooor', arrayLikes.length);
           if (arrayLikes[i] === user.uid) {
             arrayLikes.splice(i, 1);
             postLike(e.id, arrayLikes);
+            console.log('soy post likeeeeeeeeeeee', postLike);
             break;
           } else {
             // eslint-disable-next-line no-plusplus
@@ -164,7 +166,6 @@ export const Feed = () => {
     onGetPost((querySnapshot) => {
       let posts = '';
       querySnapshot.forEach((doc) => {
-        console.log('soy un documento', doc);
         const postData = doc.data();
         posts += `
           <div id="postFormContainer" id="postForm">
@@ -182,7 +183,6 @@ export const Feed = () => {
           `;
       });
       postContainer.innerHTML = posts;
-      addLikesPost();
       // console.log('SOOOY la ejecución de like', addLikes());
 
       const deleteBtns = feedDiv.querySelectorAll('.deleteBtns');
@@ -211,6 +211,7 @@ export const Feed = () => {
           id = dataset.id;
         });
       });
+      addLikesPost(auth.currentUser);
     });
   };
   fetchPosts();

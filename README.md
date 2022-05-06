@@ -1,4 +1,71 @@
-# Creando una Red Social
+# Binge Worthy
+### Definición del proyecto
+Binge worthy es una red social que permite la difusión de opiniones, información y recomendaciones de series, películas y libros. 
+
+### Historias de usuario
+---
+* **Primera Historia de usuario**. Yo como: Usuari@ no registrad@. Quiero: Poder registrarme con correo y contraseña a una red social con una temática de recomendaciones para películas, series y libros. Para: Tener una cuenta desde la que pueda conseguir información o recomendaciones de entrenimiento que me agraden.
+
+Criterios de aceptación: Botón en la página de bienvenida para ir al registro, campo de input para correo electrónico, contraseña y contraseña, mostrar y ocultar contraseña, botón de crear cuenta y cambia a una página de confirmar correo.
+
+Definición de terminado: SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras.
+
+---
+* **Segunda Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder ingresar a mi cuenta con correo y contraseña en Binge Worthy. Para: poder conseguir información o recomendaciones de entrenimiento que me agraden.
+
+Criterios de aceptación: Contraseña ocultable, login con google y facebook, floating label, link de "i forgot my password", botón de login nos lleva al muro, CSS de mobile y desktop.
+
+Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras.
+
+---
+* **Tercera Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder acceder al muro de Binge Worthy. Para: Interactuar con la aplicación.
+
+Criterios de aceptación: Barra de navegación, botones de filtro, botón de crear publicación.
+
+Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras.
+
+---
+* **Cuarta Historia de usuario**. Yo como: Usuari@ no registrad@. Quiero: Poder registrarme directamente con mi cuenta en Google y Facebook. Para: Tener una cuenta desde la que pueda conseguir información o recomendaciones de entrenimiento que me agraden.
+
+Criterios de aceptación: Botón de registro con el logo de Google y de registro con el logo de Facebook.
+
+Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras.
+
+---
+* **Quinta Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder publicar recomendaciones para películas, series y libros. Para: Compartir mis recomendaciones de entrenimiento con otros usuarios.
+
+Criterios de aceptación: Modal para crear publicación, campo de input para ingresar título de publicación, tener una Text content donde el usuario pueda ingresar su publicación, campo de select para que el usuario agregue categoría de publicación y botón de publicar.
+
+Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras.
+
+---
+* **Sexta Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder ver publicaciones que me interesen. Para: Obtener recomendaciones de libros, películas y series.
+
+Criterios de aceptación: Publicaciones ordenadas de acuerdo a la fecha automáticamente, publicaciones más recientes aparecen primero, CSS mobile y desktop.
+
+Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras. Desplegaron su aplicación y etiquetaron la versión (git tag).
+
+---
+* **Séptima Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder borrar mis publicaciones en Binge Worthy. Para: No dejar rastro de cualquier publicación que ya no quiero compartir.
+
+Criterios de aceptación: Boton con ícono de eliminar, ventana de ¿estás seguro de eliminar?, botón de aceptar eliminar y eliminación de la base de datos la publicación.
+
+Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras. Desplegaron su aplicación y etiquetaron la versión (git tag).
+
+---
+* **Octava Historia de usuario**. Yo como: Usuarix registradx. Quiero: Poder editar mis publicaciones en Binge Worthy. Para: Corregir cualquier error que se me pueda haber pasado antes de publicar.
+
+Criterios de aceptación: Boton con ícono de editar- redirecciona a la página de editar - (misma de publicar solo que con los datos de la publicación a modificar)y verificar que la publicación no se duplique sino que se modifique.
+
+Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras. Desplegaron su aplicación y etiquetaron la versión (git tag).
+
+---
+* **Novena Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder reaccionar con un like a las publicaciones de otros usurixs en Binge Worthy.
+Para: Mostrar mi agrado o aprobación a las recomendaciones que veo a través de la App.
+
+Criterios de aceptación: Boton con ícono corazón para Like, ícono de like se colorea cuando se presiona y empieza a contar like y al quitar el like de descolorear y contador de likes - empezando cuándo tiene un like.
+
+Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras. Desplegaron su aplicación y etiquetaron la versión (git tag).
 
 ## Índice
 
@@ -48,7 +115,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 ### HTML
 
-- [ ] **Uso de HTML semántico**
+- [✔️] **Uso de HTML semántico**
 
   <details><summary>Links</summary><p>
 
@@ -58,7 +125,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 ### CSS
 
-- [ ] **Uso de selectores de CSS**
+- [✔️] **Uso de selectores de CSS**
 
   <details><summary>Links</summary><p>
 
@@ -66,7 +133,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [CSS Selectors - MDN](https://developer.mozilla.org/es/docs/Web/CSS/CSS_Selectors)
 </p></details>
 
-- [ ] **Modelo de caja (box model): borde, margen, padding**
+- [✔️] **Modelo de caja (box model): borde, margen, padding**
 
   <details><summary>Links</summary><p>
 
@@ -77,7 +144,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [display - CSS Tricks](https://css-tricks.com/almanac/properties/d/display/)
 </p></details>
 
-- [ ] **Uso de flexbox en CSS**
+- [✔️] **Uso de flexbox en CSS**
 
   <details><summary>Links</summary><p>
 
@@ -86,7 +153,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Flexbox - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox)
 </p></details>
 
-- [ ] **Uso de CSS Grid Layout**
+- [✔️] **Uso de CSS Grid Layout**
 
   <details><summary>Links</summary><p>
 
@@ -96,7 +163,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 ### Web APIs
 
-- [ ] **Uso de selectores del DOM**
+- [✔️] **Uso de selectores del DOM**
 
   <details><summary>Links</summary><p>
 
@@ -105,7 +172,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Localizando elementos DOM usando selectores - MDN](https://developer.mozilla.org/es/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors)
 </p></details>
 
-- [ ] **Manejo de eventos del DOM (listeners, propagación, delegación)**
+- [✔️] **Manejo de eventos del DOM (listeners, propagación, delegación)**
 
   <details><summary>Links</summary><p>
 
@@ -115,7 +182,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [El objeto Event](https://developer.mozilla.org/es/docs/Web/API/Event)
 </p></details>
 
-- [ ] **Manipulación dinámica del DOM**
+- [✔️] **Manipulación dinámica del DOM**
 
   <details><summary>Links</summary><p>
 
@@ -127,7 +194,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Node.textContent - MDN](https://developer.mozilla.org/es/docs/Web/API/Node/textContent)
 </p></details>
 
-- [ ] **Ruteado (History API, evento hashchange, window.location)**
+- [✔️] **Ruteado (History API, evento hashchange, window.location)**
 
   <details><summary>Links</summary><p>
 
@@ -136,7 +203,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 ### JavaScript
 
-- [ ] **Arrays (arreglos)**
+- [✔️] **Arrays (arreglos)**
 
   <details><summary>Links</summary><p>
 
@@ -149,16 +216,16 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Array.prototype.reduce() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
 </p></details>
 
-- [ ] **Objetos (key, value)**
+- [✔️] **Objetos (key, value)**
 
   <details><summary>Links</summary><p>
 
   * [Objetos en JavaScript](https://curriculum.laboratoria.la/es/topics/javascript/05-objects/01-objects)
 </p></details>
 
-- [ ] **Diferenciar entre tipos de datos primitivos y no primitivos**
+- [✔️] **Diferenciar entre tipos de datos primitivos y no primitivos**
 
-- [ ] **Variables (declaración, asignación, ámbito)**
+- [✔️] **Variables (declaración, asignación, ámbito)**
 
   <details><summary>Links</summary><p>
 
@@ -166,7 +233,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Variables](https://curriculum.laboratoria.la/es/topics/javascript/01-basics/02-variables)
 </p></details>
 
-- [ ] **Uso de condicionales (if-else, switch, operador ternario, lógica booleana)**
+- [✔️] **Uso de condicionales (if-else, switch, operador ternario, lógica booleana)**
 
   <details><summary>Links</summary><p>
 
@@ -174,7 +241,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Tomando decisiones en tu código — condicionales - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/conditionals)
 </p></details>
 
-- [ ] **Uso de bucles/ciclos (while, for, for..of)**
+- [✔️] **Uso de bucles/ciclos (while, for, for..of)**
 
   <details><summary>Links</summary><p>
 
@@ -182,7 +249,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Bucles e iteración - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Loops_and_iteration)
 </p></details>
 
-- [ ] **Funciones (params, args, return)**
+- [✔️] **Funciones (params, args, return)**
 
   <details><summary>Links</summary><p>
 
@@ -192,28 +259,28 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Funciones — bloques de código reutilizables - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/Functions)
 </p></details>
 
-- [ ] **Pruebas unitarias (unit tests)**
+- [✔️] **Pruebas unitarias (unit tests)**
 
   <details><summary>Links</summary><p>
 
   * [Empezando con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/getting-started)
 </p></details>
 
-- [ ] **Pruebas asíncronas**
+- [✔️] **Pruebas asíncronas**
 
   <details><summary>Links</summary><p>
 
   * [Tests de código asincrónico con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/asynchronous)
 </p></details>
 
-- [ ] **Uso de mocks y espías**
+- [✔️] **Uso de mocks y espías**
 
   <details><summary>Links</summary><p>
 
   * [Manual Mocks con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/manual-mocks)
 </p></details>
 
-- [ ] **Módulos de ECMAScript (ES Modules)**
+- [✔️] **Módulos de ECMAScript (ES Modules)**
 
   <details><summary>Links</summary><p>
 
@@ -221,20 +288,20 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [export - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/export)
 </p></details>
 
-- [ ] **Uso de linter (ESLINT)**
+- [✔️] **Uso de linter (ESLINT)**
 
-- [ ] **Uso de identificadores descriptivos (Nomenclatura y Semántica)**
+- [✔️] **Uso de identificadores descriptivos (Nomenclatura y Semántica)**
 
-- [ ] **Diferenciar entre expresiones (expressions) y sentencias (statements)**
+- [✔️] **Diferenciar entre expresiones (expressions) y sentencias (statements)**
 
-- [ ] **Callbacks**
+- [✔️] **Callbacks**
 
   <details><summary>Links</summary><p>
 
   * [Función Callback - MDN](https://developer.mozilla.org/es/docs/Glossary/Callback_function)
 </p></details>
 
-- [ ] **Promesas**
+- [✔️] **Promesas**
 
   <details><summary>Links</summary><p>
 
@@ -244,35 +311,36 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 ### Control de Versiones (Git y GitHub)
 
-- [ ] **Git: Instalación y configuración**
+- [✔️] **Git: Instalación y configuración**
 
-- [ ] **Git: Control de versiones con git (init, clone, add, commit, status, push, pull, remote)**
+- [✔️] **Git: Control de versiones con git (init, clone, add, commit, status, push, pull, remote)**
 
-- [ ] **Git: Integración de cambios entre ramas (branch, checkout, fetch, merge, reset, rebase, tag)**
+- [✔️] **Git: Integración de cambios entre ramas (branch, 
+out, fetch, merge, reset, rebase, tag)**
 
-- [ ] **GitHub: Creación de cuenta y repos, configuración de llaves SSH**
+- [✔️] **GitHub: Creación de cuenta y repos, configuración de llaves SSH**
 
-- [ ] **GitHub: Despliegue con GitHub Pages**
+- [✔️] **GitHub: Despliegue con GitHub Pages**
 
   <details><summary>Links</summary><p>
 
   * [Sitio oficial de GitHub Pages](https://pages.github.com/)
 </p></details>
 
-- [ ] **GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)**
+- [✔️] **GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)**
 
-- [ ] **GitHub: Organización en Github (projects | issues | labels | milestones | releases)**
+- [✔️] **GitHub: Organización en Github (projects | issues | labels | milestones | releases)**
 
 ### UX (User eXperience)
 
-- [ ] **Diseñar la aplicación pensando en y entendiendo al usuario**
-- [ ] **Crear prototipos para obtener feedback e iterar**
-- [ ] **Aplicar los principios de diseño visual (contraste, alineación, jerarquía)**
-- [ ] **Planear y ejecutar tests de usabilidad**
+- [✔️] **Diseñar la aplicación pensando en y entendiendo al usuario**
+- [✔️] **Crear prototipos para obtener feedback e iterar**
+- [✔️] **Aplicar los principios de diseño visual (contraste, alineación, jerarquía)**
+- [✔️] **Planear y ejecutar tests de usabilidad**
 
 ### Firebase
 
-- [ ] **Firebase Auth**
+- [✔️] **Firebase Auth**
 
   <details><summary>Links</summary><p>
 
@@ -280,7 +348,7 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
   * [Administra usuarios en Firebase (onAuthStateChanged)](https://firebase.google.com/docs/auth/web/manage-users?hl=es#get_the_currently_signed-in_user)
 </p></details>
 
-- [ ] **Firestore**
+- [✔️] **Firestore**
 
   <details><summary>Links</summary><p>
 

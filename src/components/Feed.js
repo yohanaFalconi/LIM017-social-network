@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import {
-  updatePost, getPost,
-  logOut, savePost, onGetPost, getArrayLikes, postLike,
-  deletePost, getDataWithFilters, getUser,
+  updatePost, getPost, /* auth, */
+  logOut, savePost, onGetPost,
+  deletePost, getDataWithFilters,
 } from '../lib/firebaseAuth.js';
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
@@ -35,7 +35,7 @@ export const Feed = () => {
       </div>
     </form>
 
-    <div id="overlay" class="inactive"></div> 
+    <div id="overlay" class="inactive"></div>
     <div id="deleteDiv" class="inactive modal">
       <h3 class="margin purple" >Are you sure to delete?</h3>
       <div class="flexDlt">
@@ -46,12 +46,12 @@ export const Feed = () => {
     <div id="overlayDelete" class="inactive"></div>
 
     <div id="postContainer"></div>
-    
+
     <footer>
       <nav id= "footerMobile">
         <ul class="footerFeed darkPurple">
           <li class="icon-home" id="home"></li>
-          <li class="icon-books" id="BookFilter"></li>
+          <li class="icon-books" id="bookFilter"></li>
           <div><img src="images/mobile/upload post icon.png" id="uploadPost"> </div>
           <li class="icon-video-camera" id="movieFilter"></li>
           <li class="icon-man-woman" id="tvShowFilter"></li>
@@ -66,9 +66,7 @@ export const Feed = () => {
   const postBtn = feedDiv.querySelector('#postBtn');
   const postForm = feedDiv.querySelector('#postForm');
   const postContainer = feedDiv.querySelector('#postContainer');
-  // const op = feedDiv.querySelector('.originalPost');
   const tag = feedDiv.querySelector('#tag');
-  // const postBody = feedDiv.querySelector('#postBody');
 
   const openModalPost = feedDiv.querySelector('#uploadPost');
   const closeModalBtn = feedDiv.querySelector('#cancelUpload');
@@ -123,53 +121,15 @@ export const Feed = () => {
     overlayDelete.classList.remove('active');
   }
 
-  const currentUser = auth.currentUser; // Contiene toda la info del usuario
-  // console.log(user);
-  const userEmail = currentUser.email;
-  // console.log(user.displayName);
-  console.log(userEmail);
-  const userInfo = () => {
-    getUser(currentUser.uid)
-      .then((re) => {
-        console.log(re);
-      })
-      .catch((err) => err);
-  };
-  userInfo();
-
-  function AddLikes(user) {
-    const likeButton = feedDiv.querySelectorAll('.likeButton');
-    likeButton.forEach((e) => {
-      e.addEventListener('click', async () => {
-        console.log('entreee al botón likeeeeeee');
-        // eslint-disable-next-line prefer-const
-        let arrayLikes = await getArrayLikes(e.id);
-        let count = 0;
-        const arrayCounter = arrayLikes.length;
-        // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < arrayLikes.length; i++) {
-          if (arrayLikes[i] === user.uid) {
-            arrayLikes.splice(i, 1);
-            postLike(e.id, arrayLikes);
-            break;
-          } else {
-            // eslint-disable-next-line no-plusplus
-            count++;
-          }
-        }
-        if (count === arrayCounter) {
-          arrayLikes.push(user.uid);
-          postLike(e.id, arrayLikes);
-        }
-      });
-    });
-  }
+  const movieFilter = feedDiv.querySelector('#movieFilter');
+  const BookFilter = feedDiv.querySelector('#bookFilter');
+  const tvShowFilter = feedDiv.querySelector('#tvShowFilter');
+  const home = feedDiv.querySelector('#home');
 
   const fetchPosts = () => {
     onGetPost((querySnapshot) => {
       let posts = '';
       querySnapshot.forEach((doc) => {
-        console.log('soy un documento', doc);
         const postData = doc.data();
         posts += `
           <div id="postFormContainer" id="postForm">
@@ -178,16 +138,26 @@ export const Feed = () => {
               <p id="tagSelected">${postData.tag}</p>
             </div>
             <p id="postBody">${postData.post}</p>
-            <i class="icon-heart likeButton"></i>
+            <i class="icon-heart likeButton" id></i>
             <div>
             <button class="btnEdit" data-id=${doc.id}>Edit</button>
             </div>
-            <input type="button" class="deleteBtns" value="Delete" data-id="${doc.id}"> 
+            <input type="button" class="deleteBtns" value="Delete" data-id="${doc.id}">
           </div>
           `;
+        postContainer.innerHTML = posts;
+
+        const btnLike = feedDiv.querySelectorAll('.likeButton');
+        btnLike.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            if (btn.classList.contains('icon-like-red')) {
+              btn.classList.remove('icon-like-red');
+            } else {
+              btn.classList.add('icon-like-red');
+            }
+          });
+        });
       });
-      postContainer.innerHTML = posts;
-      AddLikes();
 
       const deleteBtns = feedDiv.querySelectorAll('.deleteBtns');
       deleteBtns.forEach((btn) => {
@@ -218,12 +188,10 @@ export const Feed = () => {
     });
   };
   fetchPosts();
-  console.log('soy feccccch', AddLikes());
 
   confirmDelete.addEventListener('click', () => {
     deletePost(deleteId)
       .then(() => {
-        console.log('se eliminó tu post', deleteId);
         deleteDiv.classList.add('inactive');
         overlayDelete.classList.add('inactive');
         deleteDiv.classList.remove('active');
@@ -241,7 +209,6 @@ export const Feed = () => {
         tag: tag.value,
       });
       changeToPostingStatus();
-      console.log('valor botonsito', postBtn.value);
       editStatus = false;
     }
     postForm.reset();
@@ -253,4 +220,58 @@ export const Feed = () => {
         onNavigate('/');
       });
   });
+
+  // Filtro tag según: movie, book, tvShow
+  movieFilter.addEventListener('click', () => {
+    getDataWithFilters('movie', (query) => {
+      query.forEach((doc) => {
+        // const postDoc = doc.data();
+        const postDocument = doc.data();
+        console.log(postDocument);
+      });
+    });
+  });
+  BookFilter.addEventListener('click', () => {
+    getDataWithFilters('book', (querySnapshot) => {
+      let posts = '';
+      postContainer.innerHTML = '';
+      querySnapshot.forEach((doc) => {
+        const postData = doc.data();
+        posts += `
+        <div id="postFormContainer" id="postForm">
+          <div class="usersEmail">
+            <p id="userName" class="darkPurple">example@gmail.com</p>
+            <p id="tagSelected">${postData.tag}</p>
+          </div>
+          <p class="postBody">${postData.post}</p>
+        </div>
+        `;
+      });
+      postContainer.innerHTML = posts;
+    });
+  });
+  tvShowFilter.addEventListener('click', () => {
+    getDataWithFilters('tvShow', (querySnapshot) => {
+      let posts = '';
+      postContainer.innerHTML = '';
+      querySnapshot.forEach((doc) => {
+        const postData = doc.data();
+        posts += `
+        <div id="postFormContainer" id="postForm">
+          <div class="usersEmail">
+            <p id="userName" class="darkPurple">example@gmail.com</p>
+            <p id="tagSelected">${postData.tag}</p>
+          </div>
+          <p class="postBody">${postData.post}</p>
+        </div>
+        `;
+      });
+      postContainer.innerHTML = posts;
+    });
+  });
+  // home recarga la pantalla
+  home.addEventListener('click', () => {
+    onNavigate('/feed');
+  });
+  return feedDiv;
 };

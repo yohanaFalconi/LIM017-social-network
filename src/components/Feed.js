@@ -2,7 +2,7 @@
 import {
   updatePost, getPost,
   logOut, savePost, onGetPost, getArrayLikes, postLike,
-  deletePost, getDataWithFilters,
+  deletePost, getDataWithFilters, getUser,
 } from '../lib/firebaseAuth.js';
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
@@ -23,9 +23,9 @@ export const Feed = () => {
         <p id="originalPost" class="purple originalPost"></p>
         <select class="select" id="tag">
           <option disabled selected >Type</option>
-          <option value="Movie">Movie</option>
-          <option value="Book">Book</option>
-          <option value="TV Show">TV Show</option>
+          <option value="movie">Movie</option>
+          <option value="book">Book</option>
+          <option value="tv Show">TV Show</option>
         </select>
       </div>
       <textarea id="postDescription" placeholder="Write your recommendation here"></textarea>
@@ -53,7 +53,7 @@ export const Feed = () => {
           <li class="icon-home" id="home"></li>
           <li class="icon-books" id="BookFilter"></li>
           <div><img src="images/mobile/upload post icon.png" id="uploadPost"> </div>
-          <li class="icon-video-camera" id="MovieFilter"></li>
+          <li class="icon-video-camera" id="movieFilter"></li>
           <li class="icon-man-woman" id="tvShowFilter"></li>
         </ul>
       </nav>
@@ -123,12 +123,7 @@ export const Feed = () => {
     overlayDelete.classList.remove('active');
   }
 
-  const movieFilter = feedDiv.querySelector('#MovieFilter');
-  const BookFilter = feedDiv.querySelector('#BookFilter');
-  const tvShowFilter = feedDiv.querySelector('#tvShowFilter');
-  const home = feedDiv.querySelector('#home');
-
-  /* const currentUser = auth.currentUser; // Contiene toda la info del usuario
+  const currentUser = auth.currentUser; // Contiene toda la info del usuario
   // console.log(user);
   const userEmail = currentUser.email;
   // console.log(user.displayName);
@@ -140,7 +135,7 @@ export const Feed = () => {
       })
       .catch((err) => err);
   };
-  userInfo(); */
+  userInfo();
 
   function AddLikes(user) {
     const likeButton = feedDiv.querySelectorAll('.likeButton');
@@ -258,59 +253,4 @@ export const Feed = () => {
         onNavigate('/');
       });
   });
-
-  // Filtro tag según: movie, book, tvShow
-  movieFilter.addEventListener('click', () => {
-    getDataWithFilters('movie', (query) => {
-      console.log(query);
-      query.forEach((doc) => {
-        // const postDoc = doc.data();
-        const postDocument = doc.data();
-        console.log(postDocument);
-      });
-    });
-  });
-  BookFilter.addEventListener('click', () => {
-    getDataWithFilters('book', (querySnapshot) => {
-      let posts = '';
-      postContainer.innerHTML = '';
-      querySnapshot.forEach((doc) => {
-        const postData = doc.data();
-        posts += `
-        <div id="postFormContainer" id="postForm">
-          <div class="usersEmail">
-            <p id="userName" class="darkPurple">example@gmail.com</p>
-            <p id="tagSelected">${postData.tag}</p>
-          </div>
-          <p class="postBody">${postData.post}</p>
-        </div>
-        `;
-      });
-      postContainer.innerHTML = posts;
-    });
-  });
-  tvShowFilter.addEventListener('click', () => {
-    getDataWithFilters('tvShow', (querySnapshot) => {
-      let posts = '';
-      postContainer.innerHTML = '';
-      querySnapshot.forEach((doc) => {
-        const postData = doc.data();
-        posts += `
-        <div id="postFormContainer" id="postForm">
-          <div class="usersEmail">
-            <p id="userName" class="darkPurple">example@gmail.com</p>
-            <p id="tagSelected">${postData.tag}</p>
-          </div>
-          <p class="postBody">${postData.post}</p>
-        </div>
-        `;
-      });
-      postContainer.innerHTML = posts;
-    });
-  });
-  // home recarga la pantalla
-  home.addEventListener('click', () => {
-    onNavigate('/feed');
-  });
-  return feedDiv;
 };

@@ -105,7 +105,6 @@ export const deletePost = (id) => deleteDoc(doc(db, 'posts', id));
 
 export const getDataWithFilters = (tag, callback) => {
   const dataSort = query(collection(db, 'posts'), where('tag', '==', tag));
-  console.log(tag);
   return onSnapshot(dataSort, callback);
 };
 

@@ -1,71 +1,197 @@
-# Binge Worthy
-### Definición del proyecto
-Binge worthy es una red social que permite la difusión de opiniones, información y recomendaciones de series, películas y libros. 
+# Creando una Red Social : 📲 Binge Worthy
 
-### Historias de usuario
----
-* **Primera Historia de usuario**. Yo como: Usuari@ no registrad@. Quiero: Poder registrarme con correo y contraseña a una red social con una temática de recomendaciones para películas, series y libros. Para: Tener una cuenta desde la que pueda conseguir información o recomendaciones de entrenimiento que me agraden.
+## Introducción
+**Binge Worthy** significa digno de atracones, una red social dónde su comunidad puede encontrar y ofrecer las mejores recomendaciones de series, libros y películas.
 
-Criterios de aceptación: Botón en la página de bienvenida para ir al registro, campo de input para correo electrónico, contraseña y contraseña, mostrar y ocultar contraseña, botón de crear cuenta y cambia a una página de confirmar correo.
+## Descripción del proyecto
+#### ¿Quiénes son los principales usuarios del producto?
 
-Definición de terminado: SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras.
+"El entretenimiento ha estado presente en la vida de los seres humanos desde tiempos inmemoriales. Incluso los animales buscan la manera de entretenerse en su hábitat y crean rituales con el mismo fin". Cuando se habla de entretenimiento, se habla de mucho más que de pasar el rato con fines recreativos, y las historias en todos los formatos ofrecen uno de las mejores opciones de entretenimiento para las personas.
 
----
-* **Segunda Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder ingresar a mi cuenta con correo y contraseña en Binge Worthy. Para: poder conseguir información o recomendaciones de entrenimiento que me agraden.
+#### ¿Qué problema resuelve el producto?
+¿Estás buscando comedias con las que reírte un rato? ¿Clásicos imprescindibles que hay que ver al menos una vez en la vida? ¿Una película de acción que te dé un subidón de adrenalina? ¿O quizás alguno de esos dramas lacrimógenos para llorar a moco tendido? Tras más de un siglo de existencia del séptimo arte, las opciones son muchísimas. Y difícilmente encontrar algo sin durar horas buscando entre artículos de recomendaciones y perdiendo el tiempo disponible para el entretenimiento. Por ello, Binge Worthy viene a solucionarlo ofreciendo filtros que te ayudarán en la búsqueda de recomendaciones para hacer match, con tu historia favorita, en cualquiera de los formatos como series, libros y películas. Desde las manos de otros cinéfilos aficionados como tú.
 
-Criterios de aceptación: Contraseña ocultable, login con google y facebook, floating label, link de "i forgot my password", botón de login nos lleva al muro, CSS de mobile y desktop.
+### Proceso creativo de diseño
+#### Historias de usuario
 
-Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras.
+![Imagen text](https://github.com/elianamendez1/LIM017-social-network/blob/2ba007c89770909dfe83559f1199a99de750a2f7/src/images/images%20for%20readme/User%20stories.png)
 
----
-* **Tercera Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder acceder al muro de Binge Worthy. Para: Interactuar con la aplicación.
+#### Historia Usuario 1⃣
 
-Criterios de aceptación: Barra de navegación, botones de filtro, botón de crear publicación.
+*Criterios de aceptación*
 
-Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras.
+* ✔️ Botón en la página de bienvenida para ir al registro.
+* ✔️ Campo de input para correo electrónico.
+* ✔️ Campo de input para contraseña.
+* ✔️Mostrar y ocultar contraseña.
+* ✔️ Botón de crear cuenta.
+* ✔️ Si coinciden, redirige a una página de confirmar correo electrónico.
 
----
-* **Cuarta Historia de usuario**. Yo como: Usuari@ no registrad@. Quiero: Poder registrarme directamente con mi cuenta en Google y Facebook. Para: Tener una cuenta desde la que pueda conseguir información o recomendaciones de entrenimiento que me agraden.
+*Definición de terminado*
 
-Criterios de aceptación: Botón de registro con el logo de Google y de registro con el logo de Facebook.
+* ✔️Versión 1 de la App Binge Worthy completada en la rama Main **"tree clean"**.
+* ✔️ Debe ser una SPA.
+* ✔️ Debe ser responsive.
+* ✔️ Deben haber recibido code review de al menos una compañera de otro equipo.
+* ✔️ Pasaron los test unitarios.
+* ✔️ Test manual buscando errores e imperfecciones simples.
+* ✔️ Etiqueta de versión (git tag).
 
-Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras.
+#### Historia Usuario 2⃣
 
----
-* **Quinta Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder publicar recomendaciones para películas, series y libros. Para: Compartir mis recomendaciones de entrenimiento con otros usuarios.
+*Criterios de aceptación*
 
-Criterios de aceptación: Modal para crear publicación, campo de input para ingresar título de publicación, tener una Text content donde el usuario pueda ingresar su publicación, campo de select para que el usuario agregue categoría de publicación y botón de publicar.
+* ✔️ Contraseña ocultable.
+* ✔️ Floating label para campos de email y contraseña.
+* ✔️ Botón de olvidé mi contraseña "i forgot my password".
+* ✔️ Botón de login que redirige lleva al muro.
 
-Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras.
+*Definición de terminado*
 
----
-* **Sexta Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder ver publicaciones que me interesen. Para: Obtener recomendaciones de libros, películas y series.
+* ✔️Versión 1 de la App Binge Worthy completada en la rama Main **"tree clean"**.
+* ✔️ Debe ser una SPA.
+* ✔️ Debe ser responsive.
+* ✔️ Deben haber recibido code review de al menos una compañera de otro equipo.
+* ✔️ Pasaron los test unitarios.
+* ✔️ Test manual buscando errores e imperfecciones simples.
 
-Criterios de aceptación: Publicaciones ordenadas de acuerdo a la fecha automáticamente, publicaciones más recientes aparecen primero, CSS mobile y desktop.
+#### Historia Usuario 3⃣
 
-Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras. Desplegaron su aplicación y etiquetaron la versión (git tag).
+*Criterios de aceptación*
 
----
-* **Séptima Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder borrar mis publicaciones en Binge Worthy. Para: No dejar rastro de cualquier publicación que ya no quiero compartir.
+* ✔️ Botón para el registro con el logo de Google con redirección al Feed.
+* ✔️ Botón para el registro con el logo de Facebook con redirección al Feed.
 
-Criterios de aceptación: Boton con ícono de eliminar, ventana de ¿estás seguro de eliminar?, botón de aceptar eliminar y eliminación de la base de datos la publicación.
+*Definición de terminado*
 
-Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras. Desplegaron su aplicación y etiquetaron la versión (git tag).
+* ✔️ Versión 1 de la App Binge Worthy completada en la rama Main **"tree clean"**.
+* ✔️ Debe ser una SPA.
+* ✔️ Debe ser responsive.
+* ✔️ Deben haber recibido code review de al menos una compañera de otro equipo.
+* ✔️ Pasaron los test unitarios.
+* ✔️ Test manual buscando errores e imperfecciones simples.
 
----
-* **Octava Historia de usuario**. Yo como: Usuarix registradx. Quiero: Poder editar mis publicaciones en Binge Worthy. Para: Corregir cualquier error que se me pueda haber pasado antes de publicar.
+#### Historia Usuario 4⃣
 
-Criterios de aceptación: Boton con ícono de editar- redirecciona a la página de editar - (misma de publicar solo que con los datos de la publicación a modificar)y verificar que la publicación no se duplique sino que se modifique.
+*Criterios de aceptación*
 
-Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras. Desplegaron su aplicación y etiquetaron la versión (git tag).
+* ✔️ Barra de navegación.
+* ✔️ Botones para los filtros.
+* ✔️ Botón de crear publicación.
 
----
-* **Novena Historia de usuario**. Yo como: Usuari@ registrad@. Quiero: Poder reaccionar con un like a las publicaciones de otros usurixs en Binge Worthy.
-Para: Mostrar mi agrado o aprobación a las recomendaciones que veo a través de la App.
+*Definición de terminado*
 
-Criterios de aceptación: Boton con ícono corazón para Like, ícono de like se colorea cuando se presiona y empieza a contar like y al quitar el like de descolorear y contador de likes - empezando cuándo tiene un like.
+* ✔️ Versión 1 de la App Binge Worthy completada en la rama Main **"tree clean"**.
+* ✔️ Debe ser una SPA.
+* ✔️ Debe ser responsive.
+* ✔️ Deben haber recibido code review de al menos una compañera de otro equipo.
+* ✔️ Pasaron los test unitarios.
+* ✔️ Test manual buscando errores e imperfecciones simples.
+* ✔️ Etiqueta de versión (git tag).
 
-Definición de terminado:  SPA, responsive, code review de al menos una compañera de otro equipo, test unitarios, testeo manualmente buscando errores e imperfecciones simples, pruebas de usabilidad incorporando el feedback de los usuarios como mejoras. Desplegaron su aplicación y etiquetaron la versión (git tag).
+#### Historia Usuario 5⃣
+
+*Criterios de aceptación*
+
+* ✔️ Modal para crear publicación.
+* ✔️ Campo de input para ingresar título de publicación.
+* ✔️ Tener una Text content donde el usuario pueda ingresar su publicación.
+* ✔️ Campo de select para que el usuario agregue categoría de publicación.
+* ✔️ Botón de publicar.
+* ✔️ Al realizar la publicación asignarle una fecha y hora exacta para su organización en el feed.
+
+*Definición de terminado*
+
+* ✔️ Versión 1 de la App Binge Worthy completada en la rama Main **"tree clean"**.
+* ✔️ Debe ser una SPA.
+* ✔️ Debe ser responsive.
+* ✔️ Deben haber recibido code review de al menos una compañera de otro equipo.
+* ✔️ Pasaron los test unitarios.
+* ✔️ Test manual buscando errores e imperfecciones simples.
+* ✔️ Etiqueta de versión (git tag).
+
+#### Historia Usuario 6⃣
+
+*Criterios de aceptación*
+
+* ✔️ Publicaciones ordenadas de acuerdo a la fecha automáticamente.
+* ✔️ Publicaciones más recientes aparecen primero.
+
+*Definición de terminado*
+
+* ✔️ Versión 1 de la App Binge Worthy completada en la rama Main **"tree clean"**.
+* ✔️ Debe ser una SPA.
+* ✔️ Debe ser responsive.
+* ✔️ Deben haber recibido code review de al menos una compañera de otro equipo.
+* ✔️ Pasaron los test unitarios.
+* ✔️ Test manual buscando errores e imperfecciones simples.
+* ✔️ Etiqueta de versión (git tag).
+
+#### Historia Usuario 7⃣
+
+*Criterios de aceptación*
+
+* ✔️ Boton con ícono para eliminar.
+* ✔️ Ventana modal de ¿estás seguro de eliminar?
+* ✔️ Botón de aceptar eliminar.
+* ✔️ Botón de cancelar eliminar.
+* ✔️ Eliminar de la base de datos la publicación.
+
+*Definición de terminado*
+
+* ✔️ Versión 1 de la App Binge Worthy completada en la rama Main **"tree clean"**.
+* ✔️ Debe ser una SPA.
+* ✔️ Debe ser responsive.
+* ✔️ Deben haber recibido code review de al menos una compañera de otro equipo.
+* ✔️ Pasaron los test unitarios.
+* ✔️ Test manual buscando errores e imperfecciones simples.
+
+#### Historia Usuario 8⃣
+
+*Criterios de aceptación*
+
+* ✔️ Boton con ícono para editar
+* ✔️ Botón de editar - redirecciona al modal para editar - (misma de publicar solo que con los datos de la publicación a modificar).
+* ✔️ Verificación de que la publicación no se duplique sino que se modifique.
+
+*Definición de terminado*
+
+* ✔️ Versión 1 de la App Binge Worthy completada en la rama Main **"tree clean"**.
+* ✔️ Debe ser una SPA.
+* ✔️ Debe ser responsive.
+* ✔️ Deben haber recibido code review de al menos una compañera de otro equipo.
+* ✔️ Pasaron los test unitarios.
+* ✔️ Test manual buscando errores e imperfecciones simples.
+
+#### Historia Usuario 9⃣
+
+*Criterios de aceptación*
+
+* ✔️ Boton con ícono de corazón para dar Like.
+* ✔️ Ícono de like se colorea cuando se presiona y al quitar el like de descolorea.
+
+*Definición de terminado*
+
+* ✔️ Versión 1 de la App Binge Worthy completada en la rama Main **"tree clean"**.
+* ✔️ Debe ser una SPA.
+* ✔️ Debe ser responsive.
+* ✔️ Deben haber recibido code review de al menos una compañera de otro equipo.
+* ✔️ Pasaron los test unitarios.
+* ✔️ Test manual buscando errores e imperfecciones simples.
+* ✔️ Etiqueta de versión (git tag).
+
+### 🖥 Prototipo de alta fidelidad para escritorio 🖥
+
+![Imagen text](https://github.com/elianamendez1/LIM017-social-network/blob/2ba007c89770909dfe83559f1199a99de750a2f7/src/images/images%20for%20readme/hifi%20prototype%20-%20Desktop.png)
+
+![Imagen text](https://github.com/elianamendez1/LIM017-social-network/blob/2ba007c89770909dfe83559f1199a99de750a2f7/src/images/images%20for%20readme/hifi%20prototype%20feed%20-%20Desktop.png)
+
+### 📱 Prototipo de alta fidelidad para Móvil 📱
+
+![Imagen text](https://github.com/elianamendez1/LIM017-social-network/blob/2ba007c89770909dfe83559f1199a99de750a2f7/src/images/images%20for%20readme/hifi%20prototype%20-%20Mobile.png)
+
+![Imagen text](https://github.com/elianamendez1/LIM017-social-network/blob/2ba007c89770909dfe83559f1199a99de750a2f7/src/images/images%20for%20readme/hifi%20prototype%20feed%20-%20Mobile.png)
+>>>>>>> af83414e0501bec40749668c6ed8979ada51ed23
 
 ## Índice
 
